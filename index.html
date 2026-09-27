@@ -20,84 +20,28 @@
 ========================================= */
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
-
 
 html,
 body{
     width:100%;
-    height:100%;
-    overflow:hidden;
+    min-height:100%;
 }
 
-
 body{
-    background:#050608;
+    background:#050507;
     color:#ffffff;
-
     font-family:
         Inter,
-        system-ui,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-}
 
-
-/* =========================================
-   BACKGROUND
-========================================= */
-
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    width:520px;
-    height:520px;
-
-    top:-270px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(104,73,255,.14),
-            rgba(90,55,220,.04) 42%,
-            transparent 72%
-        );
-
-    pointer-events:none;
-}
-
-
-body::after{
-
-    content:"";
-
-    position:fixed;
-
-    width:500px;
-    height:500px;
-
-    right:-260px;
-    bottom:-280px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(76,60,210,.08),
-            transparent 70%
-        );
-
-    pointer-events:none;
+    overflow-x:hidden;
 }
 
 
@@ -107,16 +51,30 @@ body::after{
 
 .app{
 
-    width:100%;
-    height:100dvh;
     min-height:100vh;
+    min-height:100svh;
 
     display:flex;
     flex-direction:column;
 
     position:relative;
 
-    overflow:hidden;
+    background:
+
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(91,54,190,.09),
+            transparent 34%
+        ),
+
+        radial-gradient(
+            circle at 50% 80%,
+            rgba(70,40,150,.05),
+            transparent 35%
+        ),
+
+        #050507;
+
 }
 
 
@@ -126,51 +84,53 @@ body::after{
 
 .top{
 
-    flex-shrink:0;
+    width:100%;
 
-    height:145px;
+    padding:
+        24px
+        28px
+        0;
 
     display:flex;
-    flex-direction:column;
-
     align-items:center;
     justify-content:center;
 
-    padding-top:16px;
-
     position:relative;
-    z-index:10;
+
+    z-index:20;
+
 }
 
 
 .title{
 
-    font-size:19px;
+    font-size:15px;
 
     font-weight:600;
 
-    letter-spacing:7px;
+    letter-spacing:.38em;
 
-    margin-left:7px;
+    text-indent:.38em;
 
-    color:#f2f0fa;
+    color:rgba(255,255,255,.92);
 
-    text-shadow:
-        0 0 20px rgba(130,105,255,.12);
 }
 
 
 .status{
 
-    margin-top:8px;
+    position:absolute;
 
-    font-size:8px;
+    right:28px;
 
-    font-weight:500;
+    top:25px;
 
-    letter-spacing:3.5px;
+    font-size:9px;
 
-    color:#696774;
+    letter-spacing:.18em;
+
+    color:rgba(255,255,255,.25);
+
 }
 
 
@@ -182,7 +142,7 @@ body::after{
 
     flex:1;
 
-    min-height:0;
+    width:100%;
 
     display:flex;
 
@@ -190,12 +150,15 @@ body::after{
 
     align-items:center;
 
-    position:relative;
+    justify-content:center;
+
+    text-align:center;
 
     padding:
-        5px
+        20px
         20px
         0;
+
 }
 
 
@@ -205,23 +168,24 @@ body::after{
 
 .quasar{
 
-    width:170px;
-    height:170px;
+    width:190px;
+    height:190px;
 
     position:relative;
-
-    flex-shrink:0;
-
-    margin-top:4px;
-    margin-bottom:30px;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
 
+    flex-shrink:0;
+
     animation:
-        quasarFloat 5s ease-in-out infinite;
+        quasarFloat
+        5s
+        ease-in-out
+        infinite;
+
 }
 
 
@@ -231,26 +195,35 @@ body::after{
 
 .black-hole{
 
-    width:58px;
-    height:58px;
-
     position:absolute;
 
-    z-index:5;
+    width:76px;
+    height:76px;
 
     border-radius:50%;
 
-    background:#000000;
+    background:
+        radial-gradient(
+            circle,
+
+            #000 0%,
+            #000 57%,
+
+            rgba(0,0,0,.96) 68%,
+
+            transparent 74%
+        );
+
+    z-index:5;
 
     box-shadow:
 
-        0 0 10px rgba(0,0,0,.95),
+        0 0 25px
+        rgba(0,0,0,.95),
 
-        0 0 24px rgba(72,45,185,.7),
+        0 0 50px
+        rgba(115,70,255,.18);
 
-        0 0 45px rgba(88,55,220,.38),
-
-        0 0 75px rgba(75,45,190,.15);
 }
 
 
@@ -258,21 +231,12 @@ body::after{
 
     position:absolute;
 
-    inset:-5px;
+    inset:7px;
 
     border-radius:50%;
 
-    border:
-        1px solid
-        rgba(181,160,255,.28);
+    background:#000;
 
-    box-shadow:
-
-        0 0 12px
-        rgba(136,102,255,.35),
-
-        inset 0 0 10px
-        rgba(120,85,255,.15);
 }
 
 
@@ -284,70 +248,63 @@ body::after{
 
     position:absolute;
 
-    width:138px;
-    height:48px;
+    width:170px;
+    height:55px;
 
     border-radius:50%;
 
-    transform:rotate(-18deg);
-
-    z-index:3;
+    transform:rotate(-12deg);
 
     background:
 
         radial-gradient(
             ellipse,
 
-            transparent 25%,
+            rgba(255,255,255,.95) 0%,
 
-            rgba(255,255,255,.82) 30%,
+            rgba(255,185,90,.95) 13%,
 
-            rgba(182,151,255,.95) 36%,
+            rgba(164,70,255,.9) 34%,
 
-            rgba(119,76,255,.82) 46%,
+            rgba(77,48,255,.55) 55%,
 
-            rgba(66,35,180,.55) 59%,
-
-            rgba(36,19,105,.22) 68%,
-
-            transparent 75%
+            transparent 72%
         );
 
-    box-shadow:
+    filter:blur(.4px);
 
-        0 0 10px
-        rgba(142,103,255,.75),
+    z-index:3;
 
-        0 0 25px
-        rgba(106,65,235,.5),
-
-        0 0 45px
-        rgba(81,45,190,.25);
-
-    filter:blur(.25px);
-
-    animation:
-        diskPulse 3.5s ease-in-out infinite;
 }
 
 
 .disk-back{
 
     transform:
-        rotate(-18deg)
-        translateY(-3px);
+        rotate(-12deg)
+        translateY(-3px)
+        scale(.96);
 
-    opacity:.72;
+    opacity:.82;
+
 }
 
 
 .disk-front{
 
     transform:
-        rotate(-18deg)
-        translateY(3px);
+        rotate(-12deg)
+        translateY(4px)
+        scale(1);
 
-    opacity:.96;
+    opacity:.95;
+
+    animation:
+        diskPulse
+        3.2s
+        ease-in-out
+        infinite;
+
 }
 
 
@@ -359,29 +316,34 @@ body::after{
 
     position:absolute;
 
-    width:154px;
-    height:52px;
+    width:128px;
+    height:128px;
 
     border-radius:50%;
 
     border:
-        1px solid
-        rgba(184,157,255,.38);
-
-    transform:rotate(-18deg);
-
-    z-index:6;
+        2px solid
+        rgba(170,110,255,.65);
 
     box-shadow:
 
-        0 0 10px
-        rgba(135,101,255,.28),
+        0 0 12px
+        rgba(139,92,246,.55),
 
-        inset 0 0 12px
-        rgba(120,82,255,.2);
+        0 0 35px
+        rgba(139,92,246,.28),
+
+        inset 0 0 15px
+        rgba(139,92,246,.25);
+
+    z-index:4;
 
     animation:
-        ringPulse 2.5s ease-in-out infinite;
+        ringPulse
+        2.5s
+        ease-in-out
+        infinite;
+
 }
 
 
@@ -393,26 +355,31 @@ body::after{
 
     position:absolute;
 
-    width:150px;
-    height:150px;
+    width:180px;
+    height:180px;
 
     border-radius:50%;
-
-    z-index:1;
 
     background:
 
         radial-gradient(
             circle,
-            rgba(107,76,235,.18),
-            rgba(72,43,180,.08) 42%,
+
+            rgba(120,80,255,.24),
+
+            rgba(90,40,180,.10) 38%,
+
             transparent 72%
         );
 
-    filter:blur(9px);
+    filter:blur(10px);
 
     animation:
-        glowPulse 3s ease-in-out infinite;
+        glowPulse
+        3s
+        ease-in-out
+        infinite;
+
 }
 
 
@@ -424,76 +391,54 @@ body::after{
 
     position:absolute;
 
-    left:50%;
-
-    width:7px;
-
-    transform:translateX(-50%);
-
-    z-index:2;
+    width:12px;
 
     border-radius:50%;
-
-    filter:
-
-        blur(1px)
-
-        drop-shadow(
-            0 0 8px
-            rgba(130,95,255,.8)
-        )
-
-        drop-shadow(
-            0 0 20px
-            rgba(93,54,220,.5)
-        );
-
-    animation:
-        jetPulse 1.8s ease-in-out infinite;
-}
-
-
-.jet-top{
-
-    height:105px;
-
-    top:-72px;
 
     background:
 
         linear-gradient(
             to top,
 
-            rgba(220,210,255,.95),
+            rgba(190,150,255,.9),
 
-            rgba(155,125,255,.8),
-
-            rgba(102,62,235,.38),
+            rgba(90,60,255,.45),
 
             transparent
         );
+
+    filter:blur(2px);
+
+    opacity:.8;
+
+    z-index:1;
+
+    animation:
+        jetPulse
+        2.4s
+        ease-in-out
+        infinite;
+
+}
+
+
+.jet-top{
+
+    height:145px;
+
+    bottom:105px;
+
 }
 
 
 .jet-bottom{
 
-    height:105px;
+    height:145px;
 
-    bottom:-72px;
+    top:105px;
 
-    background:
+    transform:rotate(180deg);
 
-        linear-gradient(
-            to bottom,
-
-            rgba(220,210,255,.95),
-
-            rgba(155,125,255,.8),
-
-            rgba(102,62,235,.38),
-
-            transparent
-        );
 }
 
 
@@ -503,39 +448,42 @@ body::after{
 
 .welcome{
 
-    width:100%;
+    margin-top:18px;
 
-    max-width:520px;
+    max-width:560px;
 
-    text-align:center;
+    position:relative;
 
-    flex-shrink:0;
+    z-index:10;
+
 }
 
 
 .welcome h2{
 
-    font-size:20px;
+    font-size:26px;
+
+    line-height:1.2;
 
     font-weight:500;
 
-    color:#dedbe8;
+    letter-spacing:-.03em;
 
-    margin-bottom:8px;
+    color:rgba(255,255,255,.94);
+
 }
 
 
 .welcome p{
 
-    font-size:13px;
+    margin-top:10px;
+
+    font-size:14px;
 
     line-height:1.6;
 
-    color:#696774;
+    color:rgba(255,255,255,.42);
 
-    max-width:440px;
-
-    margin:auto;
 }
 
 
@@ -545,42 +493,39 @@ body::after{
 
 .suggestions{
 
-    display:flex;
-
-    gap:9px;
-
     margin-top:24px;
+
+    display:flex;
 
     flex-wrap:wrap;
 
     justify-content:center;
 
+    gap:9px;
+
     max-width:650px;
 
-    flex-shrink:0;
 }
 
 
 .suggestion{
 
-    border:
-        1px solid
-        rgba(255,255,255,.07);
+    border:1px solid
+        rgba(255,255,255,.08);
 
     background:
         rgba(255,255,255,.025);
 
-    color:#8c8a97;
+    color:
+        rgba(255,255,255,.55);
 
-    border-radius:100px;
+    border-radius:999px;
 
     padding:
-        9px
-        14px;
+        10px
+        15px;
 
-    font-size:11px;
-
-    font-family:inherit;
+    font-size:12px;
 
     cursor:pointer;
 
@@ -589,20 +534,24 @@ body::after{
         border-color .2s ease,
         color .2s ease,
         transform .2s ease;
+
 }
 
 
 .suggestion:hover{
 
     background:
-        rgba(255,255,255,.06);
+        rgba(255,255,255,.055);
 
     border-color:
-        rgba(150,125,255,.25);
+        rgba(255,255,255,.14);
 
-    color:#c9c4e7;
+    color:
+        rgba(255,255,255,.82);
 
-    transform:translateY(-1px);
+    transform:
+        translateY(-1px);
+
 }
 
 
@@ -616,23 +565,20 @@ body::after{
 
     max-width:760px;
 
-    flex:1;
-
-    min-height:0;
-
-    overflow-y:auto;
-
-    padding:
-        15px
-        0;
+    margin-top:22px;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:10px;
+    gap:12px;
+
+    overflow-y:auto;
+
+    max-height:240px;
 
     scrollbar-width:none;
+
 }
 
 
@@ -643,77 +589,97 @@ body::after{
 
 .message{
 
-    max-width:80%;
+    max-width:78%;
 
     padding:
-        12px
+        11px
         15px;
 
-    border-radius:15px;
+    border-radius:18px;
 
     font-size:13px;
 
     line-height:1.5;
+
+    word-break:break-word;
+
 }
 
 
-.user{
+.message.user{
 
     align-self:flex-end;
 
-    background:#17151f;
+    background:
+        rgba(255,255,255,.09);
 
-    color:#d8d5df;
+    color:
+        rgba(255,255,255,.9);
 
-    border:
-        1px solid
-        rgba(255,255,255,.05);
+    border-bottom-right-radius:5px;
+
 }
 
 
-.assistant{
+.message.assistant{
 
     align-self:flex-start;
 
     background:
-        rgba(255,255,255,.025);
-
-    color:#aaa8b4;
+        rgba(120,80,255,.08);
 
     border:
         1px solid
-        rgba(255,255,255,.04);
+        rgba(150,110,255,.08);
+
+    color:
+        rgba(255,255,255,.65);
+
+    border-bottom-left-radius:5px;
+
 }
+
+
 /* =========================================
    INPUT AREA
 ========================================= */
 
 .input-area{
 
+    width:100%;
+
     flex-shrink:0;
+
+    padding-bottom:
+        env(safe-area-inset-bottom);
+
+    margin-bottom:28px;
+
+}
+
+
+.input-wrapper{
 
     width:100%;
 
-    display:flex;
+    max-width:768px;
 
-    justify-content:center;
+    margin:
+        0 auto;
 
     padding:
-        8px
-        20px
-        max(22px, env(safe-area-inset-bottom));
+        0 16px;
 
-    position:relative;
-
-    z-index:20;
 }
 
+
+/* =========================================
+   INPUT BOX
+========================================= */
 
 .input-box{
 
     width:100%;
-
-    max-width:760px;
 
     min-height:58px;
 
@@ -721,32 +687,55 @@ body::after{
 
     align-items:center;
 
+    gap:5px;
+
     padding:
         7px
         8px
         7px
-        18px;
+        20px;
 
-    border-radius:18px;
+    border-radius:999px;
 
     background:
-        rgba(17,17,21,.97);
+        rgba(255,255,255,.055);
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.09);
 
     box-shadow:
 
-        0 10px 40px
-        rgba(0,0,0,.42),
+        0 18px 45px
+        rgba(0,0,0,.45),
 
-        0 0 30px
-        rgba(90,70,180,.05);
+        0 4px 18px
+        rgba(0,0,0,.25),
 
-    backdrop-filter:blur(20px);
+        inset 0 1px 0
+        rgba(255,255,255,.025);
 
-    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+
+}
+
+
+.input-box:focus-within{
+
+    border-color:
+        rgba(160,120,255,.22);
+
+    background:
+        rgba(255,255,255,.065);
+
 }
 
 
@@ -762,166 +751,147 @@ body::after{
 
     height:42px;
 
-    border:0;
+    border:none;
 
-    outline:0;
+    outline:none;
 
     background:transparent;
 
-    color:#eeeeF2;
+    color:#fff;
 
     font-size:14px;
 
-    font-family:inherit;
 }
 
 
 .input-box input::placeholder{
 
-    color:#62616d;
+    color:
+        rgba(255,255,255,.32);
 
-    transition:
-        color .2s ease;
-}
-
-
-.input-box input:focus::placeholder{
-
-    color:#50505a;
 }
 
 
 /* =========================================
-   INPUT BUTTONS
+   ICON BUTTON
 ========================================= */
 
 .icon-btn{
 
     width:42px;
-
     height:42px;
 
     flex-shrink:0;
 
-    border-radius:13px;
+    border:none;
 
-    border:
-        1px solid
-        rgba(255,255,255,.06);
-
-    background:
-        rgba(255,255,255,.035);
-
-    color:#888693;
+    border-radius:50%;
 
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     cursor:pointer;
 
+    background:transparent;
+
+    color:
+        rgba(255,255,255,.42);
+
     transition:
-
         background .2s ease,
-
         color .2s ease,
+        transform .2s ease;
 
-        border-color .2s ease,
-
-        transform .15s ease;
 }
 
 
 .icon-btn:hover{
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.07);
 
-    color:#dedbe8;
+    color:
+        rgba(255,255,255,.82);
 
-    border-color:
-        rgba(255,255,255,.1);
 }
 
 
 .icon-btn:active{
 
     transform:scale(.94);
+
 }
 
 
 .icon{
 
-    width:17px;
+    width:19px;
+    height:19px;
 
-    height:17px;
 }
 
 
 /* =========================================
-   SEND BUTTON
+   SEND
 ========================================= */
 
 .send{
 
-    margin-left:7px;
+    background:
+        rgba(255,255,255,.9);
 
-    background:#eeeeF2;
+    color:#050507;
 
-    color:#08080a;
-
-    border:0;
 }
 
 
 .send:hover{
 
-    background:#ffffff;
+    background:#fff;
 
-    color:#000000;
+    color:#000;
+
 }
 
 
 /* =========================================
-   ACTIVE VOICE STATE
+   MIC ACTIVE
 ========================================= */
 
 .mic-active{
 
-    color:#c9baff;
-
     background:
-        rgba(120,85,255,.14);
+        rgba(130,90,255,.18);
 
-    border-color:
-        rgba(140,110,255,.3);
+    color:
+        rgba(190,160,255,.95);
 
-    box-shadow:
-        0 0 18px
-        rgba(110,75,255,.18);
+    animation:
+        micPulse
+        1.2s
+        ease-in-out
+        infinite;
+
 }
 
 
 /* =========================================
-   QUASAR ANIMATIONS
+   ANIMATIONS
 ========================================= */
 
 @keyframes quasarFloat{
 
     0%,
     100%{
-
-        transform:
-            translateY(0);
+        transform:translateY(0);
     }
 
     50%{
-
-        transform:
-            translateY(-6px);
+        transform:translateY(-8px);
     }
+
 }
 
 
@@ -931,24 +901,21 @@ body::after{
     100%{
 
         transform:
-            rotate(-18deg)
-            scaleX(1);
+            rotate(-12deg)
+            translateY(4px)
+            scale(1);
 
-        filter:
-            blur(.25px)
-            brightness(.9);
     }
 
     50%{
 
         transform:
-            rotate(-18deg)
-            scaleX(1.06);
+            rotate(-12deg)
+            translateY(4px)
+            scale(1.04);
 
-        filter:
-            blur(.2px)
-            brightness(1.18);
     }
+
 }
 
 
@@ -957,21 +924,20 @@ body::after{
     0%,
     100%{
 
-        opacity:.35;
+        transform:scale(.98);
 
-        transform:
-            rotate(-18deg)
-            scale(1);
+        opacity:.72;
+
     }
 
     50%{
 
-        opacity:.85;
+        transform:scale(1.04);
 
-        transform:
-            rotate(-18deg)
-            scale(1.045);
+        opacity:1;
+
     }
+
 }
 
 
@@ -980,19 +946,20 @@ body::after{
     0%,
     100%{
 
-        opacity:.45;
+        transform:scale(.95);
 
-        transform:
-            scale(.94);
+        opacity:.65;
+
     }
 
     50%{
 
+        transform:scale(1.08);
+
         opacity:1;
 
-        transform:
-            scale(1.08);
     }
+
 }
 
 
@@ -1001,315 +968,198 @@ body::after{
     0%,
     100%{
 
-        opacity:.35;
+        opacity:.55;
 
-        transform:
-            translateX(-50%)
-            scaleX(.7);
-
-        filter:
-
-            blur(2px)
-
-            drop-shadow(
-                0 0 6px
-                rgba(130,95,255,.5)
-            );
     }
 
     50%{
 
-        opacity:1;
+        opacity:.95;
 
-        transform:
-            translateX(-50%)
-            scaleX(1);
-
-        filter:
-
-            blur(1px)
-
-            drop-shadow(
-                0 0 12px
-                rgba(160,125,255,.9)
-            )
-
-            drop-shadow(
-                0 0 28px
-                rgba(90,50,220,.7)
-            );
     }
+
+}
+
+
+@keyframes micPulse{
+
+    0%,
+    100%{
+        box-shadow:0 0 0 rgba(140,100,255,0);
+    }
+
+    50%{
+        box-shadow:
+            0 0 18px
+            rgba(140,100,255,.28);
+    }
+
 }
 
 
 /* =========================================
-   MOBILE
+   RESPONSIVE
 ========================================= */
 
 @media(max-width:600px){
 
     .top{
 
-        height:125px;
+        padding:
+            20px
+            18px
+            0;
 
-        padding-top:10px;
     }
-
-
-    .title{
-
-        font-size:16px;
-
-        letter-spacing:5px;
-
-        margin-left:5px;
-    }
-
 
     .status{
 
-        font-size:7px;
+        right:18px;
 
-        letter-spacing:3px;
+        top:21px;
 
-        margin-top:6px;
+        font-size:8px;
+
     }
-
 
     .main{
 
         padding:
-            0
-            14px
+            10px
+            16px
             0;
-    }
 
+    }
 
     .quasar{
 
-        width:150px;
-        height:150px;
+        width:160px;
+        height:160px;
 
-        margin-top:0;
-
-        margin-bottom:22px;
     }
-
-
-    .black-hole{
-
-        width:52px;
-        height:52px;
-    }
-
 
     .disk{
 
-        width:125px;
-        height:44px;
-    }
+        width:145px;
 
+    }
 
     .energy-ring{
 
-        width:140px;
-        height:48px;
+        width:110px;
+        height:110px;
+
     }
 
+    .black-hole{
 
-    .quasar-glow{
+        width:68px;
+        height:68px;
 
-        width:135px;
-        height:135px;
     }
-
 
     .jet{
 
-        width:6px;
+        width:10px;
+
     }
-
-
-    .jet-top{
-
-        height:90px;
-
-        top:-60px;
-    }
-
-
-    .jet-bottom{
-
-        height:90px;
-
-        bottom:-60px;
-    }
-
 
     .welcome h2{
 
-        font-size:18px;
-    }
+        font-size:23px;
 
+    }
 
     .welcome p{
 
-        font-size:12px;
+        font-size:13px;
 
-        line-height:1.55;
+        max-width:320px;
+
     }
-
 
     .suggestions{
 
-        margin-top:18px;
+        margin-top:20px;
 
         gap:7px;
-    }
 
+    }
 
     .suggestion{
 
-        font-size:10px;
-
         padding:
-            8px
+            9px
             12px;
-    }
 
+        font-size:11px;
+
+    }
 
     .input-area{
 
-        padding:
-            7px
-            12px
-            max(18px, env(safe-area-inset-bottom));
+        margin-bottom:16px;
+
     }
 
+    .input-wrapper{
+
+        padding:
+            0 16px;
+
+    }
 
     .input-box{
 
-        min-height:55px;
+        min-height:56px;
 
-        border-radius:17px;
+        padding-left:17px;
 
-        padding-left:14px;
     }
 
-
-    .input-box input{
-
-        font-size:14px;
-    }
-
-
-    .icon-btn{
-
-        width:40px;
-
-        height:40px;
-    }
 }
 
 
 /* =========================================
-   SMALL HEIGHT PHONES
+   SHORT SCREENS
 ========================================= */
 
 @media(max-height:700px){
 
     .top{
 
-        height:103px;
+        padding-top:16px;
+
     }
 
+    .main{
+
+        justify-content:flex-start;
+
+        padding-top:10px;
+
+    }
 
     .quasar{
 
-        width:125px;
-        height:125px;
+        transform:scale(.82);
 
-        margin-bottom:14px;
+        margin-bottom:-18px;
+
     }
 
+    .welcome{
 
-    .black-hole{
+        margin-top:4px;
 
-        width:46px;
-        height:46px;
     }
-
-
-    .disk{
-
-        width:108px;
-        height:38px;
-    }
-
-
-    .energy-ring{
-
-        width:120px;
-        height:42px;
-    }
-
-
-    .quasar-glow{
-
-        width:115px;
-        height:115px;
-    }
-
-
-    .jet-top{
-
-        height:75px;
-
-        top:-50px;
-    }
-
-
-    .jet-bottom{
-
-        height:75px;
-
-        bottom:-50px;
-    }
-
-
-    .welcome h2{
-
-        font-size:16px;
-
-        margin-bottom:5px;
-    }
-
-
-    .welcome p{
-
-        font-size:11px;
-    }
-
 
     .suggestions{
 
-        margin-top:12px;
+        margin-top:14px;
+
     }
 
-
-    .suggestion{
-
-        padding:
-            6px
-            10px;
-    }
-
-
-    .input-area{
-
-        padding-bottom:
-            max(14px, env(safe-area-inset-bottom));
-    }
 }
 
 
@@ -1323,22 +1173,44 @@ body::after{
     .disk,
     .energy-ring,
     .quasar-glow,
-    .jet{
+    .jet,
+    .mic-active{
 
         animation:none;
+
     }
+
+}
+
+
+/* =========================================
+   SAFE MOBILE INPUT
+========================================= */
+
+@supports(padding:max(0px)){
+
+    .input-area{
+
+        padding-bottom:
+            max(
+                8px,
+                env(safe-area-inset-bottom)
+            );
+
+    }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
 <div class="app">
-
-
     <!-- =====================================
-         TOP
+         TOP BAR
     ====================================== -->
 
     <header class="top">
@@ -1355,23 +1227,39 @@ body::after{
 
 
     <!-- =====================================
-         MAIN
+         MAIN CONTENT
     ====================================== -->
 
     <main class="main">
 
 
-        <!-- QUASAR CORE -->
+        <!-- =================================
+             QUASAR CORE
+        ================================== -->
 
         <div class="quasar">
 
+            <!-- TOP JET -->
+
             <div class="jet jet-top"></div>
+
+
+            <!-- BOTTOM JET -->
 
             <div class="jet jet-bottom"></div>
 
+
+            <!-- OUTER GLOW -->
+
             <div class="quasar-glow"></div>
 
+
+            <!-- BACK OF ACCRETION DISK -->
+
             <div class="disk disk-back"></div>
+
+
+            <!-- BLACK HOLE -->
 
             <div class="black-hole">
 
@@ -1379,16 +1267,24 @@ body::after{
 
             </div>
 
+
+            <!-- FRONT OF ACCRETION DISK -->
+
             <div class="disk disk-front"></div>
+
+
+            <!-- ENERGY RING -->
 
             <div class="energy-ring"></div>
 
         </div>
 
 
-        <!-- WELCOME -->
+        <!-- =================================
+             WELCOME TEXT
+        ================================== -->
 
-        <div class="welcome">
+        <section class="welcome">
 
             <h2>
                 I'm online.
@@ -1399,19 +1295,24 @@ body::after{
                 or tell me what you need.
             </p>
 
-        </div>
+        </section>
 
 
-        <!-- SUGGESTIONS -->
+        <!-- =================================
+             SUGGESTION CHIPS
+        ================================== -->
 
         <div class="suggestions">
+
 
             <button
                 class="suggestion"
                 type="button"
                 data-prompt="Find something nearby"
             >
+
                 Find something nearby
+
             </button>
 
 
@@ -1420,37 +1321,59 @@ body::after{
                 type="button"
                 data-prompt="Search the web"
             >
+
                 Search the web
+
             </button>
 
 
             <button
                 class="suggestion"
                 type="button"
-                data-prompt="Plan something for me"
+                data-prompt="Plan something"
             >
+
                 Plan something
+
             </button>
 
 
             <button
                 class="suggestion"
                 type="button"
-                data-prompt="Tell me something interesting"
+                data-prompt="Ask QUASAR"
             >
+
                 Ask QUASAR
+
             </button>
+
 
         </div>
 
 
-        <!-- CHAT -->
+        <!-- =================================
+             CHAT MESSAGES
+        ================================== -->
 
         <div
             class="chat"
             id="chat"
             aria-live="polite"
         ></div>
+
+
+        <!--
+            IMPORTANT:
+
+            No mt-auto here.
+            No giant flex spacer here.
+
+            The main itself is flex:1 and centered.
+            The input is completely outside it,
+            so the input keeps its controlled
+            bottom spacing.
+        -->
 
 
     </main>
@@ -1462,106 +1385,130 @@ body::after{
 
     <div class="input-area">
 
-        <div class="input-box">
+
+        <!--
+            max-width:
+            keeps the input from becoming
+            ridiculously wide on desktop.
+
+            width:100%:
+            keeps it responsive.
+
+            margin:auto:
+            centers it.
+
+            px-4 equivalent:
+            16px horizontal padding.
+        -->
+
+        <div class="input-wrapper">
 
 
-            <!-- TEXT INPUT -->
-
-            <input
-                id="input"
-                type="text"
-                placeholder="Ask QUASAR anything..."
-                autocomplete="off"
-                aria-label="Message QUASAR"
-            >
+            <div class="input-box">
 
 
-            <!-- MICROPHONE -->
+                <!-- =========================
+                     TEXT INPUT
+                ========================== -->
 
-            <button
-                class="icon-btn"
-                id="mic"
-                type="button"
-                aria-label="Voice input"
-                title="Voice input"
-            >
+                <input
+                    id="input"
+                    type="text"
+                    placeholder="Ask QUASAR anything..."
+                    autocomplete="off"
+                    aria-label="Ask QUASAR anything"
+                />
 
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+
+                <!-- =========================
+                     MICROPHONE
+                ========================== -->
+
+                <button
+                    class="icon-btn"
+                    id="mic"
+                    type="button"
+                    aria-label="Voice input"
+                    title="Voice input"
                 >
 
-                    <rect
-                        x="9"
-                        y="3"
-                        width="6"
-                        height="11"
-                        rx="3"
-                    ></rect>
+                    <svg
+                        class="icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
 
-                    <path
-                        d="M5 11a7 7 0 0 0 14 0"
-                    ></path>
+                        <rect
+                            x="9"
+                            y="3"
+                            width="6"
+                            height="11"
+                            rx="3"
+                        ></rect>
 
-                    <path
-                        d="M12 18v3"
-                    ></path>
+                        <path
+                            d="M5 11a7 7 0 0 0 14 0"
+                        ></path>
 
-                    <path
-                        d="M8 21h8"
-                    ></path>
+                        <path
+                            d="M12 18v3"
+                        ></path>
 
-                </svg>
+                        <path
+                            d="M8 21h8"
+                        ></path>
 
-            </button>
+                    </svg>
+
+                </button>
 
 
-            <!-- SEND -->
+                <!-- =========================
+                     SEND
+                ========================== -->
 
-            <button
-                class="icon-btn send"
-                id="send"
-                type="button"
-                aria-label="Send message"
-                title="Send"
-            >
-
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                <button
+                    class="icon-btn send"
+                    id="send"
+                    type="button"
+                    aria-label="Send message"
+                    title="Send message"
                 >
 
-                    <path
-                        d="M22 2L11 13"
-                    ></path>
+                    <svg
+                        class="icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
 
-                    <path
-                        d="M22 2L15 22L11 13L2 9L22 2Z"
-                    ></path>
+                        <path
+                            d="M22 2L11 13"
+                        ></path>
 
-                </svg>
+                        <path
+                            d="M22 2L15 22L11 13L2 9L22 2Z"
+                        ></path>
 
-            </button>
+                    </svg>
+
+                </button>
+
+
+            </div>
 
 
         </div>
 
+
     </div>
-
-
-</div>
-
-
 <script>
 
 /* =========================================
@@ -1603,7 +1550,6 @@ function addMessage(text, type){
 
     chat.scrollTop =
         chat.scrollHeight;
-
 }
 
 
@@ -1638,7 +1584,7 @@ function sendMessage(){
     input.value = "";
 
 
-    /* TEMPORARY RESPONSE */
+    /* TEMPORARY QUASAR RESPONSE */
 
     setTimeout(() => {
 
@@ -1666,12 +1612,12 @@ send.addEventListener(
 
 
 /* =========================================
-   ENTER KEY
+   ENTER TO SEND
 ========================================= */
 
 input.addEventListener(
     "keydown",
-    function(event){
+    (event) => {
 
         if(event.key === "Enter"){
 
@@ -1686,18 +1632,20 @@ input.addEventListener(
 
 
 /* =========================================
-   SUGGESTION BUTTONS
+   SUGGESTION CHIPS
 ========================================= */
 
 suggestions.forEach(
-    function(button){
+    (button) => {
 
         button.addEventListener(
             "click",
-            function(){
+            () => {
 
                 const prompt =
-                    button.dataset.prompt;
+                    button.dataset.prompt ||
+                    button.textContent.trim();
+
 
                 input.value =
                     prompt;
@@ -1712,7 +1660,7 @@ suggestions.forEach(
 
 
 /* =========================================
-   VOICE INPUT
+   VOICE RECOGNITION
 ========================================= */
 
 const SpeechRecognition =
@@ -1738,11 +1686,13 @@ if(SpeechRecognition){
         false;
 
 
-    /* START LISTENING */
+    /* ==============================
+       START LISTENING
+    =============================== */
 
     mic.addEventListener(
         "click",
-        function(){
+        () => {
 
             try{
 
@@ -1755,8 +1705,13 @@ if(SpeechRecognition){
             }
             catch(error){
 
+                /*
+                    Browser may throw an error
+                    if recognition is already running.
+                */
+
                 console.log(
-                    "Microphone already active."
+                    "Voice recognition is already active."
                 );
 
             }
@@ -1765,14 +1720,18 @@ if(SpeechRecognition){
     );
 
 
-    /* SPEECH RESULT */
+    /* ==============================
+       SPEECH RESULT
+    =============================== */
 
     recognition.addEventListener(
         "result",
-        function(event){
+        (event) => {
 
             const transcript =
-                event.results[0][0].transcript;
+                event
+                    .results[0][0]
+                    .transcript;
 
 
             input.value =
@@ -1784,11 +1743,13 @@ if(SpeechRecognition){
     );
 
 
-    /* STOP LISTENING */
+    /* ==============================
+       RECOGNITION ENDED
+    =============================== */
 
     recognition.addEventListener(
         "end",
-        function(){
+        () => {
 
             mic.classList.remove(
                 "mic-active"
@@ -1798,11 +1759,13 @@ if(SpeechRecognition){
     );
 
 
-    /* ERROR */
+    /* ==============================
+       RECOGNITION ERROR
+    =============================== */
 
     recognition.addEventListener(
         "error",
-        function(){
+        () => {
 
             mic.classList.remove(
                 "mic-active"
@@ -1815,13 +1778,13 @@ if(SpeechRecognition){
 else{
 
     /*
-       Browser does not support
-       speech recognition.
+        Fallback for browsers
+        without Speech Recognition.
     */
 
     mic.addEventListener(
         "click",
-        function(){
+        () => {
 
             input.focus();
 
@@ -1837,7 +1800,7 @@ else{
 
 window.addEventListener(
     "load",
-    function(){
+    () => {
 
         input.focus();
 
@@ -1845,6 +1808,9 @@ window.addEventListener(
 );
 
 </script>
+
+
+</div>
 
 </body>
 
