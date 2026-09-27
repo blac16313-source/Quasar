@@ -2,546 +2,461 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>QUASAR</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-:root{
-  --bg:#050608;
-  --panel:#0c0e12;
-  --panel-light:#11141a;
-  --line:rgba(255,255,255,.08);
-  --text:#f4f5f7;
-  --muted:#777d88;
-  --accent:#8b7cff;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html,
 body{
-  width:100%;
-  height:100%;
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
 body{
-  background:#050608;
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  overflow:hidden;
+    background:#050608;
+    color:#fff;
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    top:-220px;
+    left:50%;
+    transform:translateX(-50%);
+    background:radial-gradient(
+        circle,
+        rgba(113,72,255,.14),
+        rgba(113,72,255,.04) 40%,
+        transparent 70%
+    );
+    pointer-events:none;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:420px;
+    height:420px;
+    bottom:-250px;
+    right:-180px;
+    background:radial-gradient(
+        circle,
+        rgba(66,92,255,.08),
+        transparent 70%
+    );
+    pointer-events:none;
+}
 
 /* =========================
    APP
 ========================= */
 
 .app{
-  width:100%;
-  height:100vh;
-  position:relative;
-  overflow:hidden;
+    width:100%;
+    height:100dvh;
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    position:relative;
 }
-
-
-/* =========================
-   BACKGROUND
-========================= */
-
-.background{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-}
-
-.glow{
-  position:absolute;
-  width:500px;
-  height:500px;
-  border-radius:50%;
-  background:radial-gradient(
-    circle,
-    rgba(104,91,255,.13) 0%,
-    rgba(104,91,255,.05) 30%,
-    transparent 70%
-  );
-  top:-220px;
-  left:50%;
-  transform:translateX(-50%);
-}
-
-.glow-bottom{
-  position:absolute;
-  width:600px;
-  height:350px;
-  border-radius:50%;
-  background:radial-gradient(
-    circle,
-    rgba(100,80,255,.045),
-    transparent 70%
-  );
-  bottom:-250px;
-  left:50%;
-  transform:translateX(-50%);
-}
-
 
 /* =========================
    TOP
 ========================= */
 
 .top{
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
+    flex-shrink:0;
 
-  height:100px;
+    height:150px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
-  z-index:5;
+    padding-top:18px;
 }
-
-
-/* LOGO */
 
 .logo{
-  width:56px;
-  height:56px;
+    width:52px;
+    height:52px;
 
-  object-fit:contain;
+    object-fit:contain;
 
-  filter:
-    drop-shadow(0 0 15px rgba(130,110,255,.22));
+    filter:
+        drop-shadow(0 0 12px rgba(125,91,255,.35));
 
-  opacity:.96;
-
-  transition:
-    transform .35s ease,
-    filter .35s ease;
+    margin-bottom:9px;
 }
 
-.logo:hover{
-  transform:scale(1.04);
+.title{
+    font-size:18px;
+    font-weight:600;
+    letter-spacing:6px;
 
-  filter:
-    drop-shadow(0 0 25px rgba(130,110,255,.4));
+    margin-left:6px;
+
+    color:#f4f2ff;
 }
 
+.status{
+    margin-top:7px;
+
+    font-size:8px;
+    letter-spacing:3px;
+
+    color:#777687;
+}
 
 /* =========================
    MAIN
 ========================= */
 
 .main{
-  position:relative;
+    flex:1;
+    min-height:0;
 
-  width:100%;
-  height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 
-  display:flex;
-  justify-content:center;
+    position:relative;
 
-  z-index:2;
+    padding:10px 20px 0;
 }
-
-.center{
-  width:min(850px,100%);
-
-  height:100%;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-
-  padding:
-    120px
-    20px
-    0;
-}
-
 
 /* =========================
-   TITLE
+   ORB
 ========================= */
 
-.title{
-  margin-top:35px;
+.core{
+    width:125px;
+    height:125px;
 
-  font-size:34px;
-  font-weight:500;
+    border-radius:50%;
 
-  letter-spacing:7px;
+    margin-top:10px;
+    margin-bottom:28px;
 
-  color:#f2f2f4;
+    position:relative;
 
-  text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(255,255,255,.95) 0%,
+            rgba(173,155,255,.75) 8%,
+            rgba(95,67,220,.5) 28%,
+            rgba(36,25,87,.8) 55%,
+            rgba(5,6,8,0) 72%
+        );
+
+    box-shadow:
+        0 0 35px rgba(105,75,255,.25),
+        0 0 90px rgba(74,51,190,.12);
+
+    animation:
+        floating 5s ease-in-out infinite;
 }
 
+.core::before{
+    content:"";
 
-/* =========================
-   SUBTITLE
-========================= */
+    position:absolute;
 
-.subtitle{
-  margin-top:12px;
+    inset:-18px;
 
-  color:#656a74;
+    border-radius:50%;
 
-  font-size:12px;
+    border:1px solid rgba(128,105,255,.12);
 
-  letter-spacing:1.2px;
-
-  text-align:center;
+    box-shadow:
+        0 0 30px rgba(112,86,255,.08);
 }
 
+.core::after{
+    content:"";
 
-/* =========================
-   CHAT AREA
-========================= */
+    position:absolute;
 
-.chat-area{
-  width:100%;
+    inset:-35px;
 
-  flex:1;
+    border-radius:50%;
 
-  min-height:0;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-
-  padding-top:40px;
+    border:1px solid rgba(128,105,255,.05);
 }
 
+@keyframes floating{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-7px);
+    }
+}
 
 /* =========================
    WELCOME
 ========================= */
 
 .welcome{
-  width:100%;
+    text-align:center;
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-
-  text-align:center;
+    max-width:500px;
 }
 
-.welcome-text{
-  color:#666c76;
+.welcome h2{
+    font-size:20px;
+    font-weight:500;
 
-  font-size:13px;
+    color:#dddbe8;
 
-  max-width:430px;
-
-  line-height:1.7;
+    margin-bottom:8px;
 }
 
+.welcome p{
+    font-size:13px;
+    line-height:1.6;
+
+    color:#686775;
+}
 
 /* =========================
    SUGGESTIONS
 ========================= */
 
 .suggestions{
-  width:min(620px,100%);
+    display:flex;
+    gap:9px;
 
-  display:grid;
+    margin-top:25px;
 
-  grid-template-columns:
-    repeat(2,1fr);
+    flex-wrap:wrap;
+    justify-content:center;
 
-  gap:10px;
-
-  margin-top:28px;
+    max-width:600px;
 }
 
 .suggestion{
-  border:1px solid var(--line);
+    border:1px solid rgba(255,255,255,.07);
 
-  background:
-    rgba(255,255,255,.025);
+    background:rgba(255,255,255,.025);
 
-  color:#a8adb6;
+    color:#8d8b99;
 
-  padding:14px 16px;
+    border-radius:100px;
 
-  border-radius:13px;
+    padding:9px 14px;
 
-  font-size:12px;
+    font-size:11px;
 
-  text-align:left;
+    cursor:pointer;
 
-  cursor:pointer;
-
-  transition:
-    background .2s ease,
-    border .2s ease,
-    transform .2s ease;
+    transition:.2s;
 }
 
 .suggestion:hover{
-  background:
-    rgba(255,255,255,.045);
-
-  border-color:
-    rgba(139,124,255,.22);
-
-  transform:translateY(-2px);
-
-  color:#d7d9de;
+    background:rgba(255,255,255,.06);
+    border-color:rgba(150,125,255,.25);
+    color:#c9c4e7;
 }
 
-
 /* =========================
-   MESSAGES
+   CHAT
 ========================= */
 
-.messages{
-  width:100%;
+.chat{
+    width:100%;
+    max-width:760px;
 
-  flex:1;
+    flex:1;
+    min-height:0;
 
-  overflow-y:auto;
+    overflow-y:auto;
 
-  display:none;
+    padding:15px 0;
 
-  padding:
-    20px
-    10px
-    30px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    scrollbar-width:none;
+}
+
+.chat::-webkit-scrollbar{
+    display:none;
 }
 
 .message{
-  display:flex;
+    max-width:80%;
 
-  margin-bottom:20px;
+    padding:12px 15px;
+
+    border-radius:15px;
+
+    font-size:13px;
+    line-height:1.5;
 }
 
-.message.user{
-  justify-content:flex-end;
+.user{
+    align-self:flex-end;
+
+    background:#17151f;
+
+    color:#d8d5df;
+
+    border:1px solid rgba(255,255,255,.05);
 }
 
-.bubble{
-  max-width:
-    min(680px,82%);
+.assistant{
+    align-self:flex-start;
 
-  padding:
-    13px
-    16px;
+    background:rgba(255,255,255,.025);
 
-  font-size:13px;
+    color:#aaa8b4;
 
-  line-height:1.65;
-
-  border-radius:16px;
+    border:1px solid rgba(255,255,255,.04);
 }
-
-.assistant .bubble{
-  background:
-    rgba(255,255,255,.035);
-
-  border:
-    1px solid var(--line);
-
-  color:#d6d9df;
-
-  border-bottom-left-radius:5px;
-}
-
-.user .bubble{
-  background:
-    #171522;
-
-  border:
-    1px solid rgba(139,124,255,.15);
-
-  color:#e9e8f2;
-
-  border-bottom-right-radius:5px;
-}
-
 
 /* =========================
-   INPUT SECTION
+   INPUT AREA
 ========================= */
 
-.input-section{
-  width:100%;
+.input-area{
+    flex-shrink:0;
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+    width:100%;
 
-  padding:
-    0
-    0
-    42px;
+    display:flex;
+    justify-content:center;
+
+    padding:
+        8px
+        20px
+        max(22px, env(safe-area-inset-bottom));
+
+    position:relative;
+    z-index:10;
 }
-
-
-/* =========================
-   INPUT
-========================= */
 
 .input-box{
-  width:min(720px,100%);
+    width:100%;
+    max-width:760px;
 
-  min-height:60px;
+    min-height:58px;
 
-  display:flex;
-  align-items:flex-end;
+    display:flex;
+    align-items:center;
 
-  gap:8px;
+    padding:7px 8px 7px 18px;
 
-  padding:8px;
+    border-radius:18px;
 
-  background:
-    rgba(13,15,20,.92);
+    background:rgba(18,18,22,.96);
 
-  border:
-    1px solid rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.08);
 
-  border-radius:19px;
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.4),
+        0 0 30px rgba(90,70,180,.04);
 
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.4);
-
-  backdrop-filter:
-    blur(18px);
-
-  transition:
-    border .25s ease,
-    box-shadow .25s ease;
+    backdrop-filter:blur(20px);
 }
 
-.input-box:focus-within{
-  border-color:
-    rgba(139,124,255,.3);
+.input-box input{
+    flex:1;
 
-  box-shadow:
-    0 20px 70px rgba(0,0,0,.5),
-    0 0 30px rgba(100,80,255,.05);
+    min-width:0;
+
+    border:0;
+    outline:0;
+
+    background:transparent;
+
+    color:#eee;
+
+    font-size:14px;
+
+    font-family:inherit;
 }
 
-textarea{
-  flex:1;
-
-  min-height:42px;
-  max-height:120px;
-
-  resize:none;
-
-  border:0;
-  outline:0;
-
-  background:transparent;
-
-  color:#f4f5f7;
-
-  font-family:inherit;
-
-  font-size:13px;
-
-  padding:
-    11px
-    9px;
+.input-box input::placeholder{
+    color:#62616d;
 }
-
-textarea::placeholder{
-  color:#5f646e;
-}
-
 
 /* =========================
    BUTTONS
 ========================= */
 
-.icon-btn,
-.send-btn{
-  width:42px;
-  height:42px;
-
-  flex:none;
-
-  border:0;
-
-  border-radius:13px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  cursor:pointer;
-
-  transition:
-    transform .2s ease,
-    background .2s ease,
-    color .2s ease;
-}
-
 .icon-btn{
-  background:
-    rgba(255,255,255,.045);
+    width:42px;
+    height:42px;
 
-  color:#858b96;
+    flex-shrink:0;
+
+    border-radius:13px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    background:rgba(255,255,255,.035);
+
+    color:#888693;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    transition:.2s;
 }
 
 .icon-btn:hover{
-  background:
-    rgba(255,255,255,.08);
-
-  color:#dfe1e6;
+    background:rgba(255,255,255,.08);
+    color:#ddd;
 }
 
-.send-btn{
-  background:
-    #8173f4;
+.send{
+    margin-left:7px;
 
-  color:white;
+    background:#eee;
 
-  box-shadow:
-    0 5px 20px rgba(129,115,244,.18);
+    color:#08080a;
+
+    border:0;
 }
 
-.send-btn:hover{
-  background:#9185ff;
+.send:hover{
+    background:#fff;
 
-  transform:
-    translateY(-1px);
+    color:#000;
 }
 
-.icon-btn svg,
-.send-btn svg{
-  width:18px;
-  height:18px;
+.icon{
+    width:17px;
+    height:17px;
 }
-
-
-/* =========================
-   FOOTNOTE
-========================= */
-
-.disclaimer{
-  margin-top:9px;
-
-  color:#474c55;
-
-  font-size:9px;
-
-  letter-spacing:.2px;
-}
-
 
 /* =========================
    MOBILE
@@ -549,491 +464,344 @@ textarea::placeholder{
 
 @media(max-width:600px){
 
-  .top{
-    height:88px;
-  }
+    .top{
+        height:125px;
+        padding-top:12px;
+    }
 
-  .logo{
-    width:48px;
-    height:48px;
-  }
+    .logo{
+        width:45px;
+        height:45px;
+        margin-bottom:7px;
+    }
 
-  .center{
-    padding:
-      105px
-      14px
-      0;
-  }
+    .title{
+        font-size:16px;
+        letter-spacing:5px;
+    }
 
-  .title{
-    margin-top:27px;
+    .status{
+        font-size:7px;
+        margin-top:5px;
+    }
 
-    font-size:29px;
+    .main{
+        padding:
+            0
+            15px
+            0;
+    }
 
-    letter-spacing:6px;
-  }
+    .core{
+        width:105px;
+        height:105px;
 
-  .subtitle{
-    font-size:10px;
-  }
+        margin-top:5px;
+        margin-bottom:22px;
+    }
 
-  .chat-area{
-    padding-top:30px;
-  }
+    .welcome h2{
+        font-size:18px;
+    }
 
-  .suggestions{
-    grid-template-columns:1fr;
+    .welcome p{
+        font-size:12px;
+    }
 
-    margin-top:22px;
-  }
+    .suggestions{
+        margin-top:18px;
+        gap:7px;
+    }
 
-  .suggestion{
-    padding:13px;
-  }
+    .suggestion{
+        font-size:10px;
+        padding:8px 12px;
+    }
 
-  .input-section{
-    padding-bottom:28px;
-  }
+    .input-area{
+        padding:
+            7px
+            12px
+            max(18px, env(safe-area-inset-bottom));
+    }
 
-  .input-box{
-    min-height:58px;
-  }
+    .input-box{
+        min-height:55px;
 
+        border-radius:17px;
+
+        padding-left:15px;
+    }
+
+    .icon-btn{
+        width:40px;
+        height:40px;
+    }
 }
 
-
 /* =========================
-   VERY SMALL SCREEN
+   SMALL HEIGHT PHONES
 ========================= */
 
 @media(max-height:700px){
 
-  .top{
-    height:76px;
-  }
+    .top{
+        height:105px;
+    }
 
-  .logo{
-    width:43px;
-    height:43px;
-  }
+    .logo{
+        width:38px;
+        height:38px;
+    }
 
-  .center{
-    padding-top:88px;
-  }
+    .core{
+        width:85px;
+        height:85px;
 
-  .title{
-    margin-top:20px;
-    font-size:27px;
-  }
+        margin-bottom:15px;
+    }
 
-  .subtitle{
-    display:none;
-  }
+    .welcome h2{
+        font-size:16px;
+    }
 
-  .chat-area{
-    padding-top:20px;
-  }
+    .welcome p{
+        font-size:11px;
+    }
 
-  .suggestions{
-    margin-top:18px;
-  }
+    .suggestions{
+        margin-top:13px;
+    }
 
-  .input-section{
-    padding-bottom:20px;
-  }
-
+    .suggestion{
+        padding:6px 10px;
+    }
 }
 </style>
 </head>
-
 
 <body>
 
 <div class="app">
 
-  <div class="background">
-    <div class="glow"></div>
-    <div class="glow-bottom"></div>
-  </div>
+    <!-- TOP -->
+    <header class="top">
 
-
-  <!-- TOP CENTER LOGO -->
-
-  <div class="top">
-
-    <img
-      class="logo"
-      src="https://drive.google.com/uc?export=view&id=1psqfF-1XZcolA1QoZIES3Y-PiH_koliU"
-      alt="QUASAR"
-    >
-
-  </div>
-
-
-  <main class="main">
-
-    <div class="center">
-
-
-      <!-- TITLE -->
-
-      <h1 class="title">
-        QUASAR
-      </h1>
-
-      <div class="subtitle">
-        PERSONAL INTELLIGENCE
-      </div>
-
-
-      <!-- CHAT -->
-
-      <div class="chat-area">
-
-
-        <!-- WELCOME -->
-
-        <div
-          class="welcome"
-          id="welcome"
+        <img
+            class="logo"
+            src="assets/quasar-logo.png"
+            alt="QUASAR"
         >
 
-          <p class="welcome-text">
-            Your personal intelligence system.
-            Ask anything, research anything, or give me something to do.
-          </p>
+        <div class="title">QUASAR</div>
+
+        <div class="status">PERSONAL INTELLIGENCE</div>
+
+    </header>
 
 
-          <div class="suggestions">
+    <!-- MAIN -->
+    <main class="main">
 
-            <button
-              class="suggestion"
-              onclick="useSuggestion('Find 20 cafes near me')"
-            >
-              Find 20 cafes near me
-            </button>
+        <div class="core"></div>
 
-            <button
-              class="suggestion"
-              onclick="useSuggestion('Research something for me')"
-            >
-              Research something for me
-            </button>
+        <div class="welcome">
 
-            <button
-              class="suggestion"
-              onclick="useSuggestion('Help me plan my day')"
-            >
-              Help me plan my day
-            </button>
+            <h2>I'm online.</h2>
 
-            <button
-              class="suggestion"
-              onclick="useSuggestion('Explain something to me')"
-            >
-              Explain something to me
-            </button>
-
-          </div>
+            <p>
+                Ask me anything. Search, think, explore,
+                or tell me what you need.
+            </p>
 
         </div>
 
 
-        <!-- MESSAGES -->
+        <div class="suggestions">
 
-        <div
-          class="messages"
-          id="messages"
-        ></div>
+            <button class="suggestion">
+                Find something nearby
+            </button>
+
+            <button class="suggestion">
+                Search the web
+            </button>
+
+            <button class="suggestion">
+                Plan something
+            </button>
+
+            <button class="suggestion">
+                Ask QUASAR
+            </button>
+
+        </div>
 
 
-      </div>
+        <div class="chat" id="chat"></div>
+
+    </main>
 
 
-      <!-- INPUT -->
-
-      <div class="input-section">
+    <!-- INPUT -->
+    <div class="input-area">
 
         <div class="input-box">
 
-
-          <!-- MIC -->
-
-          <button
-            class="icon-btn"
-            id="micBtn"
-            aria-label="Voice input"
-          >
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+            <input
+                id="input"
+                type="text"
+                placeholder="Ask QUASAR anything..."
+                autocomplete="off"
             >
 
-              <rect
-                x="9"
-                y="3"
-                width="6"
-                height="11"
-                rx="3"
-              ></rect>
-
-              <path
-                d="M5 11a7 7 0 0 0 14 0"
-              ></path>
-
-              <path
-                d="M12 18v3"
-              ></path>
-
-              <path
-                d="M8 21h8"
-              ></path>
-
-            </svg>
-
-          </button>
-
-
-          <textarea
-            id="input"
-            rows="1"
-            placeholder="Ask QUASAR anything..."
-          ></textarea>
-
-
-          <!-- SEND -->
-
-          <button
-            class="send-btn"
-            id="sendBtn"
-            aria-label="Send"
-          >
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+            <button
+                class="icon-btn"
+                id="mic"
+                aria-label="Voice input"
             >
+                <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <rect
+                        x="9"
+                        y="3"
+                        width="6"
+                        height="11"
+                        rx="3"
+                    ></rect>
 
-              <path
-                d="M22 2 11 13"
-              ></path>
+                    <path d="M5 11a7 7 0 0 0 14 0"></path>
+                    <path d="M12 18v3"></path>
+                    <path d="M8 21h8"></path>
+                </svg>
+            </button>
 
-              <path
-                d="m22 2-7 20-4-9-9-4Z"
-              ></path>
 
-            </svg>
-
-          </button>
+            <button
+                class="icon-btn send"
+                id="send"
+                aria-label="Send"
+            >
+                <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M22 2L11 13"></path>
+                    <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                </svg>
+            </button>
 
         </div>
-
-
-        <div class="disclaimer">
-          QUASAR can make mistakes. Verify important information.
-        </div>
-
-      </div>
 
     </div>
-
-  </main>
 
 </div>
 
 
 <script>
 
-const input =
-  document.getElementById("input");
-
-const sendBtn =
-  document.getElementById("sendBtn");
-
-const messages =
-  document.getElementById("messages");
-
-const welcome =
-  document.getElementById("welcome");
-
-
-function useSuggestion(text){
-
-  input.value = text;
-
-  input.focus();
-
-}
-
-
-function addMessage(text,type){
-
-  const message =
-    document.createElement("div");
-
-  message.className =
-    "message " + type;
-
-  const bubble =
-    document.createElement("div");
-
-  bubble.className =
-    "bubble";
-
-  bubble.textContent =
-    text;
-
-  message.appendChild(bubble);
-
-  messages.appendChild(message);
-
-  messages.scrollTop =
-    messages.scrollHeight;
-
-}
+const input = document.getElementById("input");
+const send = document.getElementById("send");
+const mic = document.getElementById("mic");
+const chat = document.getElementById("chat");
 
 
 function sendMessage(){
 
-  const text =
-    input.value.trim();
+    const text = input.value.trim();
 
-  if(!text) return;
+    if(!text) return;
 
-  welcome.style.display =
-    "none";
+    const userMessage = document.createElement("div");
 
-  messages.style.display =
-    "block";
+    userMessage.className = "message user";
 
-  addMessage(
-    text,
-    "user"
-  );
+    userMessage.textContent = text;
 
-  input.value = "";
+    chat.appendChild(userMessage);
 
-  setTimeout(()=>{
+    input.value = "";
 
-    addMessage(
-      "QUASAR is online. The intelligence layer will be connected next.",
-      "assistant"
-    );
+    chat.scrollTop = chat.scrollHeight;
 
-  },500);
 
+    setTimeout(() => {
+
+        const assistantMessage =
+            document.createElement("div");
+
+        assistantMessage.className =
+            "message assistant";
+
+        assistantMessage.textContent =
+            "I'm online. Real intelligence will be connected next.";
+
+        chat.appendChild(assistantMessage);
+
+        chat.scrollTop = chat.scrollHeight;
+
+    },500);
 }
 
 
-sendBtn.addEventListener(
-  "click",
-  sendMessage
-);
+send.addEventListener("click", sendMessage);
 
 
-input.addEventListener(
-  "keydown",
-  (e)=>{
+input.addEventListener("keydown", (e) => {
 
-    if(
-      e.key === "Enter" &&
-      !e.shiftKey
-    ){
-
-      e.preventDefault();
-
-      sendMessage();
-
+    if(e.key === "Enter"){
+        sendMessage();
     }
 
-  }
-);
+});
 
 
-input.addEventListener(
-  "input",
-  ()=>{
+/* VOICE */
 
-    input.style.height =
-      "auto";
-
-    input.style.height =
-      Math.min(
-        input.scrollHeight,
-        120
-      ) + "px";
-
-  }
-);
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
 
 
-/* VOICE INPUT */
+if(SpeechRecognition){
 
-const micBtn =
-  document.getElementById("micBtn");
+    const recognition =
+        new SpeechRecognition();
 
+    recognition.lang = "en-US";
 
-if(
-  "webkitSpeechRecognition"
-  in window
-){
+    recognition.continuous = false;
 
-  const recognition =
-    new webkitSpeechRecognition();
-
-  recognition.lang =
-    "en-IN";
-
-  recognition.continuous =
-    false;
-
-  recognition.interimResults =
-    false;
+    recognition.interimResults = false;
 
 
-  micBtn.addEventListener(
-    "click",
-    ()=>{
+    mic.addEventListener("click", () => {
 
-      recognition.start();
+        recognition.start();
 
-    }
-  );
+    });
 
 
-  recognition.onresult =
-    (event)=>{
+    recognition.onresult = (event) => {
 
-      input.value =
-        event.results[0][0]
-        .transcript;
+        input.value =
+            event.results[0][0].transcript;
 
-      input.focus();
+        input.focus();
 
     };
-
-
-}else{
-
-  micBtn.addEventListener(
-    "click",
-    ()=>{
-
-      alert(
-        "Voice input isn't supported in this browser."
-      );
-
-    }
-  );
 
 }
 
