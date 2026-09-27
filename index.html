@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
 <title>QUASAR</title>
 
+
 <style>
+
+/* =========================================
+   RESET
+========================================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
+
 
 html,
 body{
@@ -20,53 +33,80 @@ body{
     overflow:hidden;
 }
 
+
 body{
     background:#050608;
-    color:#fff;
-    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:#ffffff;
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 }
 
-/* =========================
+
+/* =========================================
    BACKGROUND
-========================= */
+========================================= */
 
 body::before{
+
     content:"";
+
     position:fixed;
-    width:500px;
-    height:500px;
-    top:-220px;
+
+    width:520px;
+    height:520px;
+
+    top:-270px;
     left:50%;
+
     transform:translateX(-50%);
-    background:radial-gradient(
-        circle,
-        rgba(113,72,255,.14),
-        rgba(113,72,255,.04) 40%,
-        transparent 70%
-    );
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(104,73,255,.14),
+            rgba(90,55,220,.04) 42%,
+            transparent 72%
+        );
+
     pointer-events:none;
 }
+
 
 body::after{
+
     content:"";
+
     position:fixed;
-    width:420px;
-    height:420px;
-    bottom:-250px;
-    right:-180px;
-    background:radial-gradient(
-        circle,
-        rgba(66,92,255,.08),
-        transparent 70%
-    );
+
+    width:500px;
+    height:500px;
+
+    right:-260px;
+    bottom:-280px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(76,60,210,.08),
+            transparent 70%
+        );
+
     pointer-events:none;
 }
 
-/* =========================
+
+/* =========================================
    APP
-========================= */
+========================================= */
 
 .app{
+
     width:100%;
     height:100dvh;
     min-height:100vh;
@@ -75,280 +115,587 @@ body::after{
     flex-direction:column;
 
     position:relative;
+
+    overflow:hidden;
 }
 
-/* =========================
+
+/* =========================================
    TOP
-========================= */
+========================================= */
 
 .top{
+
     flex-shrink:0;
 
-    height:150px;
+    height:145px;
 
     display:flex;
     flex-direction:column;
+
     align-items:center;
     justify-content:center;
 
-    padding-top:18px;
+    padding-top:16px;
+
+    position:relative;
+    z-index:10;
 }
 
-.logo{
-    width:52px;
-    height:52px;
-
-    object-fit:contain;
-
-    filter:
-        drop-shadow(0 0 12px rgba(125,91,255,.35));
-
-    margin-bottom:9px;
-}
 
 .title{
-    font-size:18px;
+
+    font-size:19px;
+
     font-weight:600;
-    letter-spacing:6px;
 
-    margin-left:6px;
+    letter-spacing:7px;
 
-    color:#f4f2ff;
+    margin-left:7px;
+
+    color:#f2f0fa;
+
+    text-shadow:
+        0 0 20px rgba(130,105,255,.12);
 }
+
 
 .status{
-    margin-top:7px;
+
+    margin-top:8px;
 
     font-size:8px;
-    letter-spacing:3px;
 
-    color:#777687;
+    font-weight:500;
+
+    letter-spacing:3.5px;
+
+    color:#696774;
 }
 
-/* =========================
+
+/* =========================================
    MAIN
-========================= */
+========================================= */
 
 .main{
+
     flex:1;
+
     min-height:0;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
 
     position:relative;
 
-    padding:10px 20px 0;
+    padding:
+        5px
+        20px
+        0;
 }
 
-/* =========================
-   ORB
-========================= */
 
-.core{
-    width:125px;
-    height:125px;
+/* =========================================
+   QUASAR
+========================================= */
 
-    border-radius:50%;
+.quasar{
 
-    margin-top:10px;
-    margin-bottom:28px;
+    width:170px;
+    height:170px;
 
     position:relative;
 
+    flex-shrink:0;
+
+    margin-top:4px;
+    margin-bottom:30px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
 
+    animation:
+        quasarFloat 5s ease-in-out infinite;
+}
+
+
+/* =========================================
+   CENTRAL BLACK HOLE
+========================================= */
+
+.black-hole{
+
+    width:58px;
+    height:58px;
+
+    position:absolute;
+
+    z-index:5;
+
+    border-radius:50%;
+
+    background:#000000;
+
+    box-shadow:
+
+        0 0 10px rgba(0,0,0,.95),
+
+        0 0 24px rgba(72,45,185,.7),
+
+        0 0 45px rgba(88,55,220,.38),
+
+        0 0 75px rgba(75,45,190,.15);
+}
+
+
+.event-horizon{
+
+    position:absolute;
+
+    inset:-5px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(181,160,255,.28);
+
+    box-shadow:
+
+        0 0 12px
+        rgba(136,102,255,.35),
+
+        inset 0 0 10px
+        rgba(120,85,255,.15);
+}
+
+
+/* =========================================
+   ACCRETION DISK
+========================================= */
+
+.disk{
+
+    position:absolute;
+
+    width:138px;
+    height:48px;
+
+    border-radius:50%;
+
+    transform:rotate(-18deg);
+
+    z-index:3;
+
     background:
+
         radial-gradient(
-            circle at 35% 30%,
-            rgba(255,255,255,.95) 0%,
-            rgba(173,155,255,.75) 8%,
-            rgba(95,67,220,.5) 28%,
-            rgba(36,25,87,.8) 55%,
-            rgba(5,6,8,0) 72%
+            ellipse,
+
+            transparent 25%,
+
+            rgba(255,255,255,.82) 30%,
+
+            rgba(182,151,255,.95) 36%,
+
+            rgba(119,76,255,.82) 46%,
+
+            rgba(66,35,180,.55) 59%,
+
+            rgba(36,19,105,.22) 68%,
+
+            transparent 75%
         );
 
     box-shadow:
-        0 0 35px rgba(105,75,255,.25),
-        0 0 90px rgba(74,51,190,.12);
+
+        0 0 10px
+        rgba(142,103,255,.75),
+
+        0 0 25px
+        rgba(106,65,235,.5),
+
+        0 0 45px
+        rgba(81,45,190,.25);
+
+    filter:blur(.25px);
 
     animation:
-        floating 5s ease-in-out infinite;
+        diskPulse 3.5s ease-in-out infinite;
 }
 
-.core::before{
-    content:"";
+
+.disk-back{
+
+    transform:
+        rotate(-18deg)
+        translateY(-3px);
+
+    opacity:.72;
+}
+
+
+.disk-front{
+
+    transform:
+        rotate(-18deg)
+        translateY(3px);
+
+    opacity:.96;
+}
+
+
+/* =========================================
+   ENERGY RING
+========================================= */
+
+.energy-ring{
 
     position:absolute;
 
-    inset:-18px;
+    width:154px;
+    height:52px;
 
     border-radius:50%;
 
-    border:1px solid rgba(128,105,255,.12);
+    border:
+        1px solid
+        rgba(184,157,255,.38);
+
+    transform:rotate(-18deg);
+
+    z-index:6;
 
     box-shadow:
-        0 0 30px rgba(112,86,255,.08);
+
+        0 0 10px
+        rgba(135,101,255,.28),
+
+        inset 0 0 12px
+        rgba(120,82,255,.2);
+
+    animation:
+        ringPulse 2.5s ease-in-out infinite;
 }
 
-.core::after{
-    content:"";
+
+/* =========================================
+   QUASAR GLOW
+========================================= */
+
+.quasar-glow{
 
     position:absolute;
 
-    inset:-35px;
+    width:150px;
+    height:150px;
 
     border-radius:50%;
 
-    border:1px solid rgba(128,105,255,.05);
+    z-index:1;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(107,76,235,.18),
+            rgba(72,43,180,.08) 42%,
+            transparent 72%
+        );
+
+    filter:blur(9px);
+
+    animation:
+        glowPulse 3s ease-in-out infinite;
 }
 
-@keyframes floating{
-    0%,100%{
-        transform:translateY(0);
-    }
 
-    50%{
-        transform:translateY(-7px);
-    }
+/* =========================================
+   RELATIVISTIC JETS
+========================================= */
+
+.jet{
+
+    position:absolute;
+
+    left:50%;
+
+    width:7px;
+
+    transform:translateX(-50%);
+
+    z-index:2;
+
+    border-radius:50%;
+
+    filter:
+
+        blur(1px)
+
+        drop-shadow(
+            0 0 8px
+            rgba(130,95,255,.8)
+        )
+
+        drop-shadow(
+            0 0 20px
+            rgba(93,54,220,.5)
+        );
+
+    animation:
+        jetPulse 1.8s ease-in-out infinite;
 }
 
-/* =========================
+
+.jet-top{
+
+    height:105px;
+
+    top:-72px;
+
+    background:
+
+        linear-gradient(
+            to top,
+
+            rgba(220,210,255,.95),
+
+            rgba(155,125,255,.8),
+
+            rgba(102,62,235,.38),
+
+            transparent
+        );
+}
+
+
+.jet-bottom{
+
+    height:105px;
+
+    bottom:-72px;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+
+            rgba(220,210,255,.95),
+
+            rgba(155,125,255,.8),
+
+            rgba(102,62,235,.38),
+
+            transparent
+        );
+}
+
+
+/* =========================================
    WELCOME
-========================= */
+========================================= */
 
 .welcome{
+
+    width:100%;
+
+    max-width:520px;
+
     text-align:center;
 
-    max-width:500px;
+    flex-shrink:0;
 }
 
+
 .welcome h2{
+
     font-size:20px;
+
     font-weight:500;
 
-    color:#dddbe8;
+    color:#dedbe8;
 
     margin-bottom:8px;
 }
 
+
 .welcome p{
+
     font-size:13px;
+
     line-height:1.6;
 
-    color:#686775;
+    color:#696774;
+
+    max-width:440px;
+
+    margin:auto;
 }
 
-/* =========================
+
+/* =========================================
    SUGGESTIONS
-========================= */
+========================================= */
 
 .suggestions{
+
     display:flex;
+
     gap:9px;
 
-    margin-top:25px;
+    margin-top:24px;
 
     flex-wrap:wrap;
+
     justify-content:center;
 
-    max-width:600px;
+    max-width:650px;
+
+    flex-shrink:0;
 }
 
+
 .suggestion{
-    border:1px solid rgba(255,255,255,.07);
 
-    background:rgba(255,255,255,.025);
+    border:
+        1px solid
+        rgba(255,255,255,.07);
 
-    color:#8d8b99;
+    background:
+        rgba(255,255,255,.025);
+
+    color:#8c8a97;
 
     border-radius:100px;
 
-    padding:9px 14px;
+    padding:
+        9px
+        14px;
 
     font-size:11px;
 
+    font-family:inherit;
+
     cursor:pointer;
 
-    transition:.2s;
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
 }
+
 
 .suggestion:hover{
-    background:rgba(255,255,255,.06);
-    border-color:rgba(150,125,255,.25);
+
+    background:
+        rgba(255,255,255,.06);
+
+    border-color:
+        rgba(150,125,255,.25);
+
     color:#c9c4e7;
+
+    transform:translateY(-1px);
 }
 
-/* =========================
+
+/* =========================================
    CHAT
-========================= */
+========================================= */
 
 .chat{
+
     width:100%;
+
     max-width:760px;
 
     flex:1;
+
     min-height:0;
 
     overflow-y:auto;
 
-    padding:15px 0;
+    padding:
+        15px
+        0;
 
     display:flex;
+
     flex-direction:column;
+
     gap:10px;
 
     scrollbar-width:none;
 }
 
+
 .chat::-webkit-scrollbar{
     display:none;
 }
 
+
 .message{
+
     max-width:80%;
 
-    padding:12px 15px;
+    padding:
+        12px
+        15px;
 
     border-radius:15px;
 
     font-size:13px;
+
     line-height:1.5;
 }
 
+
 .user{
+
     align-self:flex-end;
 
     background:#17151f;
 
     color:#d8d5df;
 
-    border:1px solid rgba(255,255,255,.05);
+    border:
+        1px solid
+        rgba(255,255,255,.05);
 }
 
+
 .assistant{
+
     align-self:flex-start;
 
-    background:rgba(255,255,255,.025);
+    background:
+        rgba(255,255,255,.025);
 
     color:#aaa8b4;
 
-    border:1px solid rgba(255,255,255,.04);
+    border:
+        1px solid
+        rgba(255,255,255,.04);
 }
-
-/* =========================
+/* =========================================
    INPUT AREA
-========================= */
+========================================= */
 
 .input-area{
+
     flex-shrink:0;
 
     width:100%;
 
     display:flex;
+
     justify-content:center;
 
     padding:
@@ -357,226 +704,631 @@ body::after{
         max(22px, env(safe-area-inset-bottom));
 
     position:relative;
-    z-index:10;
+
+    z-index:20;
 }
 
+
 .input-box{
+
     width:100%;
+
     max-width:760px;
 
     min-height:58px;
 
     display:flex;
+
     align-items:center;
 
-    padding:7px 8px 7px 18px;
+    padding:
+        7px
+        8px
+        7px
+        18px;
 
     border-radius:18px;
 
-    background:rgba(18,18,22,.96);
+    background:
+        rgba(17,17,21,.97);
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     box-shadow:
-        0 10px 40px rgba(0,0,0,.4),
-        0 0 30px rgba(90,70,180,.04);
+
+        0 10px 40px
+        rgba(0,0,0,.42),
+
+        0 0 30px
+        rgba(90,70,180,.05);
 
     backdrop-filter:blur(20px);
+
+    -webkit-backdrop-filter:blur(20px);
 }
 
+
+/* =========================================
+   INPUT
+========================================= */
+
 .input-box input{
+
     flex:1;
 
     min-width:0;
 
+    height:42px;
+
     border:0;
+
     outline:0;
 
     background:transparent;
 
-    color:#eee;
+    color:#eeeeF2;
 
     font-size:14px;
 
     font-family:inherit;
 }
 
+
 .input-box input::placeholder{
+
     color:#62616d;
+
+    transition:
+        color .2s ease;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+
+.input-box input:focus::placeholder{
+
+    color:#50505a;
+}
+
+
+/* =========================================
+   INPUT BUTTONS
+========================================= */
 
 .icon-btn{
+
     width:42px;
+
     height:42px;
 
     flex-shrink:0;
 
     border-radius:13px;
 
-    border:1px solid rgba(255,255,255,.06);
+    border:
+        1px solid
+        rgba(255,255,255,.06);
 
-    background:rgba(255,255,255,.035);
+    background:
+        rgba(255,255,255,.035);
 
     color:#888693;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:
+
+        background .2s ease,
+
+        color .2s ease,
+
+        border-color .2s ease,
+
+        transform .15s ease;
 }
+
 
 .icon-btn:hover{
-    background:rgba(255,255,255,.08);
-    color:#ddd;
+
+    background:
+        rgba(255,255,255,.08);
+
+    color:#dedbe8;
+
+    border-color:
+        rgba(255,255,255,.1);
 }
 
+
+.icon-btn:active{
+
+    transform:scale(.94);
+}
+
+
+.icon{
+
+    width:17px;
+
+    height:17px;
+}
+
+
+/* =========================================
+   SEND BUTTON
+========================================= */
+
 .send{
+
     margin-left:7px;
 
-    background:#eee;
+    background:#eeeeF2;
 
     color:#08080a;
 
     border:0;
 }
 
+
 .send:hover{
-    background:#fff;
 
-    color:#000;
+    background:#ffffff;
+
+    color:#000000;
 }
 
-.icon{
-    width:17px;
-    height:17px;
+
+/* =========================================
+   ACTIVE VOICE STATE
+========================================= */
+
+.mic-active{
+
+    color:#c9baff;
+
+    background:
+        rgba(120,85,255,.14);
+
+    border-color:
+        rgba(140,110,255,.3);
+
+    box-shadow:
+        0 0 18px
+        rgba(110,75,255,.18);
 }
 
-/* =========================
+
+/* =========================================
+   QUASAR ANIMATIONS
+========================================= */
+
+@keyframes quasarFloat{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(0);
+    }
+
+    50%{
+
+        transform:
+            translateY(-6px);
+    }
+}
+
+
+@keyframes diskPulse{
+
+    0%,
+    100%{
+
+        transform:
+            rotate(-18deg)
+            scaleX(1);
+
+        filter:
+            blur(.25px)
+            brightness(.9);
+    }
+
+    50%{
+
+        transform:
+            rotate(-18deg)
+            scaleX(1.06);
+
+        filter:
+            blur(.2px)
+            brightness(1.18);
+    }
+}
+
+
+@keyframes ringPulse{
+
+    0%,
+    100%{
+
+        opacity:.35;
+
+        transform:
+            rotate(-18deg)
+            scale(1);
+    }
+
+    50%{
+
+        opacity:.85;
+
+        transform:
+            rotate(-18deg)
+            scale(1.045);
+    }
+}
+
+
+@keyframes glowPulse{
+
+    0%,
+    100%{
+
+        opacity:.45;
+
+        transform:
+            scale(.94);
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:
+            scale(1.08);
+    }
+}
+
+
+@keyframes jetPulse{
+
+    0%,
+    100%{
+
+        opacity:.35;
+
+        transform:
+            translateX(-50%)
+            scaleX(.7);
+
+        filter:
+
+            blur(2px)
+
+            drop-shadow(
+                0 0 6px
+                rgba(130,95,255,.5)
+            );
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:
+            translateX(-50%)
+            scaleX(1);
+
+        filter:
+
+            blur(1px)
+
+            drop-shadow(
+                0 0 12px
+                rgba(160,125,255,.9)
+            )
+
+            drop-shadow(
+                0 0 28px
+                rgba(90,50,220,.7)
+            );
+    }
+}
+
+
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
 @media(max-width:600px){
 
     .top{
+
         height:125px;
-        padding-top:12px;
+
+        padding-top:10px;
     }
 
-    .logo{
-        width:45px;
-        height:45px;
-        margin-bottom:7px;
-    }
 
     .title{
+
         font-size:16px;
+
         letter-spacing:5px;
+
+        margin-left:5px;
     }
+
 
     .status{
+
         font-size:7px;
-        margin-top:5px;
+
+        letter-spacing:3px;
+
+        margin-top:6px;
     }
 
+
     .main{
+
         padding:
             0
-            15px
+            14px
             0;
     }
 
-    .core{
-        width:105px;
-        height:105px;
 
-        margin-top:5px;
+    .quasar{
+
+        width:150px;
+        height:150px;
+
+        margin-top:0;
+
         margin-bottom:22px;
     }
 
+
+    .black-hole{
+
+        width:52px;
+        height:52px;
+    }
+
+
+    .disk{
+
+        width:125px;
+        height:44px;
+    }
+
+
+    .energy-ring{
+
+        width:140px;
+        height:48px;
+    }
+
+
+    .quasar-glow{
+
+        width:135px;
+        height:135px;
+    }
+
+
+    .jet{
+
+        width:6px;
+    }
+
+
+    .jet-top{
+
+        height:90px;
+
+        top:-60px;
+    }
+
+
+    .jet-bottom{
+
+        height:90px;
+
+        bottom:-60px;
+    }
+
+
     .welcome h2{
+
         font-size:18px;
     }
 
+
     .welcome p{
+
         font-size:12px;
+
+        line-height:1.55;
     }
 
+
     .suggestions{
+
         margin-top:18px;
+
         gap:7px;
     }
 
+
     .suggestion{
+
         font-size:10px;
-        padding:8px 12px;
+
+        padding:
+            8px
+            12px;
     }
 
+
     .input-area{
+
         padding:
             7px
             12px
             max(18px, env(safe-area-inset-bottom));
     }
 
+
     .input-box{
+
         min-height:55px;
 
         border-radius:17px;
 
-        padding-left:15px;
+        padding-left:14px;
     }
 
+
+    .input-box input{
+
+        font-size:14px;
+    }
+
+
     .icon-btn{
+
         width:40px;
+
         height:40px;
     }
 }
 
-/* =========================
+
+/* =========================================
    SMALL HEIGHT PHONES
-========================= */
+========================================= */
 
 @media(max-height:700px){
 
     .top{
-        height:105px;
+
+        height:103px;
     }
 
-    .logo{
-        width:38px;
+
+    .quasar{
+
+        width:125px;
+        height:125px;
+
+        margin-bottom:14px;
+    }
+
+
+    .black-hole{
+
+        width:46px;
+        height:46px;
+    }
+
+
+    .disk{
+
+        width:108px;
         height:38px;
     }
 
-    .core{
-        width:85px;
-        height:85px;
 
-        margin-bottom:15px;
+    .energy-ring{
+
+        width:120px;
+        height:42px;
     }
+
+
+    .quasar-glow{
+
+        width:115px;
+        height:115px;
+    }
+
+
+    .jet-top{
+
+        height:75px;
+
+        top:-50px;
+    }
+
+
+    .jet-bottom{
+
+        height:75px;
+
+        bottom:-50px;
+    }
+
 
     .welcome h2{
+
         font-size:16px;
+
+        margin-bottom:5px;
     }
 
+
     .welcome p{
+
         font-size:11px;
     }
 
+
     .suggestions{
-        margin-top:13px;
+
+        margin-top:12px;
     }
 
+
     .suggestion{
-        padding:6px 10px;
+
+        padding:
+            6px
+            10px;
+    }
+
+
+    .input-area{
+
+        padding-bottom:
+            max(14px, env(safe-area-inset-bottom));
     }
 }
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    .quasar,
+    .disk,
+    .energy-ring,
+    .quasar-glow,
+    .jet{
+
+        animation:none;
+    }
+}
+
 </style>
 </head>
 
@@ -584,30 +1336,63 @@ body::after{
 
 <div class="app">
 
-    <!-- TOP -->
+
+    <!-- =====================================
+         TOP
+    ====================================== -->
+
     <header class="top">
 
-        <img
-            class="logo"
-            src="assets/quasar-logo.png"
-            alt="QUASAR"
-        >
+        <div class="title">
+            QUASAR
+        </div>
 
-        <div class="title">QUASAR</div>
-
-        <div class="status">PERSONAL INTELLIGENCE</div>
+        <div class="status">
+            PERSONAL INTELLIGENCE
+        </div>
 
     </header>
 
 
-    <!-- MAIN -->
+    <!-- =====================================
+         MAIN
+    ====================================== -->
+
     <main class="main">
 
-        <div class="core"></div>
+
+        <!-- QUASAR CORE -->
+
+        <div class="quasar">
+
+            <div class="jet jet-top"></div>
+
+            <div class="jet jet-bottom"></div>
+
+            <div class="quasar-glow"></div>
+
+            <div class="disk disk-back"></div>
+
+            <div class="black-hole">
+
+                <div class="event-horizon"></div>
+
+            </div>
+
+            <div class="disk disk-front"></div>
+
+            <div class="energy-ring"></div>
+
+        </div>
+
+
+        <!-- WELCOME -->
 
         <div class="welcome">
 
-            <h2>I'm online.</h2>
+            <h2>
+                I'm online.
+            </h2>
 
             <p>
                 Ask me anything. Search, think, explore,
@@ -617,49 +1402,90 @@ body::after{
         </div>
 
 
+        <!-- SUGGESTIONS -->
+
         <div class="suggestions">
 
-            <button class="suggestion">
+            <button
+                class="suggestion"
+                type="button"
+                data-prompt="Find something nearby"
+            >
                 Find something nearby
             </button>
 
-            <button class="suggestion">
+
+            <button
+                class="suggestion"
+                type="button"
+                data-prompt="Search the web"
+            >
                 Search the web
             </button>
 
-            <button class="suggestion">
+
+            <button
+                class="suggestion"
+                type="button"
+                data-prompt="Plan something for me"
+            >
                 Plan something
             </button>
 
-            <button class="suggestion">
+
+            <button
+                class="suggestion"
+                type="button"
+                data-prompt="Tell me something interesting"
+            >
                 Ask QUASAR
             </button>
 
         </div>
 
 
-        <div class="chat" id="chat"></div>
+        <!-- CHAT -->
+
+        <div
+            class="chat"
+            id="chat"
+            aria-live="polite"
+        ></div>
+
 
     </main>
 
 
-    <!-- INPUT -->
+    <!-- =====================================
+         INPUT AREA
+    ====================================== -->
+
     <div class="input-area">
 
         <div class="input-box">
+
+
+            <!-- TEXT INPUT -->
 
             <input
                 id="input"
                 type="text"
                 placeholder="Ask QUASAR anything..."
                 autocomplete="off"
+                aria-label="Message QUASAR"
             >
+
+
+            <!-- MICROPHONE -->
 
             <button
                 class="icon-btn"
                 id="mic"
+                type="button"
                 aria-label="Voice input"
+                title="Voice input"
             >
+
                 <svg
                     class="icon"
                     viewBox="0 0 24 24"
@@ -669,6 +1495,7 @@ body::after{
                     stroke-linecap="round"
                     stroke-linejoin="round"
                 >
+
                     <rect
                         x="9"
                         y="3"
@@ -677,18 +1504,33 @@ body::after{
                         rx="3"
                     ></rect>
 
-                    <path d="M5 11a7 7 0 0 0 14 0"></path>
-                    <path d="M12 18v3"></path>
-                    <path d="M8 21h8"></path>
+                    <path
+                        d="M5 11a7 7 0 0 0 14 0"
+                    ></path>
+
+                    <path
+                        d="M12 18v3"
+                    ></path>
+
+                    <path
+                        d="M8 21h8"
+                    ></path>
+
                 </svg>
+
             </button>
 
+
+            <!-- SEND -->
 
             <button
                 class="icon-btn send"
                 id="send"
-                aria-label="Send"
+                type="button"
+                aria-label="Send message"
+                title="Send"
             >
+
                 <svg
                     class="icon"
                     viewBox="0 0 24 24"
@@ -698,77 +1540,180 @@ body::after{
                     stroke-linecap="round"
                     stroke-linejoin="round"
                 >
-                    <path d="M22 2L11 13"></path>
-                    <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+
+                    <path
+                        d="M22 2L11 13"
+                    ></path>
+
+                    <path
+                        d="M22 2L15 22L11 13L2 9L22 2Z"
+                    ></path>
+
                 </svg>
+
             </button>
+
 
         </div>
 
     </div>
+
 
 </div>
 
 
 <script>
 
-const input = document.getElementById("input");
-const send = document.getElementById("send");
-const mic = document.getElementById("mic");
-const chat = document.getElementById("chat");
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const input =
+    document.getElementById("input");
+
+const send =
+    document.getElementById("send");
+
+const mic =
+    document.getElementById("mic");
+
+const chat =
+    document.getElementById("chat");
+
+const suggestions =
+    document.querySelectorAll(".suggestion");
 
 
-function sendMessage(){
+/* =========================================
+   ADD MESSAGE
+========================================= */
 
-    const text = input.value.trim();
+function addMessage(text, type){
 
-    if(!text) return;
+    const message =
+        document.createElement("div");
 
-    const userMessage = document.createElement("div");
+    message.className =
+        "message " + type;
 
-    userMessage.className = "message user";
+    message.textContent =
+        text;
 
-    userMessage.textContent = text;
+    chat.appendChild(message);
 
-    chat.appendChild(userMessage);
+    chat.scrollTop =
+        chat.scrollHeight;
 
-    input.value = "";
-
-    chat.scrollTop = chat.scrollHeight;
-
-
-    setTimeout(() => {
-
-        const assistantMessage =
-            document.createElement("div");
-
-        assistantMessage.className =
-            "message assistant";
-
-        assistantMessage.textContent =
-            "I'm online. Real intelligence will be connected next.";
-
-        chat.appendChild(assistantMessage);
-
-        chat.scrollTop = chat.scrollHeight;
-
-    },500);
 }
 
 
-send.addEventListener("click", sendMessage);
+/* =========================================
+   SEND MESSAGE
+========================================= */
+
+function sendMessage(){
+
+    const text =
+        input.value.trim();
 
 
-input.addEventListener("keydown", (e) => {
+    if(!text){
 
-    if(e.key === "Enter"){
-        sendMessage();
+        input.focus();
+
+        return;
     }
 
-});
+
+    /* USER MESSAGE */
+
+    addMessage(
+        text,
+        "user"
+    );
 
 
-/* VOICE */
+    /* CLEAR INPUT */
+
+    input.value = "";
+
+
+    /* TEMPORARY RESPONSE */
+
+    setTimeout(() => {
+
+        addMessage(
+            "I'm online. Real intelligence will be connected next.",
+            "assistant"
+        );
+
+    }, 500);
+
+
+    input.focus();
+
+}
+
+
+/* =========================================
+   SEND BUTTON
+========================================= */
+
+send.addEventListener(
+    "click",
+    sendMessage
+);
+
+
+/* =========================================
+   ENTER KEY
+========================================= */
+
+input.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Enter"){
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   SUGGESTION BUTTONS
+========================================= */
+
+suggestions.forEach(
+    function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                const prompt =
+                    button.dataset.prompt;
+
+                input.value =
+                    prompt;
+
+                input.focus();
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================
+   VOICE INPUT
+========================================= */
 
 const SpeechRecognition =
     window.SpeechRecognition ||
@@ -780,32 +1725,127 @@ if(SpeechRecognition){
     const recognition =
         new SpeechRecognition();
 
-    recognition.lang = "en-US";
 
-    recognition.continuous = false;
-
-    recognition.interimResults = false;
+    recognition.lang =
+        "en-US";
 
 
-    mic.addEventListener("click", () => {
-
-        recognition.start();
-
-    });
+    recognition.continuous =
+        false;
 
 
-    recognition.onresult = (event) => {
+    recognition.interimResults =
+        false;
 
-        input.value =
-            event.results[0][0].transcript;
+
+    /* START LISTENING */
+
+    mic.addEventListener(
+        "click",
+        function(){
+
+            try{
+
+                recognition.start();
+
+                mic.classList.add(
+                    "mic-active"
+                );
+
+            }
+            catch(error){
+
+                console.log(
+                    "Microphone already active."
+                );
+
+            }
+
+        }
+    );
+
+
+    /* SPEECH RESULT */
+
+    recognition.addEventListener(
+        "result",
+        function(event){
+
+            const transcript =
+                event.results[0][0].transcript;
+
+
+            input.value =
+                transcript;
+
+            input.focus();
+
+        }
+    );
+
+
+    /* STOP LISTENING */
+
+    recognition.addEventListener(
+        "end",
+        function(){
+
+            mic.classList.remove(
+                "mic-active"
+            );
+
+        }
+    );
+
+
+    /* ERROR */
+
+    recognition.addEventListener(
+        "error",
+        function(){
+
+            mic.classList.remove(
+                "mic-active"
+            );
+
+        }
+    );
+
+}
+else{
+
+    /*
+       Browser does not support
+       speech recognition.
+    */
+
+    mic.addEventListener(
+        "click",
+        function(){
+
+            input.focus();
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   INITIAL FOCUS
+========================================= */
+
+window.addEventListener(
+    "load",
+    function(){
 
         input.focus();
 
-    };
-
-}
+    }
+);
 
 </script>
 
 </body>
+
 </html>
