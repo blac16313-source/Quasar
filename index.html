@@ -3,1215 +3,858 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-<title>QUASAR</title>
+    <title>QUASAR</title>
 
 
-<style>
+    <!-- =========================================
+         TAILWIND
+    ========================================== -->
 
-/* =========================================
-   RESET
-========================================= */
+    <script src="https://cdn.tailwindcss.com"></script>
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
 
-html,
-body{
-    width:100%;
-    min-height:100%;
-}
+    <!-- =========================================
+         FRAMER MOTION
+         Loaded for animation support.
+    ========================================== -->
 
-body{
-    background:#050507;
-    color:#ffffff;
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+    <script src="https://unpkg.com/framer-motion@11.18.2/dist/framer-motion.js"></script>
 
-    overflow-x:hidden;
-}
 
+    <!-- =========================================
+         STYLES
+    ========================================== -->
 
-/* =========================================
-   APP
-========================================= */
+    <style>
 
-.app{
+        /* =====================================
+           RESET
+        ====================================== */
 
-    min-height:100vh;
-    min-height:100svh;
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
 
-    display:flex;
-    flex-direction:column;
 
-    position:relative;
+        html,
+        body{
+            width:100%;
+            min-height:100%;
+            background:#050507;
+        }
 
-    background:
 
-        radial-gradient(
-            circle at 50% 42%,
-            rgba(91,54,190,.09),
-            transparent 34%
-        ),
+        body{
 
-        radial-gradient(
-            circle at 50% 80%,
-            rgba(70,40,150,.05),
-            transparent 35%
-        ),
+            overflow:hidden;
 
-        #050507;
+            color:#fff;
 
-}
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
 
+            -webkit-tap-highlight-color:transparent;
 
-/* =========================================
-   TOP
-========================================= */
+            overscroll-behavior:none;
 
-.top{
+        }
 
-    width:100%;
 
-    padding:
-        24px
-        28px
-        0;
+        button,
+        input{
+            font:inherit;
+        }
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
 
-    position:relative;
+        button{
+            -webkit-user-select:none;
+            user-select:none;
+        }
 
-    z-index:20;
 
-}
+        /* =====================================
+           APP
+        ====================================== */
 
+        .app{
 
-.title{
+            width:100%;
 
-    font-size:15px;
+            min-height:100vh;
 
-    font-weight:600;
+            min-height:100svh;
 
-    letter-spacing:.38em;
+            display:flex;
 
-    text-indent:.38em;
+            flex-direction:column;
 
-    color:rgba(255,255,255,.92);
+            position:relative;
 
-}
+            overflow:hidden;
 
+            background:#050507;
 
-.status{
+        }
 
-    position:absolute;
 
-    right:28px;
+        /* =====================================
+           HEADER
+        ====================================== */
 
-    top:25px;
+        .top{
 
-    font-size:9px;
+            width:100%;
 
-    letter-spacing:.18em;
+            height:68px;
 
-    color:rgba(255,255,255,.25);
+            flex-shrink:0;
 
-}
+            display:flex;
 
+            align-items:center;
 
-/* =========================================
-   MAIN
-========================================= */
+            padding:
+                0 26px;
 
-.main{
+            position:relative;
 
-    flex:1;
+            z-index:100;
 
-    width:100%;
+        }
 
-    display:flex;
 
-    flex-direction:column;
+        .title{
 
-    align-items:center;
+            font-size:15px;
 
-    justify-content:center;
+            font-weight:600;
 
-    text-align:center;
+            letter-spacing:.38em;
 
-    padding:
-        20px
-        20px
-        0;
+            text-indent:.38em;
 
-}
+            color:#fff;
 
+        }
 
-/* =========================================
-   QUASAR
-========================================= */
 
-.quasar{
+        /* =====================================
+           MAIN COSMIC VOID
+        ====================================== */
 
-    width:190px;
-    height:190px;
+        .main{
 
-    position:relative;
+            position:relative;
 
-    display:flex;
+            flex:1;
 
-    align-items:center;
-    justify-content:center;
+            min-height:0;
 
-    flex-shrink:0;
+            width:100%;
 
-    animation:
-        quasarFloat
-        5s
-        ease-in-out
-        infinite;
+            overflow:hidden;
 
-}
+        }
 
 
-/* =========================================
-   CENTRAL BLACK HOLE
-========================================= */
+        /* =====================================
+           SUBTLE AMBIENT LIGHT
+        ====================================== */
 
-.black-hole{
+        .ambient-glow{
 
-    position:absolute;
+            position:absolute;
 
-    width:76px;
-    height:76px;
+            width:520px;
 
-    border-radius:50%;
+            height:520px;
 
-    background:
-        radial-gradient(
-            circle,
+            left:50%;
 
-            #000 0%,
-            #000 57%,
+            top:27%;
 
-            rgba(0,0,0,.96) 68%,
+            transform:
+                translate(-50%,-50%);
 
-            transparent 74%
-        );
+            border-radius:50%;
 
-    z-index:5;
+            background:
 
-    box-shadow:
+                radial-gradient(
+                    circle,
+                    rgba(105,70,220,.07),
+                    rgba(70,40,150,.025) 38%,
+                    transparent 72%
+                );
 
-        0 0 25px
-        rgba(0,0,0,.95),
+            filter:blur(28px);
 
-        0 0 50px
-        rgba(115,70,255,.18);
+            pointer-events:none;
 
-}
+        }
 
 
-.event-horizon{
+        /* =====================================
+           QUASAR CONTAINER
+        ====================================== */
 
-    position:absolute;
+        .quasar{
 
-    inset:7px;
+            position:absolute;
 
-    border-radius:50%;
+            left:50%;
 
-    background:#000;
+            top:4px;
 
-}
+            transform:
+                translateX(-50%);
 
+            width:190px;
 
-/* =========================================
-   ACCRETION DISK
-========================================= */
+            height:190px;
 
-.disk{
+            z-index:30;
 
-    position:absolute;
+            display:flex;
 
-    width:170px;
-    height:55px;
+            align-items:center;
 
-    border-radius:50%;
+            justify-content:center;
 
-    transform:rotate(-12deg);
+            pointer-events:none;
 
-    background:
+        }
 
-        radial-gradient(
-            ellipse,
 
-            rgba(255,255,255,.95) 0%,
+        /* =====================================
+           FLOAT
+        ====================================== */
 
-            rgba(255,185,90,.95) 13%,
+        .quasar-core{
 
-            rgba(164,70,255,.9) 34%,
+            position:relative;
 
-            rgba(77,48,255,.55) 55%,
+            width:190px;
 
-            transparent 72%
-        );
+            height:190px;
 
-    filter:blur(.4px);
+            animation:
+                quasarFloat
+                5s
+                ease-in-out
+                infinite;
 
-    z-index:3;
+        }
 
-}
 
+        /* =====================================
+           QUASAR GLOW
+        ====================================== */
 
-.disk-back{
+        .quasar-glow{
 
-    transform:
-        rotate(-12deg)
-        translateY(-3px)
-        scale(.96);
+            position:absolute;
 
-    opacity:.82;
+            width:185px;
 
-}
+            height:185px;
 
+            left:50%;
 
-.disk-front{
+            top:50%;
 
-    transform:
-        rotate(-12deg)
-        translateY(4px)
-        scale(1);
+            transform:
+                translate(-50%,-50%);
 
-    opacity:.95;
+            border-radius:50%;
 
-    animation:
-        diskPulse
-        3.2s
-        ease-in-out
-        infinite;
+            background:
 
-}
+                radial-gradient(
+                    circle,
+                    rgba(125,85,255,.18),
+                    rgba(85,45,180,.07) 38%,
+                    transparent 72%
+                );
 
+            filter:blur(13px);
 
-/* =========================================
-   ENERGY RING
-========================================= */
+        }
 
-.energy-ring{
 
-    position:absolute;
+        /* =====================================
+           ACCRETION DISK
+        ====================================== */
 
-    width:128px;
-    height:128px;
+        .disk{
 
-    border-radius:50%;
+            position:absolute;
 
-    border:
-        2px solid
-        rgba(170,110,255,.65);
+            width:174px;
 
-    box-shadow:
+            height:56px;
 
-        0 0 12px
-        rgba(139,92,246,.55),
+            left:50%;
 
-        0 0 35px
-        rgba(139,92,246,.28),
+            top:50%;
 
-        inset 0 0 15px
-        rgba(139,92,246,.25);
+            margin-left:-87px;
 
-    z-index:4;
+            margin-top:-28px;
 
-    animation:
-        ringPulse
-        2.5s
-        ease-in-out
-        infinite;
+            border-radius:50%;
 
-}
+            transform:
+                rotate(-12deg);
 
+            background:
 
-/* =========================================
-   QUASAR GLOW
-========================================= */
+                radial-gradient(
+                    ellipse,
 
-.quasar-glow{
+                    rgba(255,255,255,.96) 0%,
 
-    position:absolute;
+                    rgba(255,190,100,.95) 12%,
 
-    width:180px;
-    height:180px;
+                    rgba(173,82,255,.92) 34%,
 
-    border-radius:50%;
+                    rgba(83,50,255,.58) 56%,
 
-    background:
+                    transparent 73%
+                );
 
-        radial-gradient(
-            circle,
+            filter:blur(.4px);
 
-            rgba(120,80,255,.24),
+            z-index:5;
 
-            rgba(90,40,180,.10) 38%,
+        }
 
-            transparent 72%
-        );
 
-    filter:blur(10px);
+        .disk-back{
 
-    animation:
-        glowPulse
-        3s
-        ease-in-out
-        infinite;
+            transform:
+                rotate(-12deg)
+                translateY(-4px)
+                scale(.96);
 
-}
+            opacity:.78;
 
+        }
 
-/* =========================================
-   RELATIVISTIC JETS
-========================================= */
 
-.jet{
+        .disk-front{
 
-    position:absolute;
+            transform:
+                rotate(-12deg)
+                translateY(4px);
 
-    width:12px;
+            opacity:.96;
 
-    border-radius:50%;
+            animation:
+                diskPulse
+                3.2s
+                ease-in-out
+                infinite;
 
-    background:
+        }
 
-        linear-gradient(
-            to top,
 
-            rgba(190,150,255,.9),
+        /* =====================================
+           BLACK HOLE
+        ====================================== */
 
-            rgba(90,60,255,.45),
+        .black-hole{
 
-            transparent
-        );
+            position:absolute;
 
-    filter:blur(2px);
+            width:78px;
 
-    opacity:.8;
+            height:78px;
 
-    z-index:1;
+            left:50%;
 
-    animation:
-        jetPulse
-        2.4s
-        ease-in-out
-        infinite;
+            top:50%;
 
-}
+            margin-left:-39px;
 
+            margin-top:-39px;
 
-.jet-top{
+            border-radius:50%;
 
-    height:145px;
+            background:
 
-    bottom:105px;
+                radial-gradient(
+                    circle,
+                    #000 0%,
+                    #000 57%,
+                    rgba(0,0,0,.98) 69%,
+                    transparent 75%
+                );
 
-}
+            z-index:10;
 
+            box-shadow:
 
-.jet-bottom{
+                0 0 26px
+                rgba(0,0,0,.95),
 
-    height:145px;
+                0 0 52px
+                rgba(110,65,255,.17);
 
-    top:105px;
+            pointer-events:auto;
 
-    transform:rotate(180deg);
+            cursor:pointer;
 
-}
+            touch-action:none;
 
+        }
 
-/* =========================================
-   WELCOME
-========================================= */
 
-.welcome{
+        .event-horizon{
 
-    margin-top:18px;
+            position:absolute;
 
-    max-width:560px;
+            inset:7px;
 
-    position:relative;
+            border-radius:50%;
 
-    z-index:10;
+            background:#000;
 
-}
+        }
 
 
-.welcome h2{
+        /* =====================================
+           ENERGY RING
+        ====================================== */
 
-    font-size:26px;
+        .energy-ring{
 
-    line-height:1.2;
+            position:absolute;
 
-    font-weight:500;
+            width:130px;
 
-    letter-spacing:-.03em;
+            height:130px;
 
-    color:rgba(255,255,255,.94);
+            left:50%;
 
-}
+            top:50%;
 
+            margin-left:-65px;
 
-.welcome p{
+            margin-top:-65px;
 
-    margin-top:10px;
+            border-radius:50%;
 
-    font-size:14px;
+            border:
+                2px solid
+                rgba(170,110,255,.62);
 
-    line-height:1.6;
+            box-shadow:
 
-    color:rgba(255,255,255,.42);
+                0 0 12px
+                rgba(139,92,246,.5),
 
-}
+                0 0 36px
+                rgba(139,92,246,.22),
 
+                inset 0 0 15px
+                rgba(139,92,246,.2);
 
-/* =========================================
-   SUGGESTIONS
-========================================= */
+            z-index:9;
 
-.suggestions{
+        }
 
-    margin-top:24px;
 
-    display:flex;
+        /* =====================================
+           VERTICAL BEAMS
+        ====================================== */
 
-    flex-wrap:wrap;
+        .beam{
 
-    justify-content:center;
+            position:absolute;
 
-    gap:9px;
+            width:11px;
 
-    max-width:650px;
+            left:50%;
 
-}
+            margin-left:-5.5px;
 
+            border-radius:50%;
 
-.suggestion{
+            pointer-events:none;
 
-    border:1px solid
-        rgba(255,255,255,.08);
+            z-index:2;
 
-    background:
-        rgba(255,255,255,.025);
+            background:
 
-    color:
-        rgba(255,255,255,.55);
+                linear-gradient(
+                    to top,
+                    rgba(200,170,255,.94),
+                    rgba(105,70,255,.52),
+                    transparent
+                );
 
-    border-radius:999px;
+            filter:blur(2px);
 
-    padding:
-        10px
-        15px;
+            opacity:.72;
 
-    font-size:12px;
+        }
 
-    cursor:pointer;
 
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
+        .beam-top{
 
-}
+            height:155px;
 
+            bottom:calc(50% + 35px);
 
-.suggestion:hover{
+        }
 
-    background:
-        rgba(255,255,255,.055);
 
-    border-color:
-        rgba(255,255,255,.14);
+        .beam-bottom{
 
-    color:
-        rgba(255,255,255,.82);
+            height:155px;
 
-    transform:
-        translateY(-1px);
+            top:calc(50% + 35px);
 
-}
+            transform:rotate(180deg);
 
+        }
 
-/* =========================================
-   CHAT
-========================================= */
 
-.chat{
+        /* =====================================
+           NORMAL FLOAT ANIMATION
+        ====================================== */
 
-    width:100%;
+        @keyframes quasarFloat{
 
-    max-width:760px;
+            0%,
+            100%{
+                transform:translateY(0);
+            }
 
-    margin-top:22px;
+            50%{
+                transform:translateY(-7px);
+            }
 
-    display:flex;
+        }
 
-    flex-direction:column;
 
-    gap:12px;
+        @keyframes diskPulse{
 
-    overflow-y:auto;
+            0%,
+            100%{
 
-    max-height:240px;
+                transform:
+                    rotate(-12deg)
+                    translateY(4px)
+                    scale(1);
 
-    scrollbar-width:none;
+            }
 
-}
+            50%{
 
+                transform:
+                    rotate(-12deg)
+                    translateY(4px)
+                    scale(1.04);
 
-.chat::-webkit-scrollbar{
-    display:none;
-}
+            }
 
+        }
 
-.message{
 
-    max-width:78%;
+        @keyframes ringPulse{
 
-    padding:
-        11px
-        15px;
+            0%,
+            100%{
 
-    border-radius:18px;
+                transform:scale(.98);
 
-    font-size:13px;
+                opacity:.72;
 
-    line-height:1.5;
+            }
 
-    word-break:break-word;
+            50%{
 
-}
+                transform:scale(1.04);
 
+                opacity:1;
 
-.message.user{
+            }
 
-    align-self:flex-end;
+        }
 
-    background:
-        rgba(255,255,255,.09);
 
-    color:
-        rgba(255,255,255,.9);
+        /* =====================================
+           THINKING BEAM
+        ====================================== */
 
-    border-bottom-right-radius:5px;
+        .thinking .beam{
 
-}
+            animation:
+                beamThinking
+                .38s
+                ease-in-out
+                infinite alternate;
 
+        }
 
-.message.assistant{
 
-    align-self:flex-start;
+        .thinking .quasar-glow{
 
-    background:
-        rgba(120,80,255,.08);
+            animation:
+                thinkingGlow
+                .55s
+                ease-in-out
+                infinite alternate;
 
-    border:
-        1px solid
-        rgba(150,110,255,.08);
+        }
 
-    color:
-        rgba(255,255,255,.65);
 
-    border-bottom-left-radius:5px;
+        .thinking .energy-ring{
 
-}
+            animation:
+                thinkingRing
+                .55s
+                ease-in-out
+                infinite alternate;
 
+        }
 
-/* =========================================
-   INPUT AREA
-========================================= */
 
-.input-area{
+        @keyframes beamThinking{
 
-    width:100%;
+            0%{
 
-    flex-shrink:0;
+                opacity:.45;
 
-    padding-bottom:
-        env(safe-area-inset-bottom);
+                transform:
+                    scaleX(.72);
 
-    margin-bottom:28px;
+            }
 
-}
+            35%{
 
+                opacity:1;
 
-.input-wrapper{
+                transform:
+                    scaleX(1.2);
 
-    width:100%;
+            }
 
-    max-width:768px;
+            70%{
 
-    margin:
-        0 auto;
+                opacity:.55;
 
-    padding:
-        0 16px;
+                transform:
+                    scaleX(.82);
 
-}
+            }
 
+            100%{
 
-/* =========================================
-   INPUT BOX
-========================================= */
+                opacity:1;
 
-.input-box{
+                transform:
+                    scaleX(1.1);
 
-    width:100%;
+            }
 
-    min-height:58px;
+        }
 
-    display:flex;
 
-    align-items:center;
+        @keyframes thinkingGlow{
 
-    gap:5px;
+            from{
 
-    padding:
-        7px
-        8px
-        7px
-        20px;
+                opacity:.45;
 
-    border-radius:999px;
+                transform:
+                    translate(-50%,-50%)
+                    scale(.94);
 
-    background:
-        rgba(255,255,255,.055);
+            }
 
-    border:
-        1px solid
-        rgba(255,255,255,.09);
+            to{
 
-    box-shadow:
+                opacity:1;
 
-        0 18px 45px
-        rgba(0,0,0,.45),
+                transform:
+                    translate(-50%,-50%)
+                    scale(1.1);
 
-        0 4px 18px
-        rgba(0,0,0,.25),
+            }
 
-        inset 0 1px 0
-        rgba(255,255,255,.025);
+        }
 
-    backdrop-filter:
-        blur(20px);
 
-    -webkit-backdrop-filter:
-        blur(20px);
+        @keyframes thinkingRing{
 
-    transition:
-        border-color .2s ease,
-        background .2s ease;
+            from{
 
-}
+                opacity:.55;
 
+                transform:scale(.96);
 
-.input-box:focus-within{
+            }
 
-    border-color:
-        rgba(160,120,255,.22);
+            to{
 
-    background:
-        rgba(255,255,255,.065);
+                opacity:1;
 
-}
+                transform:scale(1.09);
 
+            }
 
-/* =========================================
-   INPUT
-========================================= */
+        }
 
-.input-box input{
 
-    flex:1;
+        /* =====================================
+           MOBILE QUASAR
+        ====================================== */
 
-    min-width:0;
+        @media(max-width:600px){
 
-    height:42px;
+            .top{
 
-    border:none;
+                height:62px;
 
-    outline:none;
+                padding:
+                    0 18px;
 
-    background:transparent;
+            }
 
-    color:#fff;
 
-    font-size:14px;
+            .quasar{
 
-}
+                top:0;
 
+            }
 
-.input-box input::placeholder{
 
-    color:
-        rgba(255,255,255,.32);
+            .quasar-core{
 
-}
+                width:160px;
 
+                height:160px;
 
-/* =========================================
-   ICON BUTTON
-========================================= */
+            }
 
-.icon-btn{
 
-    width:42px;
-    height:42px;
+            .quasar-glow{
 
-    flex-shrink:0;
+                width:158px;
 
-    border:none;
+                height:158px;
 
-    border-radius:50%;
+            }
 
-    display:flex;
 
-    align-items:center;
-    justify-content:center;
+            .disk{
 
-    cursor:pointer;
+                width:145px;
 
-    background:transparent;
+                height:50px;
 
-    color:
-        rgba(255,255,255,.42);
+                margin-left:-72.5px;
 
-    transition:
-        background .2s ease,
-        color .2s ease,
-        transform .2s ease;
+                margin-top:-25px;
 
-}
+            }
 
 
-.icon-btn:hover{
+            .black-hole{
 
-    background:
-        rgba(255,255,255,.07);
+                width:68px;
 
-    color:
-        rgba(255,255,255,.82);
+                height:68px;
 
-}
+                margin-left:-34px;
 
+                margin-top:-34px;
 
-.icon-btn:active{
+            }
 
-    transform:scale(.94);
 
-}
+            .energy-ring{
 
+                width:110px;
 
-.icon{
+                height:110px;
 
-    width:19px;
-    height:19px;
+                margin-left:-55px;
 
-}
+                margin-top:-55px;
 
+            }
 
-/* =========================================
-   SEND
-========================================= */
 
-.send{
+            .beam{
 
-    background:
-        rgba(255,255,255,.9);
+                width:10px;
 
-    color:#050507;
+                margin-left:-5px;
 
-}
+            }
 
 
-.send:hover{
+            .beam-top{
 
-    background:#fff;
+                height:135px;
 
-    color:#000;
+                bottom:calc(50% + 30px);
 
-}
+            }
 
 
-/* =========================================
-   MIC ACTIVE
-========================================= */
+            .beam-bottom{
 
-.mic-active{
+                height:135px;
 
-    background:
-        rgba(130,90,255,.18);
+                top:calc(50% + 30px);
 
-    color:
-        rgba(190,160,255,.95);
+            }
 
-    animation:
-        micPulse
-        1.2s
-        ease-in-out
-        infinite;
+        }
 
-}
 
+        /* =====================================
+           REDUCED MOTION
+        ====================================== */
 
-/* =========================================
-   ANIMATIONS
-========================================= */
+        @media(prefers-reduced-motion:reduce){
 
-@keyframes quasarFloat{
+            .quasar-core,
+            .disk,
+            .beam,
+            .quasar-glow,
+            .energy-ring{
 
-    0%,
-    100%{
-        transform:translateY(0);
-    }
+                animation:none !important;
 
-    50%{
-        transform:translateY(-8px);
-    }
+            }
 
-}
+        }
 
-
-@keyframes diskPulse{
-
-    0%,
-    100%{
-
-        transform:
-            rotate(-12deg)
-            translateY(4px)
-            scale(1);
-
-    }
-
-    50%{
-
-        transform:
-            rotate(-12deg)
-            translateY(4px)
-            scale(1.04);
-
-    }
-
-}
-
-
-@keyframes ringPulse{
-
-    0%,
-    100%{
-
-        transform:scale(.98);
-
-        opacity:.72;
-
-    }
-
-    50%{
-
-        transform:scale(1.04);
-
-        opacity:1;
-
-    }
-
-}
-
-
-@keyframes glowPulse{
-
-    0%,
-    100%{
-
-        transform:scale(.95);
-
-        opacity:.65;
-
-    }
-
-    50%{
-
-        transform:scale(1.08);
-
-        opacity:1;
-
-    }
-
-}
-
-
-@keyframes jetPulse{
-
-    0%,
-    100%{
-
-        opacity:.55;
-
-    }
-
-    50%{
-
-        opacity:.95;
-
-    }
-
-}
-
-
-@keyframes micPulse{
-
-    0%,
-    100%{
-        box-shadow:0 0 0 rgba(140,100,255,0);
-    }
-
-    50%{
-        box-shadow:
-            0 0 18px
-            rgba(140,100,255,.28);
-    }
-
-}
-
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media(max-width:600px){
-
-    .top{
-
-        padding:
-            20px
-            18px
-            0;
-
-    }
-
-    .status{
-
-        right:18px;
-
-        top:21px;
-
-        font-size:8px;
-
-    }
-
-    .main{
-
-        padding:
-            10px
-            16px
-            0;
-
-    }
-
-    .quasar{
-
-        width:160px;
-        height:160px;
-
-    }
-
-    .disk{
-
-        width:145px;
-
-    }
-
-    .energy-ring{
-
-        width:110px;
-        height:110px;
-
-    }
-
-    .black-hole{
-
-        width:68px;
-        height:68px;
-
-    }
-
-    .jet{
-
-        width:10px;
-
-    }
-
-    .welcome h2{
-
-        font-size:23px;
-
-    }
-
-    .welcome p{
-
-        font-size:13px;
-
-        max-width:320px;
-
-    }
-
-    .suggestions{
-
-        margin-top:20px;
-
-        gap:7px;
-
-    }
-
-    .suggestion{
-
-        padding:
-            9px
-            12px;
-
-        font-size:11px;
-
-    }
-
-    .input-area{
-
-        margin-bottom:16px;
-
-    }
-
-    .input-wrapper{
-
-        padding:
-            0 16px;
-
-    }
-
-    .input-box{
-
-        min-height:56px;
-
-        padding-left:17px;
-
-    }
-
-}
-
-
-/* =========================================
-   SHORT SCREENS
-========================================= */
-
-@media(max-height:700px){
-
-    .top{
-
-        padding-top:16px;
-
-    }
-
-    .main{
-
-        justify-content:flex-start;
-
-        padding-top:10px;
-
-    }
-
-    .quasar{
-
-        transform:scale(.82);
-
-        margin-bottom:-18px;
-
-    }
-
-    .welcome{
-
-        margin-top:4px;
-
-    }
-
-    .suggestions{
-
-        margin-top:14px;
-
-    }
-
-}
-
-
-/* =========================================
-   REDUCED MOTION
-========================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    .quasar,
-    .disk,
-    .energy-ring,
-    .quasar-glow,
-    .jet,
-    .mic-active{
-
-        animation:none;
-
-    }
-
-}
-
-
-/* =========================================
-   SAFE MOBILE INPUT
-========================================= */
-
-@supports(padding:max(0px)){
-
-    .input-area{
-
-        padding-bottom:
-            max(
-                8px,
-                env(safe-area-inset-bottom)
-            );
-
-    }
-
-}
-
-</style>
-
+    </style>
 </head>
-
 
 <body>
 
 <div class="app">
-    <!-- =====================================
-         TOP BAR
-    ====================================== -->
 
     <header class="top">
 
@@ -1219,221 +862,543 @@ body{
             QUASAR
         </div>
 
-        <div class="status">
-            PERSONAL INTELLIGENCE
-        </div>
-
     </header>
 
 
-    <!-- =====================================
-         MAIN CONTENT
-    ====================================== -->
+    <main
+        class="main"
+        id="cosmicVoid"
+    >
 
-    <main class="main">
+        <div
+            class="ambient-glow"
+            aria-hidden="true"
+        ></div>
 
 
         <!-- =================================
-             QUASAR CORE
+             CONSTELLATION HISTORY
+        ================================== -->
+
+        <div
+            id="constellationLayer"
+            class="
+                absolute
+                inset-0
+                z-[5]
+                pointer-events-none
+            "
+        ></div>
+
+
+        <!-- =================================
+             DRAWING CANVAS
+        ================================== -->
+
+        <canvas
+            id="drawCanvas"
+            class="
+                absolute
+                inset-0
+                w-full
+                h-full
+                z-[15]
+                touch-none
+            ></canvas>
+
+
+        <!-- =================================
+             QUASAR
         ================================== -->
 
         <div class="quasar">
 
-            <!-- TOP JET -->
+            <div
+                id="quasarCore"
+                class="quasar-core"
+            >
 
-            <div class="jet jet-top"></div>
-
-
-            <!-- BOTTOM JET -->
-
-            <div class="jet jet-bottom"></div>
-
-
-            <!-- OUTER GLOW -->
-
-            <div class="quasar-glow"></div>
+                <div
+                    class="quasar-glow"
+                ></div>
 
 
-            <!-- BACK OF ACCRETION DISK -->
+                <div
+                    class="beam beam-top"
+                ></div>
 
-            <div class="disk disk-back"></div>
+
+                <div
+                    class="beam beam-bottom"
+                ></div>
 
 
-            <!-- BLACK HOLE -->
+                <div
+                    class="disk disk-back"
+                ></div>
 
-            <div class="black-hole">
 
-                <div class="event-horizon"></div>
+                <div
+                    id="blackHole"
+                    class="black-hole"
+                    aria-label="QUASAR core"
+                >
+
+                    <div
+                        class="event-horizon"
+                    ></div>
+
+                </div>
+
+
+                <div
+                    class="disk disk-front"
+                ></div>
+
+
+                <div
+                    class="energy-ring"
+                ></div>
 
             </div>
 
-
-            <!-- FRONT OF ACCRETION DISK -->
-
-            <div class="disk disk-front"></div>
-
-
-            <!-- ENERGY RING -->
-
-            <div class="energy-ring"></div>
-
         </div>
-
-
         <!-- =================================
-             WELCOME TEXT
-        ================================== -->
-
-        <section class="welcome">
-
-            <h2>
-                I'm online.
-            </h2>
-
-            <p>
-                Ask me anything. Search, think, explore,
-                or tell me what you need.
-            </p>
-
-        </section>
-
-
-        <!-- =================================
-             SUGGESTION CHIPS
-        ================================== -->
-
-        <div class="suggestions">
-
-
-            <button
-                class="suggestion"
-                type="button"
-                data-prompt="Find something nearby"
-            >
-
-                Find something nearby
-
-            </button>
-
-
-            <button
-                class="suggestion"
-                type="button"
-                data-prompt="Search the web"
-            >
-
-                Search the web
-
-            </button>
-
-
-            <button
-                class="suggestion"
-                type="button"
-                data-prompt="Plan something"
-            >
-
-                Plan something
-
-            </button>
-
-
-            <button
-                class="suggestion"
-                type="button"
-                data-prompt="Ask QUASAR"
-            >
-
-                Ask QUASAR
-
-            </button>
-
-
-        </div>
-
-
-        <!-- =================================
-             CHAT MESSAGES
+             ORBIT SYSTEM
         ================================== -->
 
         <div
-            class="chat"
-            id="chat"
-            aria-live="polite"
+            id="orbitLayer"
+            class="
+                absolute
+                inset-0
+                z-[20]
+                pointer-events-none
+            "
         ></div>
 
 
-        <!--
-            IMPORTANT:
+        <!-- =================================
+             THINKING PARTICLES
+        ================================== -->
 
-            No mt-auto here.
-            No giant flex spacer here.
+        <div
+            id="particleLayer"
+            class="
+                absolute
+                inset-0
+                z-[12]
+                pointer-events-none
+            "
+        ></div>
 
-            The main itself is flex:1 and centered.
-            The input is completely outside it,
-            so the input keeps its controlled
-            bottom spacing.
-        -->
 
+        <!-- =================================
+             TEMPORARY SUMMON RESULT
+        ================================== -->
+
+        <div
+            id="summonResult"
+            class="
+                absolute
+                left-1/2
+                top-1/2
+                -translate-x-1/2
+                -translate-y-1/2
+                z-[25]
+                pointer-events-none
+                opacity-0
+                transition-opacity
+                duration-500
+                text-center
+                max-w-xs
+                px-6
+            "
+        >
+
+            <div
+                id="summonTitle"
+                class="
+                    text-[10px]
+                    uppercase
+                    tracking-[0.35em]
+                    text-purple-200/60
+                    mb-3
+                "
+            >
+                QUASAR
+            </div>
+
+
+            <div
+                id="summonText"
+                class="
+                    text-sm
+                    text-white/80
+                    leading-relaxed
+                "
+            ></div>
+
+        </div>
+
+
+        <!-- =================================
+             COSMIC MODE MANDALA
+        ================================== -->
+
+        <div
+            id="mandalaLayer"
+            class="
+                absolute
+                left-1/2
+                top-[70px]
+                -translate-x-1/2
+                z-[8]
+                pointer-events-none
+                opacity-0
+                transition-opacity
+                duration-700
+            "
+            aria-hidden="true"
+        >
+
+            <svg
+                width="420"
+                height="420"
+                viewBox="0 0 420 420"
+                class="w-[420px] h-[420px]"
+            >
+
+                <g
+                    fill="none"
+                    stroke="rgba(166,110,255,.8)"
+                    stroke-width="0.7"
+                >
+
+                    <!-- Outer circles -->
+
+                    <circle
+                        cx="210"
+                        cy="210"
+                        r="195"
+                    />
+
+                    <circle
+                        cx="210"
+                        cy="210"
+                        r="174"
+                    />
+
+                    <circle
+                        cx="210"
+                        cy="210"
+                        r="150"
+                    />
+
+                    <circle
+                        cx="210"
+                        cy="210"
+                        r="124"
+                    />
+
+                    <circle
+                        cx="210"
+                        cy="210"
+                        r="94"
+                    />
+
+                    <circle
+                        cx="210"
+                        cy="210"
+                        r="62"
+                    />
+
+
+                    <!-- Radial geometry -->
+
+                    <g
+                        transform="translate(210 210)"
+                    >
+
+                        <polygon
+                            points="
+                                0,-172
+                                149,86
+                                -149,86
+                            "
+                        />
+
+                        <polygon
+                            points="
+                                0,172
+                                149,-86
+                                -149,-86
+                            "
+                        />
+
+
+                        <polygon
+                            points="
+                                0,-132
+                                114,66
+                                -114,66
+                            "
+                        />
+
+                        <polygon
+                            points="
+                                0,132
+                                114,-66
+                                -114,-66
+                            "
+                        />
+
+
+                        <rect
+                            x="-88"
+                            y="-88"
+                            width="176"
+                            height="176"
+                            transform="rotate(45)"
+                        />
+
+
+                        <rect
+                            x="-61"
+                            y="-61"
+                            width="122"
+                            height="122"
+                            transform="rotate(45)"
+                        />
+
+
+                        <!-- Radial lines -->
+
+                        <line
+                            x1="0"
+                            y1="-195"
+                            x2="0"
+                            y2="195"
+                        />
+
+                        <line
+                            x1="-195"
+                            y1="0"
+                            x2="195"
+                            y2="0"
+                        />
+
+                        <line
+                            x1="-138"
+                            y1="-138"
+                            x2="138"
+                            y2="138"
+                        />
+
+                        <line
+                            x1="138"
+                            y1="-138"
+                            x2="-138"
+                            y2="138"
+                        />
+
+                    </g>
+
+                </g>
+
+            </svg>
+
+        </div>
+
+
+        <!-- =================================
+             DRAWING GUIDE
+        ================================== -->
+
+        <div
+            id="drawGuide"
+            class="
+                absolute
+                left-1/2
+                top-[42%]
+                -translate-x-1/2
+                -translate-y-1/2
+                z-[16]
+                pointer-events-none
+                opacity-0
+                transition-opacity
+                duration-300
+                text-center
+            "
+        >
+
+            <div
+                class="
+                    text-[9px]
+                    uppercase
+                    tracking-[0.3em]
+                    text-white/30
+                "
+            >
+                Draw to summon
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             SUGGESTION RESULT
+        ================================== -->
+
+        <div
+            id="suggestionPanel"
+            class="
+                absolute
+                left-1/2
+                top-1/2
+                -translate-x-1/2
+                -translate-y-1/2
+                z-[40]
+                w-[min(340px,calc(100%-40px))]
+                opacity-0
+                pointer-events-none
+                transition-all
+                duration-300
+            "
+        >
+
+            <div
+                class="
+                    rounded-2xl
+                    border
+                    border-white/[.07]
+                    bg-black/70
+                    backdrop-blur-xl
+                    px-5
+                    py-4
+                "
+            >
+
+                <div
+                    class="
+                        text-[9px]
+                        uppercase
+                        tracking-[.3em]
+                        text-purple-200/50
+                        mb-4
+                    "
+                >
+                    Suggested
+                </div>
+
+
+                <div
+                    id="suggestionItems"
+                    class="
+                        space-y-3
+                        text-sm
+                        text-white/70
+                    "
+                ></div>
+
+            </div>
+
+        </div>
 
     </main>
 
 
     <!-- =====================================
-         INPUT AREA
+         BOTTOM INPUT AREA
     ====================================== -->
 
-    <div class="input-area">
+    <div
+        class="
+            input-area
+            fixed
+            left-0
+            right-0
+            bottom-6
+            z-[100]
+            px-4
+            pointer-events-none
+        "
+    >
 
+        <div
+            class="
+                mx-auto
+                w-full
+                max-w-3xl
+                pointer-events-auto
+            "
+        >
 
-        <!--
-            max-width:
-            keeps the input from becoming
-            ridiculously wide on desktop.
+            <form
+                id="chatForm"
+                class="
+                    relative
+                    flex
+                    items-center
+                    gap-2
+                    rounded-full
+                    border
+                    border-white/[.08]
+                    bg-[#111115]/95
+                    backdrop-blur-xl
+                    px-2
+                    py-2
+                    shadow-[0_18px_60px_rgba(0,0,0,.55)]
+                "
+            >
 
-            width:100%:
-            keeps it responsive.
-
-            margin:auto:
-            centers it.
-
-            px-4 equivalent:
-            16px horizontal padding.
-        -->
-
-        <div class="input-wrapper">
-
-
-            <div class="input-box">
-
-
-                <!-- =========================
-                     TEXT INPUT
-                ========================== -->
+                <!-- INPUT -->
 
                 <input
-                    id="input"
+                    id="chatInput"
                     type="text"
-                    placeholder="Ask QUASAR anything..."
                     autocomplete="off"
-                    aria-label="Ask QUASAR anything"
+                    spellcheck="true"
+                    placeholder="Ask QUASAR anything..."
+                    class="
+                        min-w-0
+                        flex-1
+                        bg-transparent
+                        outline-none
+                        border-none
+                        px-4
+                        py-3
+                        text-[14px]
+                        text-white
+                        placeholder:text-white/30
+                    "
                 />
 
 
-                <!-- =========================
-                     MICROPHONE
-                ========================== -->
+                <!-- MIC -->
 
                 <button
-                    class="icon-btn"
-                    id="mic"
+                    id="micButton"
                     type="button"
                     aria-label="Voice input"
-                    title="Voice input"
+                    class="
+                        flex
+                        h-10
+                        w-10
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        text-white/45
+                        transition
+                        hover:text-white
+                        active:scale-95
+                    "
                 >
 
                     <svg
-                        class="icon"
+                        width="18"
+                        height="18"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -1444,43 +1409,54 @@ body{
 
                         <rect
                             x="9"
-                            y="3"
+                            y="2"
                             width="6"
-                            height="11"
+                            height="12"
                             rx="3"
-                        ></rect>
+                        />
 
                         <path
                             d="M5 11a7 7 0 0 0 14 0"
-                        ></path>
+                        />
 
                         <path
-                            d="M12 18v3"
-                        ></path>
+                            d="M12 18v4"
+                        />
 
                         <path
-                            d="M8 21h8"
-                        ></path>
+                            d="M8 22h8"
+                        />
 
                     </svg>
 
                 </button>
 
 
-                <!-- =========================
-                     SEND
-                ========================== -->
+                <!-- SEND -->
 
                 <button
-                    class="icon-btn send"
-                    id="send"
-                    type="button"
+                    id="sendButton"
+                    type="submit"
                     aria-label="Send message"
-                    title="Send message"
+                    class="
+                        flex
+                        h-10
+                        w-10
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-white
+                        text-black
+                        transition
+                        hover:bg-white/90
+                        active:scale-95
+                    "
                 >
 
                     <svg
-                        class="icon"
+                        width="17"
+                        height="17"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -1490,325 +1466,5004 @@ body{
                     >
 
                         <path
-                            d="M22 2L11 13"
-                        ></path>
+                            d="M5 12h14"
+                        />
 
                         <path
-                            d="M22 2L15 22L11 13L2 9L22 2Z"
-                        ></path>
+                            d="m13 6 6 6-6 6"
+                        />
 
                     </svg>
 
                 </button>
 
-
-            </div>
-
+            </form>
 
         </div>
 
-
     </div>
-<script>
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const input =
-    document.getElementById("input");
-
-const send =
-    document.getElementById("send");
-
-const mic =
-    document.getElementById("mic");
-
-const chat =
-    document.getElementById("chat");
-
-const suggestions =
-    document.querySelectorAll(".suggestion");
 
 
-/* =========================================
-   ADD MESSAGE
-========================================= */
+    <!-- =====================================
+         SVG FILTERS
+    ====================================== -->
 
-function addMessage(text, type){
+    <svg
+        width="0"
+        height="0"
+        style="position:absolute"
+        aria-hidden="true"
+    >
 
-    const message =
-        document.createElement("div");
+        <defs>
 
-    message.className =
-        "message " + type;
+            <filter
+                id="gravityWarp"
+                x="-30%"
+                y="-30%"
+                width="160%"
+                height="160%"
+            >
 
-    message.textContent =
-        text;
+                <feTurbulence
+                    type="fractalNoise"
+                    baseFrequency="0.012"
+                    numOctaves="2"
+                    seed="7"
+                    result="noise"
+                />
 
-    chat.appendChild(message);
+                <feDisplacementMap
+                    in="SourceGraphic"
+                    in2="noise"
+                    scale="3"
+                    xChannelSelector="R"
+                    yChannelSelector="B"
+                />
 
-    chat.scrollTop =
-        chat.scrollHeight;
-}
-
-
-/* =========================================
-   SEND MESSAGE
-========================================= */
-
-function sendMessage(){
-
-    const text =
-        input.value.trim();
-
-
-    if(!text){
-
-        input.focus();
-
-        return;
-    }
-
-
-    /* USER MESSAGE */
-
-    addMessage(
-        text,
-        "user"
-    );
+            </filter>
 
 
-    /* CLEAR INPUT */
+            <filter
+                id="softGlow"
+                x="-100%"
+                y="-100%"
+                width="300%"
+                height="300%"
+            >
 
-    input.value = "";
+                <feGaussianBlur
+                    stdDeviation="4"
+                    result="blur"
+                />
+
+                <feMerge>
+
+                    <feMergeNode
+                        in="blur"
+                    />
+
+                    <feMergeNode
+                        in="SourceGraphic"
+                    />
+
+                </feMerge>
+
+            </filter>
+
+        </defs>
+
+    </svg>
 
 
-    /* TEMPORARY QUASAR RESPONSE */
+    <!-- =====================================
+         APPLICATION SCRIPT
+    ====================================== -->
 
-    setTimeout(() => {
+    <script>
 
-        addMessage(
-            "I'm online. Real intelligence will be connected next.",
-            "assistant"
-        );
+        /* =====================================
+           GLOBAL STATE
+        ====================================== */
 
-    }, 500);
+        const state = {
+
+            chats: [],
+
+            thinking: false,
+
+            cosmic: false,
+
+            drawing: false,
+
+            voiceActive: false,
+
+            longPressTimer: null,
+
+            orbitId: 0
+
+        };
 
 
-    input.focus();
+        /* =====================================
+           ELEMENTS
+        ====================================== */
 
-}
+        const app =
+            document.querySelector(".app");
+
+        const main =
+            document.getElementById("cosmicVoid");
+
+        const blackHole =
+            document.getElementById("blackHole");
+
+        const quasarCore =
+            document.getElementById("quasarCore");
+
+        const chatForm =
+            document.getElementById("chatForm");
+
+        const chatInput =
+            document.getElementById("chatInput");
+
+        const micButton =
+            document.getElementById("micButton");
+
+        const orbitLayer =
+            document.getElementById("orbitLayer");
+
+        const particleLayer =
+            document.getElementById("particleLayer");
+
+        const constellationLayer =
+            document.getElementById("constellationLayer");
+
+        const mandalaLayer =
+            document.getElementById("mandalaLayer");
+
+        const drawCanvas =
+            document.getElementById("drawCanvas");
+
+        const drawGuide =
+            document.getElementById("drawGuide");
+
+        const summonResult =
+            document.getElementById("summonResult");
+
+        const summonText =
+            document.getElementById("summonText");
+
+        const suggestionPanel =
+            document.getElementById("suggestionPanel");
+
+        const suggestionItems =
+            document.getElementById("suggestionItems");
 
 
-/* =========================================
-   SEND BUTTON
-========================================= */
+        /* =====================================
+           CANVAS
+        ====================================== */
 
-send.addEventListener(
-    "click",
-    sendMessage
-);
+        const ctx =
+            drawCanvas.getContext("2d");
 
 
-/* =========================================
-   ENTER TO SEND
-========================================= */
+        let drawPoints = [];
 
-input.addEventListener(
-    "keydown",
-    (event) => {
 
-        if(event.key === "Enter"){
+        function resizeCanvas(){
 
-            event.preventDefault();
+            const rect =
+                main.getBoundingClientRect();
 
-            sendMessage();
+            const dpr =
+                Math.min(
+                    window.devicePixelRatio || 1,
+                    2
+                );
+
+            drawCanvas.width =
+                rect.width * dpr;
+
+            drawCanvas.height =
+                rect.height * dpr;
+
+            drawCanvas.style.width =
+                rect.width + "px";
+
+            drawCanvas.style.height =
+                rect.height + "px";
+
+            ctx.setTransform(
+                dpr,
+                0,
+                0,
+                dpr,
+                0,
+                0
+            );
 
         }
 
-    }
-);
+
+        resizeCanvas();
+
+        window.addEventListener(
+            "resize",
+            resizeCanvas
+        );
 
 
-/* =========================================
-   SUGGESTION CHIPS
-========================================= */
+        /* =====================================
+           UTILS
+        ====================================== */
 
-suggestions.forEach(
-    (button) => {
+        function clamp(
+            value,
+            min,
+            max
+        ){
 
-        button.addEventListener(
-            "click",
-            () => {
+            return Math.max(
+                min,
+                Math.min(max,value)
+            );
 
-                const prompt =
-                    button.dataset.prompt ||
-                    button.textContent.trim();
+        }
 
 
-                input.value =
-                    prompt;
+        function escapeHTML(value){
 
-                input.focus();
+            return String(value)
+                .replace(/&/g,"&amp;")
+                .replace(/</g,"&lt;")
+                .replace(/>/g,"&gt;")
+                .replace(/"/g,"&quot;")
+                .replace(/'/g,"&#039;");
+
+        }
+
+
+        function randomBetween(
+            min,
+            max
+        ){
+
+            return (
+                Math.random() *
+                (max - min)
+            ) + min;
+
+        }
+        /* =====================================
+           DUMMY CONVERSATION DATA
+        ====================================== */
+
+        const normalReplies = [
+
+            "I'm here. What are we building?",
+
+            "Got it. Let's figure this out.",
+
+            "I can help you break that down.",
+
+            "Understood. Give me the next move.",
+
+            "Let's work through it together.",
+
+            "I’m listening.",
+
+            "That makes sense. What happens next?"
+
+        ];
+
+
+        const cosmicReplies = [
+
+            "Every question opens another layer of the unknown.",
+
+            "The path becomes clearer when you stop forcing the destination.",
+
+            "Some answers are discovered by observing the pattern beneath the noise.",
+
+            "The universe does not rush. Neither should the thought.",
+
+            "What appears distant may already be moving around you.",
+
+            "There is structure inside the chaos, if you look long enough."
+
+        ];
+
+
+        /* =====================================
+           CONSTELLATION HISTORY
+        ====================================== */
+
+        const history = [
+
+            {
+                title:"Project ideas",
+                text:"How can I build something useful?",
+                reply:"Start with the problem, then build the smallest useful version."
+            },
+
+            {
+                title:"Website clients",
+                text:"How do I find my first client?",
+                reply:"Find businesses with a clear online gap and start a direct conversation."
+            },
+
+            {
+                title:"AI future",
+                text:"What happens when AI gets better?",
+                reply:"The tools change, but the ability to identify problems and create solutions remains valuable."
+            },
+
+            {
+                title:"QUASAR",
+                text:"What should you become?",
+                reply:"An operator that helps turn ideas into actions."
+            },
+
+            {
+                title:"Webidex",
+                text:"How should Webidex evolve?",
+                reply:"Make the path from idea to deployed website dramatically simpler."
+            },
+
+            {
+                title:"Supabase",
+                text:"How should client data be organized?",
+                reply:"Keep clients isolated with store IDs and proper row-level security."
+            },
+
+            {
+                title:"Design",
+                text:"What makes a website feel premium?",
+                reply:"Typography, spacing, imagery, hierarchy and restraint."
+            },
+
+            {
+                title:"Learning",
+                text:"How should I learn coding?",
+                reply:"Build real things and learn the pieces you need along the way."
+            },
+
+            {
+                title:"Business",
+                text:"How can a small agency compete?",
+                reply:"Move faster, specialize, and make the buying experience simple."
+            },
+
+            {
+                title:"Ideas",
+                text:"I have another idea.",
+                reply:"Then let's examine it before deciding what to build."
+            },
+
+            {
+                title:"Future",
+                text:"Where is technology going?",
+                reply:"Toward systems where creating software becomes increasingly conversational."
+            },
+
+            {
+                title:"Money",
+                text:"How can I make my first serious income?",
+                reply:"Focus on a specific problem people already pay to solve."
+            },
+
+            {
+                title:"Clients",
+                text:"Why do people ignore cold outreach?",
+                reply:"Because attention is scarce. Relevance and timing matter."
+            },
+
+            {
+                title:"Products",
+                text:"Should I build a product?",
+                reply:"A product becomes powerful when it solves the same problem repeatedly."
+            },
+
+            {
+                title:"Focus",
+                text:"What should I work on today?",
+                reply:"Choose the smallest action that moves the larger project forward."
+            },
+
+            {
+                title:"Systems",
+                text:"How do I automate repetitive work?",
+                reply:"First map the workflow. Then automate the repeated decisions."
+            },
+
+            {
+                title:"Web",
+                text:"Are websites still useful?",
+                reply:"Businesses still need a place where customers can understand and trust them."
+            },
+
+            {
+                title:"Creation",
+                text:"What should I build next?",
+                reply:"Build something that teaches you something the previous project could not."
+            },
+
+            {
+                title:"Strategy",
+                text:"How do I decide between ideas?",
+                reply:"Compare the problem, effort, feedback speed and potential value."
+            },
+
+            {
+                title:"Questions",
+                text:"What should I ask?",
+                reply:"Ask the question that would remove the biggest uncertainty."
+
+            }
+
+        ];
+
+
+        /* =====================================
+           CREATE CONSTELLATION
+        ====================================== */
+
+        function createConstellation(){
+
+            constellationLayer.innerHTML = "";
+
+
+            history.forEach(
+                (item,index)=>{
+
+                    const star =
+                        document.createElement("button");
+
+                    star.type =
+                        "button";
+
+                    star.className = `
+                        constellation-star
+                        absolute
+                        w-[7px]
+                        h-[7px]
+                        rounded-full
+                        border-0
+                        outline-none
+                        pointer-events-auto
+                        cursor-pointer
+                    `;
+
+
+                    /*
+                     * Deterministic positions.
+                     * This prevents the stars from
+                     * jumping around after every render.
+                     */
+
+                    const x =
+                        8 +
+                        ((index * 37) % 84);
+
+                    const y =
+                        18 +
+                        ((index * 53) % 67);
+
+
+                    star.style.left =
+                        x + "%";
+
+                    star.style.top =
+                        y + "%";
+
+
+                    star.dataset.index =
+                        index;
+
+
+                    star.setAttribute(
+                        "aria-label",
+                        item.title
+                    );
+
+
+                    star.innerHTML = `
+
+                        <span
+                            class="
+                                absolute
+                                left-1/2
+                                top-1/2
+                                -translate-x-1/2
+                                -translate-y-1/2
+                                w-[3px]
+                                h-[3px]
+                                rounded-full
+                                bg-white
+                                shadow-[0_0_7px_rgba(255,255,255,.85)]
+                            "
+                        ></span>
+
+                        <span
+                            class="
+                                star-label
+                                absolute
+                                left-1/2
+                                top-4
+                                -translate-x-1/2
+                                whitespace-nowrap
+                                text-[9px]
+                                text-white/0
+                                transition-all
+                                duration-300
+                                pointer-events-none
+                            "
+                        >
+                            ${escapeHTML(item.title)}
+                        </span>
+
+                    `;
+
+
+                    star.addEventListener(
+                        "pointerenter",
+                        ()=>{
+
+                            star.classList.add(
+                                "star-active"
+                            );
+
+                            const label =
+                                star.querySelector(
+                                    ".star-label"
+                                );
+
+                            if(label){
+
+                                label.classList.remove(
+                                    "text-white/0"
+                                );
+
+                                label.classList.add(
+                                    "text-white/55"
+                                );
+
+                            }
+
+                        }
+                    );
+
+
+                    star.addEventListener(
+                        "pointerleave",
+                        ()=>{
+
+                            star.classList.remove(
+                                "star-active"
+                            );
+
+                            const label =
+                                star.querySelector(
+                                    ".star-label"
+                                );
+
+                            if(label){
+
+                                label.classList.add(
+                                    "text-white/0"
+                                );
+
+                                label.classList.remove(
+                                    "text-white/55"
+                                );
+
+                            }
+
+                        }
+                    );
+
+
+                    star.addEventListener(
+                        "click",
+                        event=>{
+
+                            event.stopPropagation();
+
+                            loadHistory(
+                                Number(
+                                    star.dataset.index
+                                )
+                            );
+
+                        }
+                    );
+
+
+                    constellationLayer.appendChild(
+                        star
+                    );
+
+                }
+            );
+
+        }
+
+
+        createConstellation();
+
+
+        /* =====================================
+           STAR STYLING
+        ====================================== */
+
+        const starStyle =
+            document.createElement("style");
+
+        starStyle.textContent = `
+
+            .constellation-star{
+
+                opacity:.46;
+
+                transition:
+                    opacity .25s ease,
+                    transform .25s ease;
+
+            }
+
+
+            .constellation-star:hover,
+            .constellation-star.star-active{
+
+                opacity:1;
+
+                transform:scale(1.8);
+
+            }
+
+
+            .constellation-star::after{
+
+                content:"";
+
+                position:absolute;
+
+                left:50%;
+
+                top:50%;
+
+                width:22px;
+
+                height:22px;
+
+                transform:
+                    translate(-50%,-50%);
+
+                border-radius:50%;
+
+                background:
+                    radial-gradient(
+                        circle,
+                        rgba(150,100,255,.25),
+                        transparent 70%
+                    );
+
+                opacity:0;
+
+                transition:
+                    opacity .25s ease;
+
+            }
+
+
+            .constellation-star:hover::after,
+            .constellation-star.star-active::after{
+
+                opacity:1;
+
+            }
+
+
+            @media(max-width:600px){
+
+                .constellation-star{
+
+                    opacity:.32;
+
+                }
+
+                .constellation-star:hover{
+
+                    transform:scale(1.6);
+
+                }
+
+            }
+
+        `;
+
+        document.head.appendChild(
+            starStyle
+        );
+
+
+        /* =====================================
+           HISTORY → ORBIT CHAT
+        ====================================== */
+
+        function loadHistory(index){
+
+            const item =
+                history[index];
+
+            if(!item){
+                return;
+            }
+
+
+            state.chats = [
+
+                {
+
+                    id:
+                        "history-" +
+                        Date.now(),
+
+                    user:
+                        item.text,
+
+                    reply:
+                        item.reply,
+
+                    history:true
+
+                }
+
+            ];
+
+
+            renderOrbits();
+
+        }
+
+
+        /* =====================================
+           GET REPLY
+        ====================================== */
+
+        function getDummyReply(){
+
+            const source =
+                state.cosmic
+                    ? cosmicReplies
+                    : normalReplies;
+
+
+            return source[
+                Math.floor(
+                    Math.random() *
+                    source.length
+                )
+            ];
+
+        }
+
+
+        /* =====================================
+           THINKING PARTICLES
+        ====================================== */
+
+        function startThinkingParticles(){
+
+            particleLayer.innerHTML = "";
+
+
+            for(
+                let i=0;
+                i<12;
+                i++
+            ){
+
+                const particle =
+                    document.createElement("span");
+
+
+                particle.className = `
+                    absolute
+                    left-1/2
+                    top-[150px]
+                    w-[2px]
+                    h-[2px]
+                    rounded-full
+                    bg-purple-200
+                    opacity-0
+                    pointer-events-none
+                `;
+
+
+                const x =
+                    randomBetween(
+                        -18,
+                        18
+                    );
+
+
+                const duration =
+                    randomBetween(
+                        .65,
+                        1.15
+                    );
+
+
+                const delay =
+                    randomBetween(
+                        0,
+                        .55
+                    );
+
+
+                particle.style.marginLeft =
+                    x + "px";
+
+
+                particle.animate(
+                    [
+
+                        {
+                            transform:
+                                "translateY(40px) scale(.4)",
+
+                            opacity:0
+
+                        },
+
+                        {
+                            transform:
+                                "translateY(0) scale(1)",
+
+                            opacity:.9
+
+                        },
+
+                        {
+                            transform:
+                                "translateY(-145px) scale(.1)",
+
+                            opacity:0
+
+                        }
+
+                    ],
+                    {
+
+                        duration:
+                            duration * 1000,
+
+                        delay:
+                            delay * 1000,
+
+                        iterations:
+                            Infinity,
+
+                        easing:
+                            "ease-out"
+
+                    }
+                );
+
+
+                particleLayer.appendChild(
+                    particle
+                );
+
+            }
+
+        }
+
+
+        function stopThinkingParticles(){
+
+            particleLayer.innerHTML = "";
+
+        }
+
+
+        /* =====================================
+           THINKING STATE
+        ====================================== */
+
+        function setThinking(value){
+
+            state.thinking =
+                Boolean(value);
+
+
+            if(state.thinking){
+
+                quasarCore.classList.add(
+                    "thinking"
+                );
+
+                startThinkingParticles();
+
+            }else{
+
+                quasarCore.classList.remove(
+                    "thinking"
+                );
+
+                stopThinkingParticles();
+
+            }
+
+        }
+
+
+        /* =====================================
+           SEND MESSAGE
+        ====================================== */
+
+        function sendMessage(){
+
+            const text =
+                chatInput.value.trim();
+
+
+            if(!text){
+                return;
+            }
+
+
+            if(state.thinking){
+                return;
+            }
+
+
+            chatInput.value = "";
+
+
+            const chat = {
+
+                id:
+                    "chat-" +
+                    (++state.orbitId),
+
+                user:
+                    text,
+
+                reply:
+                    "",
+
+                history:false
+
+            };
+
+
+            state.chats.push(
+                chat
+            );
+
+
+            /*
+             * Keep the interface clean.
+             * Older conversations remain
+             * available as constellation stars.
+             */
+
+            if(
+                state.chats.length > 3
+            ){
+
+                state.chats =
+                    state.chats.slice(-3);
+
+            }
+
+
+            renderOrbits();
+
+
+            setThinking(true);
+
+
+            setTimeout(
+                ()=>{
+
+                    chat.reply =
+                        getDummyReply();
+
+
+                    setThinking(false);
+
+
+                    renderOrbits();
+
+                },
+                1100
+            );
+
+        }
+
+
+        /* =====================================
+           FORM SUBMIT
+        ====================================== */
+
+        chatForm.addEventListener(
+            "submit",
+            event=>{
+
+                event.preventDefault();
+
+                sendMessage();
 
             }
         );
 
-    }
-);
+
+        /* =====================================
+           ENTER KEY
+        ====================================== */
+
+        chatInput.addEventListener(
+            "keydown",
+            event=>{
+
+                if(
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ){
+
+                    event.preventDefault();
+
+                    sendMessage();
+
+                }
+
+            }
+        );
 
 
-/* =========================================
-   VOICE RECOGNITION
-========================================= */
+        /* =====================================
+           INITIAL INPUT FOCUS
+        ====================================== */
 
-const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
+        window.setTimeout(
+            ()=>{
+
+                try{
+
+                    chatInput.focus();
+
+                }catch(error){}
+
+            },
+            300
+        );
+        /* =====================================
+           DUMMY HISTORY
+        ====================================== */
+
+        const historyData = [
+
+            {
+                id:1,
+                title:"Build a website",
+                user:"Can you build me a premium clothing website?",
+                reply:"Absolutely. I can structure the entire experience around the brand."
+            },
+
+            {
+                id:2,
+                title:"Business ideas",
+                user:"What business could I start with AI?",
+                reply:"Look for problems where AI reduces friction rather than simply adding another tool."
+            },
+
+            {
+                id:3,
+                title:"Learn coding",
+                user:"How should I start learning programming?",
+                reply:"Start small, build things, break them, and understand why they broke."
+            },
+
+            {
+                id:4,
+                title:"Website design",
+                user:"Make this website feel more premium.",
+                reply:"Reduce visual noise, strengthen hierarchy, and let spacing do more of the work."
+            },
+
+            {
+                id:5,
+                title:"Future of AI",
+                user:"Will AI replace developers?",
+                reply:"The tools will change. The ability to solve problems will remain valuable."
+            },
+
+            {
+                id:6,
+                title:"Client search",
+                user:"How do I find website clients?",
+                reply:"Find businesses with visible digital gaps and approach them with something concrete."
+            },
+
+            {
+                id:7,
+                title:"Supabase",
+                user:"How should I structure my database?",
+                reply:"Separate tenants with stable identifiers and enforce isolation at the database level."
+            },
+
+            {
+                id:8,
+                title:"Deploy project",
+                user:"How do I deploy this project?",
+                reply:"Connect the repository to your deployment platform and let each commit become a release."
+            },
+
+            {
+                id:9,
+                title:"Product ideas",
+                user:"Give me a product idea.",
+                reply:"Build around a repeated problem you personally experience every week."
+            },
+
+            {
+                id:10,
+                title:"Marketing",
+                user:"How should I market a new product?",
+                reply:"Show the product solving a real problem instead of simply describing its features."
+            },
+
+            {
+                id:11,
+                title:"AI assistant",
+                user:"What would my own AI assistant need?",
+                reply:"Memory, tools, search, files, automation, and a reliable interface."
+            },
+
+            {
+                id:12,
+                title:"Coding project",
+                user:"What should I build next?",
+                reply:"Build the smallest useful version of something you would actually use."
+            },
+
+            {
+                id:13,
+                title:"Pricing",
+                user:"How should I price a website?",
+                reply:"Price around the value, complexity, support, and business outcome involved."
+            },
+
+            {
+                id:14,
+                title:"Design system",
+                user:"How do I make designs consistent?",
+                reply:"Define reusable spacing, typography, surfaces, components, and interaction rules."
+            },
+
+            {
+                id:15,
+                title:"Startup",
+                user:"Should I build a startup?",
+                reply:"Start with the problem first. The product can evolve around the evidence."
+            },
+
+            {
+                id:16,
+                title:"Automation",
+                user:"What can I automate?",
+                reply:"Anything repetitive, predictable, and measurable is worth examining first."
+            },
+
+            {
+                id:17,
+                title:"Portfolio",
+                user:"What should my portfolio show?",
+                reply:"Show finished outcomes, explain the decisions, and make the work easy to experience."
+            },
+
+            {
+                id:18,
+                title:"Learning",
+                user:"How do I learn faster?",
+                reply:"Short feedback loops beat passive consumption. Build, test, and adjust."
+            },
+
+            {
+                id:19,
+                title:"Web app",
+                user:"Can a website become a real product?",
+                reply:"Yes. The difference is usually the systems behind the interface."
+            },
+
+            {
+                id:20,
+                title:"Future",
+                user:"What happens when AI gets much better?",
+                reply:"The advantage shifts toward people who can direct powerful tools toward useful outcomes."
+            }
+
+        ];
 
 
-if(SpeechRecognition){
+        /* =====================================
+           CONSTELLATION
+        ====================================== */
 
-    const recognition =
-        new SpeechRecognition();
+        const starPositions = [
+
+            [7,18],
+            [16,35],
+            [28,12],
+            [39,27],
+            [52,17],
+            [64,32],
+            [76,14],
+            [89,26],
+
+            [11,57],
+            [24,72],
+            [36,48],
+            [47,67],
+            [59,53],
+            [71,76],
+            [84,59],
+            [94,72],
+
+            [8,87],
+            [29,91],
+            [51,84],
+            [77,91]
+
+        ];
 
 
-    recognition.lang =
-        "en-US";
+        function createConstellation(){
+
+            constellationLayer.innerHTML = "";
 
 
-    recognition.continuous =
-        false;
+            historyData.forEach(
+                (item,index)=>{
+
+                    const position =
+                        starPositions[index];
 
 
-    recognition.interimResults =
-        false;
+                    const star =
+                        document.createElement("button");
 
 
-    /* ==============================
-       START LISTENING
-    =============================== */
+                    star.type = "button";
 
-    mic.addEventListener(
-        "click",
-        () => {
+
+                    star.className = `
+                        absolute
+                        pointer-events-auto
+                        flex
+                        items-center
+                        justify-center
+                        group
+                    `;
+
+
+                    star.style.left =
+                        position[0] + "%";
+
+
+                    star.style.top =
+                        position[1] + "%";
+
+
+                    star.style.width =
+                        "34px";
+
+
+                    star.style.height =
+                        "34px";
+
+
+                    star.setAttribute(
+                        "aria-label",
+                        item.title
+                    );
+
+
+                    const dot =
+                        document.createElement("span");
+
+
+                    dot.className = `
+                        block
+                        w-[3px]
+                        h-[3px]
+                        rounded-full
+                        bg-white/55
+                        shadow-[0_0_7px_rgba(190,170,255,.5)]
+                        transition-all
+                        duration-300
+                        group-hover:w-[6px]
+                        group-hover:h-[6px]
+                        group-hover:bg-purple-200
+                        group-hover:shadow-[0_0_15px_rgba(170,120,255,.95)]
+                    `;
+
+
+                    star.appendChild(dot);
+
+
+                    const label =
+                        document.createElement("span");
+
+
+                    label.className = `
+                        absolute
+                        left-1/2
+                        top-[31px]
+                        -translate-x-1/2
+                        whitespace-nowrap
+                        rounded-md
+                        bg-black/80
+                        px-2
+                        py-1
+                        text-[9px]
+                        text-white/65
+                        opacity-0
+                        pointer-events-none
+                        transition-opacity
+                        duration-200
+                        group-hover:opacity-100
+                    `;
+
+
+                    label.textContent =
+                        item.title;
+
+
+                    star.appendChild(label);
+
+
+                    star.addEventListener(
+                        "click",
+                        event=>{
+
+                            event.stopPropagation();
+
+                            loadHistory(
+                                item
+                            );
+
+                        }
+                    );
+
+
+                    constellationLayer.appendChild(
+                        star
+                    );
+
+                }
+            );
+
+        }
+
+
+        createConstellation();
+
+
+        /* =====================================
+           LOAD HISTORY INTO ORBIT
+        ====================================== */
+
+        function loadHistory(item){
+
+            state.chats = [
+
+                {
+                    id:
+                        "history-" +
+                        item.id,
+
+                    user:
+                        item.user,
+
+                    reply:
+                        state.cosmic
+                            ? cosmicReply(item)
+                            : item.reply
+                }
+
+            ];
+
+
+            renderOrbits();
+
+            hideSummon();
+
+        }
+
+
+        /* =====================================
+           COSMIC REPLIES
+        ====================================== */
+
+        function cosmicReply(item){
+
+            const replies = [
+
+                "Perhaps the answer is not something to find, but something to become.",
+
+                "Every system begins as a question before it becomes an architecture.",
+
+                "The universe does not rush toward meaning. It simply continues expanding.",
+
+                "What appears complicated from within may become simple when viewed from distance.",
+
+                "The interesting question is often hidden inside the question itself.",
+
+                "You are not observing the system. You are part of the system observing itself."
+
+            ];
+
+
+            return replies[
+                item.id %
+                replies.length
+            ];
+
+        }
+
+
+        /* =====================================
+           CREATE CHAT
+        ====================================== */
+
+        function addChat(
+            userText,
+            replyText
+        ){
+
+            const id =
+                ++state.orbitId;
+
+
+            state.chats.push({
+
+                id,
+
+                user:userText,
+
+                reply:replyText
+
+            });
+
+
+            /* Keep the visual system performant */
+
+            if(
+                state.chats.length > 5
+            ){
+
+                state.chats.shift();
+
+            }
+
+
+            renderOrbits();
+
+        }
+
+
+        /* =====================================
+           ORBIT GEOMETRY
+        ====================================== */
+
+        function getOrbitRadius(
+            index,
+            type
+        ){
+
+            const mobile =
+                window.innerWidth <= 600;
+
+
+            const baseUser =
+                mobile
+                    ? 105
+                    : 135;
+
+
+            const baseAssistant =
+                mobile
+                    ? 155
+                    : 190;
+
+
+            const step =
+                mobile
+                    ? 38
+                    : 46;
+
+
+            if(type === "user"){
+
+                return (
+                    baseUser +
+                    index * step
+                );
+
+            }
+
+
+            return (
+                baseAssistant +
+                index * step
+            );
+
+        }
+
+
+        /* =====================================
+           ORBIT CHAT HTML
+        ====================================== */
+
+        function createOrbit(
+            chat,
+            index,
+            type,
+            text
+        ){
+
+            const radius =
+                getOrbitRadius(
+                    index,
+                    type
+                );
+
+
+            const duration =
+                type === "user"
+                    ? 18 + index * 3
+                    : 26 + index * 4;
+
+
+            const startAngle =
+                type === "user"
+                    ? index * 67
+                    : (index * 67) + 180;
+
+
+            const orbit =
+                document.createElement("div");
+
+
+            orbit.className = `
+                absolute
+                left-1/2
+                top-[72px]
+                pointer-events-none
+            `;
+
+
+            orbit.style.width =
+                radius * 2 + "px";
+
+
+            orbit.style.height =
+                radius * 2 + "px";
+
+
+            orbit.style.marginLeft =
+                -radius + "px";
+
+
+            orbit.style.marginTop =
+                -radius + "px";
+
+
+            orbit.style.transform =
+                `rotate(${startAngle}deg)`;
+
+
+            orbit.style.willChange =
+                "transform";
+
+
+            const rotating =
+                document.createElement("div");
+
+
+            rotating.className = `
+                absolute
+                inset-0
+            `;
+
+
+            rotating.style.animation =
+                `orbitSpin ${duration}s linear infinite`;
+
+
+            const item =
+                document.createElement("div");
+
+
+            item.className = `
+                absolute
+                left-1/2
+                top-0
+                -translate-x-1/2
+                -translate-y-1/2
+                max-w-[min(260px,70vw)]
+            `;
+
+
+            item.style.transform =
+                "rotate(0deg)";
+
+
+            const pill =
+                document.createElement("div");
+
+
+            pill.className = `
+
+                gravity-text
+
+                rounded-full
+
+                border
+
+                ${
+                    type === "user"
+                        ? "border-white/[.10] bg-white/[.055]"
+                        : "border-purple-300/[.12] bg-purple-400/[.055]"
+                }
+
+                backdrop-blur-md
+
+                px-4
+
+                py-2.5
+
+                text-[11px]
+
+                leading-relaxed
+
+                ${
+                    type === "user"
+                        ? "text-white/75"
+                        : "text-purple-100/75"
+                }
+
+                shadow-[0_8px_30px_rgba(0,0,0,.25)]
+
+                whitespace-normal
+
+            `;
+
+
+            pill.style.filter =
+                "url(#gravityWarp)";
+
+
+            pill.textContent =
+                text;
+
+
+            item.appendChild(
+                pill
+            );
+
+
+            rotating.appendChild(
+                item
+            );
+
+
+            orbit.appendChild(
+                rotating
+            );
+
+
+            orbit.dataset.type =
+                type;
+
+
+            orbit.dataset.radius =
+                radius;
+
+
+            orbitLayer.appendChild(
+                orbit
+            );
+
+
+            return orbit;
+
+        }
+
+
+        /* =====================================
+           ORBIT KEYFRAMES
+        ====================================== */
+
+        const orbitStyle =
+            document.createElement("style");
+
+
+        orbitStyle.textContent = `
+
+            @keyframes orbitSpin{
+
+                from{
+
+                    transform:
+                        rotate(0deg);
+
+                }
+
+                to{
+
+                    transform:
+                        rotate(360deg);
+
+                }
+
+            }
+
+
+            @keyframes counterSpin{
+
+                from{
+
+                    transform:
+                        rotate(0deg);
+
+                }
+
+                to{
+
+                    transform:
+                        rotate(-360deg);
+
+                }
+
+            }
+
+        `;
+
+
+        document.head.appendChild(
+            orbitStyle
+        );
+
+
+        /* =====================================
+           RENDER ALL ORBITS
+        ====================================== */
+
+        function renderOrbits(){
+
+            orbitLayer.innerHTML = "";
+
+
+            state.chats.forEach(
+                (chat,index)=>{
+
+                    createOrbit(
+                        chat,
+                        index,
+                        "user",
+                        chat.user
+                    );
+
+
+                    createOrbit(
+                        chat,
+                        index,
+                        "assistant",
+                        chat.reply
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================
+           THINKING PARTICLES
+        ====================================== */
+
+        function createThinkingParticles(){
+
+            particleLayer.innerHTML = "";
+
+
+            for(
+                let i = 0;
+                i < 12;
+                i++
+            ){
+
+                const particle =
+                    document.createElement("span");
+
+
+                particle.className = `
+                    absolute
+                    left-1/2
+                    top-[82px]
+                    w-[2px]
+                    h-[2px]
+                    rounded-full
+                    bg-purple-200
+                    shadow-[0_0_8px_rgba(180,140,255,.9)]
+                `;
+
+
+                const x =
+                    randomBetween(
+                        -8,
+                        8
+                    );
+
+
+                const delay =
+                    randomBetween(
+                        0,
+                        1.2
+                    );
+
+
+                const duration =
+                    randomBetween(
+                        .65,
+                        1.25
+                    );
+
+
+                particle.style.marginLeft =
+                    x + "px";
+
+
+                particle.style.animation = `
+                    thinkingParticle
+                    ${duration}s
+                    ${delay}s
+                    linear
+                    infinite
+                `;
+
+
+                particleLayer.appendChild(
+                    particle
+                );
+
+            }
+
+        }
+
+
+        const particleStyle =
+            document.createElement("style");
+
+
+        particleStyle.textContent = `
+
+            @keyframes thinkingParticle{
+
+                0%{
+
+                    transform:
+                        translateY(70px)
+                        scale(.4);
+
+                    opacity:0;
+
+                }
+
+                20%{
+
+                    opacity:1;
+
+                }
+
+                100%{
+
+                    transform:
+                        translateY(-150px)
+                        scale(1);
+
+                    opacity:0;
+
+                }
+
+            }
+
+        `;
+
+
+        document.head.appendChild(
+            particleStyle
+        );
+
+
+        /* =====================================
+           THINKING STATE
+        ====================================== */
+
+        function setThinking(value){
+
+            state.thinking =
+                value;
+
+
+            quasarCore.classList.toggle(
+                "thinking",
+                value
+            );
+
+
+            if(value){
+
+                createThinkingParticles();
+
+            }else{
+
+                particleLayer.innerHTML = "";
+
+            }
+
+        }
+
+
+        /* =====================================
+           DUMMY AI RESPONSE
+        ====================================== */
+
+        function generateReply(
+            question
+        ){
+
+            if(
+                state.cosmic
+            ){
+
+                const cosmicReplies = [
+
+                    "The question is small. The space around it is not.",
+
+  "Perhaps every answer is simply another doorway into a larger question.",
+
+  "Some problems disappear when you change the scale at which you observe them.",
+
+  "You are asking the machine for an answer, but the interesting part is what you do with it.",
+
+  "Information becomes useful only when it changes what happens next.",
+
+  "The universe has no shortage of complexity. The art is deciding what deserves your attention."
+
+];
+
+  return cosmicReplies[
+    Math.floor(
+      Math.random() *
+      cosmicReplies.length
+    )
+  ];
+
+}
+
+const replies = [
+
+  "I'm here. Give me the problem and I'll work through it with you.",
+
+  "That's something we can break down into smaller pieces and solve.",
+
+  "Let's turn that idea into something practical.",
+
+  "I'd start by identifying the goal, then work backward from it.",
+
+  "There are a few ways to approach this. Let's find the simplest one.",
+
+  "Got it. I can help you reason through the next step."
+
+];
+
+  return replies[
+    Math.floor(
+      Math.random() *
+      replies.length
+    )
+  ];
+
+}
+        /* =====================================
+           MESSAGE SENDING
+        ====================================== */
+
+        function sendMessage(){
+
+            const text =
+                chatInput.value.trim();
+
+
+            if(!text || state.thinking){
+                return;
+            }
+
+
+            chatInput.value = "";
+
+
+            const chat = {
+
+                id:
+                    "chat-" +
+                    Date.now(),
+
+                user:text,
+
+                reply:""
+
+            };
+
+
+            state.chats.push(
+                chat
+            );
+
+
+            /*
+             * Keep the orbit system lightweight.
+             */
+
+            if(
+                state.chats.length > 4
+            ){
+
+                state.chats =
+                    state.chats.slice(-4);
+
+            }
+
+
+            renderOrbits();
+
+
+            setThinking(true);
+
+
+            setTimeout(
+                ()=>{
+
+                    chat.reply =
+                        generateReply(
+                            text
+                        );
+
+
+                    setThinking(false);
+
+
+                    renderOrbits();
+
+                },
+                1200
+            );
+
+        }
+
+
+        /* =====================================
+           FORM
+        ====================================== */
+
+        chatForm.addEventListener(
+            "submit",
+            event=>{
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+        );
+
+
+        /* =====================================
+           INPUT KEYBOARD
+        ====================================== */
+
+        chatInput.addEventListener(
+            "keydown",
+            event=>{
+
+                if(
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ){
+
+                    event.preventDefault();
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================
+           GRAVITY LENS
+        ====================================== */
+
+        function activateGravityLens(){
+
+            const texts =
+                document.querySelectorAll(
+                    ".gravity-text"
+                );
+
+
+            texts.forEach(
+                text=>{
+
+                    text.style.filter =
+                        "url(#gravityWarp)";
+
+                }
+            );
+
+        }
+
+
+        activateGravityLens();
+
+
+        /* =====================================
+           COSMIC MODE
+        ====================================== */
+
+        function setCosmicMode(
+            enabled
+        ){
+
+            state.cosmic =
+                Boolean(enabled);
+
+
+            if(state.cosmic){
+
+                app.classList.add(
+                    "cosmic-mode"
+                );
+
+
+                mandalaLayer.style.opacity =
+                    "0.08";
+
+
+                /*
+                 * Deeper purple beam.
+                 */
+
+                document
+                    .querySelectorAll(".beam")
+                    .forEach(
+                        beam=>{
+
+                            beam.style.background =
+                                `
+                                linear-gradient(
+                                    to top,
+                                    rgba(185,130,255,.98),
+                                    rgba(92,40,220,.65),
+                                    transparent
+                                )
+                                `;
+
+                        }
+                    );
+
+
+            }else{
+
+                app.classList.remove(
+                    "cosmic-mode"
+                );
+
+
+                mandalaLayer.style.opacity =
+                    "0";
+
+
+                document
+                    .querySelectorAll(".beam")
+                    .forEach(
+                        beam=>{
+
+                            beam.style.background =
+                                `
+                                linear-gradient(
+                                    to top,
+                                    rgba(200,170,255,.94),
+                                    rgba(105,70,255,.52),
+                                    transparent
+                                )
+                                `;
+
+                        }
+                    );
+
+            }
+
+
+            /*
+             * Existing orbit replies are updated
+             * to match the selected mode.
+             */
+
+            state.chats.forEach(
+                chat=>{
+
+                    if(
+                        chat.reply
+                    ){
+
+                        chat.reply =
+                            generateReply(
+                                chat.user
+                            );
+
+                    }
+
+                }
+            );
+
+
+            renderOrbits();
+
+        }
+
+
+        /* =====================================
+           COSMIC MODE VISUAL STYLE
+        ====================================== */
+
+        const cosmicStyle =
+            document.createElement("style");
+
+
+        cosmicStyle.textContent = `
+
+            .cosmic-mode
+            .energy-ring{
+
+                border-color:
+                    rgba(185,130,255,.78);
+
+                box-shadow:
+
+                    0 0 15px
+                    rgba(155,90,255,.65),
+
+                    0 0 45px
+                    rgba(110,45,255,.3),
+
+                    inset 0 0 18px
+                    rgba(155,90,255,.25);
+
+            }
+
+
+            .cosmic-mode
+            .quasar-glow{
+
+                background:
+
+                    radial-gradient(
+                        circle,
+                        rgba(140,80,255,.25),
+                        rgba(80,35,190,.08) 40%,
+                        transparent 74%
+                    );
+
+            }
+
+
+            .cosmic-mode
+            .disk-front{
+
+                filter:
+                    blur(.3px)
+                    drop-shadow(
+                        0 0 13px
+                        rgba(150,90,255,.65)
+                    );
+
+            }
+
+        `;
+
+
+        document.head.appendChild(
+            cosmicStyle
+        );
+
+
+        /* =====================================
+           LONG PRESS
+        ====================================== */
+
+        let longPressTriggered =
+            false;
+
+
+        function startLongPress(){
+
+            longPressTriggered =
+                false;
+
+
+            clearTimeout(
+                state.longPressTimer
+            );
+
+
+            state.longPressTimer =
+                setTimeout(
+                    ()=>{
+
+                        longPressTriggered =
+                            true;
+
+
+                        setCosmicMode(
+                            !state.cosmic
+                        );
+
+
+                        /*
+                         * Small visual pulse.
+                         */
+
+                        quasarCore.animate(
+                            [
+
+                                {
+                                    transform:
+                                        "scale(1)"
+                                },
+
+                                {
+                                    transform:
+                                        "scale(1.12)"
+                                },
+
+                                {
+                                    transform:
+                                        "scale(1)"
+                                }
+
+                            ],
+                            {
+
+                                duration:650,
+
+                                easing:
+                                    "cubic-bezier(.2,.8,.2,1)"
+
+                            }
+                        );
+
+                    },
+                    500
+                );
+
+        }
+
+
+        function cancelLongPress(){
+
+            clearTimeout(
+                state.longPressTimer
+            );
+
+        }
+
+
+        blackHole.addEventListener(
+            "pointerdown",
+            event=>{
+
+                event.stopPropagation();
+
+                startLongPress();
+
+            }
+        );
+
+
+        blackHole.addEventListener(
+            "pointerup",
+            event=>{
+
+                event.stopPropagation();
+
+                cancelLongPress();
+
+            }
+        );
+
+
+        blackHole.addEventListener(
+            "pointercancel",
+            cancelLongPress
+        );
+
+
+        blackHole.addEventListener(
+            "pointerleave",
+            cancelLongPress
+        );
+
+
+        /* =====================================
+           DRAWING SYSTEM
+        ====================================== */
+
+        let drawing =
+            false;
+
+
+        let points = [];
+
+
+        function getCanvasPoint(
+            event
+        ){
+
+            const rect =
+                drawCanvas.getBoundingClientRect();
+
+
+            return {
+
+                x:
+                    event.clientX -
+                    rect.left,
+
+                y:
+                    event.clientY -
+                    rect.top
+
+            };
+
+        }
+
+
+        function clearDrawing(){
+
+            ctx.clearRect(
+                0,
+                0,
+                drawCanvas.clientWidth,
+                drawCanvas.clientHeight
+            );
+
+        }
+
+
+        function drawPath(){
+
+            clearDrawing();
+
+
+            if(
+                points.length < 2
+            ){
+                return;
+            }
+
+
+            ctx.beginPath();
+
+
+            ctx.moveTo(
+                points[0].x,
+                points[0].y
+            );
+
+
+            for(
+                let i=1;
+                i<points.length;
+                i++
+            ){
+
+                ctx.lineTo(
+                    points[i].x,
+                    points[i].y
+                );
+
+            }
+
+
+            ctx.strokeStyle =
+                "rgba(190,155,255,.75)";
+
+
+            ctx.lineWidth =
+                2;
+
+
+            ctx.lineCap =
+                "round";
+
+
+            ctx.lineJoin =
+                "round";
+
+
+            ctx.shadowBlur =
+                14;
+
+
+            ctx.shadowColor =
+                "rgba(130,80,255,.75)";
+
+
+            ctx.stroke();
+
+        }
+
+
+        function distance(
+            a,
+            b
+        ){
+
+            const dx =
+                a.x - b.x;
+
+            const dy =
+                a.y - b.y;
+
+
+            return Math.sqrt(
+                dx * dx +
+                dy * dy
+            );
+
+        }
+
+
+        /* =====================================
+           CIRCLE DETECTION
+        ====================================== */
+
+        function looksLikeCircle(){
+
+            if(
+                points.length < 18
+            ){
+
+                return false;
+
+            }
+
+
+            const first =
+                points[0];
+
+
+            const last =
+                points[
+                    points.length - 1
+                ];
+
+
+            const closure =
+                distance(
+                    first,
+                    last
+                );
+
+
+            let minX =
+                Infinity;
+
+            let maxX =
+                -Infinity;
+
+            let minY =
+                Infinity;
+
+            let maxY =
+                -Infinity;
+
+
+            points.forEach(
+                point=>{
+
+                    minX =
+                        Math.min(
+                            minX,
+                            point.x
+                        );
+
+                    maxX =
+                        Math.max(
+                            maxX,
+                            point.x
+                        );
+
+                    minY =
+                        Math.min(
+                            minY,
+                            point.y
+                        );
+
+                    maxY =
+                        Math.max(
+                            maxY,
+                            point.y
+                        );
+
+                }
+            );
+
+
+            const width =
+                maxX - minX;
+
+
+            const height =
+                maxY - minY;
+
+
+            if(
+                width < 45 ||
+                height < 45
+            ){
+
+                return false;
+
+            }
+
+
+            const size =
+                Math.max(
+                    width,
+                    height
+                );
+
+
+            /*
+             * A reasonably closed path
+             * with a roughly circular shape.
+             */
+
+            if(
+                closure >
+                size * .25
+            ){
+
+                return false;
+
+            }
+
+
+            const ratio =
+                width / height;
+
+
+            return (
+                ratio > .55 &&
+                ratio < 1.8
+            );
+
+        }
+
+
+        /* =====================================
+           QUESTION-MARK DETECTION
+        ====================================== */
+
+        function looksLikeQuestion(){
+
+            if(
+                points.length < 12
+            ){
+
+                return false;
+
+            }
+
+
+            let minX =
+                Infinity;
+
+            let maxX =
+                -Infinity;
+
+            let minY =
+                Infinity;
+
+            let maxY =
+                -Infinity;
+
+
+            points.forEach(
+                point=>{
+
+                    minX =
+                        Math.min(
+                            minX,
+                            point.x
+                        );
+
+                    maxX =
+                        Math.max(
+                            maxX,
+                            point.x
+                        );
+
+                    minY =
+                        Math.min(
+                            minY,
+                            point.y
+                        );
+
+                    maxY =
+                        Math.max(
+                            maxY,
+                            point.y
+                        );
+
+                }
+            );
+
+
+            const width =
+                maxX - minX;
+
+
+            const height =
+                maxY - minY;
+
+
+            if(
+                width < 25 ||
+                height < 45
+            ){
+
+                return false;
+
+            }
+
+
+            /*
+             * Look for a lower vertical tail.
+             */
+
+            const lower =
+                points.filter(
+                    point =>
+                        point.y >
+                        minY +
+                        height * .68
+                );
+
+
+            if(
+                lower.length <
+                points.length * .08
+            ){
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+
+
+        /* =====================================
+           DRAW START
+        ====================================== */
+
+        drawCanvas.addEventListener(
+            "pointerdown",
+            event=>{
+
+                /*
+                 * Do not start drawing when
+                 * clicking UI areas.
+                 */
+
+                if(
+                    event.clientY < 120
+                ){
+
+                    return;
+
+                }
+
+
+                drawing =
+                    true;
+
+
+                points = [
+
+                    getCanvasPoint(
+                        event
+                    )
+
+                ];
+
+
+                drawCanvas.setPointerCapture(
+                    event.pointerId
+                );
+
+
+                drawGuide.style.opacity =
+                    ".65";
+
+
+                clearDrawing();
+
+            }
+        );
+
+
+        /* =====================================
+           DRAW MOVE
+        ====================================== */
+
+        drawCanvas.addEventListener(
+            "pointermove",
+            event=>{
+
+                if(!drawing){
+                    return;
+                }
+
+
+                points.push(
+                    getCanvasPoint(
+                        event
+                    )
+                );
+
+
+                /*
+                 * Bound path size for performance.
+                 */
+
+                if(
+                    points.length > 500
+                ){
+
+                    points.shift();
+
+                }
+
+
+                drawPath();
+
+            }
+        );
+
+
+        /* =====================================
+           DRAW END
+        ====================================== */
+
+        drawCanvas.addEventListener(
+            "pointerup",
+            event=>{
+
+                if(!drawing){
+                    return;
+                }
+
+
+                drawing =
+                    false;
+
+
+                try{
+
+                    drawCanvas.releasePointerCapture(
+                        event.pointerId
+                    );
+
+                }catch(error){}
+
+
+                drawGuide.style.opacity =
+                    "0";
+
+
+                const circle =
+                    looksLikeCircle();
+
+
+                const question =
+                    looksLikeQuestion();
+
+
+                if(circle){
+
+                    summonInput();
+
+                }else if(question){
+
+                    showSuggestions();
+
+                }
+
+
+                setTimeout(
+                    clearDrawing,
+                    350
+                );
+
+            }
+        );
+
+
+        drawCanvas.addEventListener(
+            "pointercancel",
+            ()=>{
+
+                drawing =
+                    false;
+
+                points = [];
+
+                drawGuide.style.opacity =
+                    "0";
+
+                clearDrawing();
+
+            }
+        );
+        /* =====================================
+           SUMMON INPUT
+        ====================================== */
+
+        function summonInput(){
+
+            /*
+             * Clear any previous result.
+             */
+
+            hideSuggestions();
+
+
+            /*
+             * Visual pulse around the quasar.
+             */
+
+            quasarCore.animate(
+                [
+
+                    {
+                        filter:
+                            "brightness(1)"
+                    },
+
+                    {
+                        filter:
+                            "brightness(1.8)"
+                    },
+
+                    {
+                        filter:
+                            "brightness(1.15)"
+                    },
+
+                    {
+                        filter:
+                            "brightness(1)"
+                    }
+
+                ],
+                {
+
+                    duration:900,
+
+                    easing:
+                        "cubic-bezier(.2,.8,.2,1)"
+
+                }
+            );
+
+
+            /*
+             * Focus the input.
+             */
 
             try{
 
-                recognition.start();
+                chatInput.focus();
 
-                mic.classList.add(
-                    "mic-active"
-                );
+            }catch(error){}
+
+
+            /*
+             * Small temporary message.
+             */
+
+            summonText.textContent =
+                state.cosmic
+                    ? "The signal has been heard."
+                    : "Signal received.";
+
+
+            summonResult.style.opacity =
+                "1";
+
+
+            setTimeout(
+                hideSummon,
+                1300
+            );
+
+        }
+
+
+        function hideSummon(){
+
+            summonResult.style.opacity =
+                "0";
+
+        }
+
+
+        /* =====================================
+           SUGGESTIONS
+        ====================================== */
+
+        function showSuggestions(){
+
+            const suggestions = state.cosmic
+
+                ? [
+
+                    "Explore an idea",
+
+                    "Ask a deeper question",
+
+                    "Trace the hidden pattern"
+
+                ]
+
+                : [
+
+                    "Build something",
+
+                    "Solve a problem",
+
+                    "Explore an idea"
+
+                ];
+
+
+            suggestionItems.innerHTML =
+                "";
+
+
+            suggestions.forEach(
+                suggestion=>{
+
+                    const button =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    button.type =
+                        "button";
+
+
+                    button.className = `
+                        block
+                        w-full
+                        text-left
+                        text-white/65
+                        hover:text-white
+                        transition-colors
+                    `;
+
+
+                    button.textContent =
+                        "→ " +
+                        suggestion;
+
+
+                    button.addEventListener(
+                        "click",
+                        ()=>{
+
+                            chatInput.value =
+                                suggestion;
+
+
+                            hideSuggestions();
+
+
+                            chatInput.focus();
+
+                        }
+                    );
+
+
+                    suggestionItems.appendChild(
+                        button
+                    );
+
+                }
+            );
+
+
+            suggestionPanel.style.opacity =
+                "1";
+
+
+            suggestionPanel.style.pointerEvents =
+                "auto";
+
+
+            setTimeout(
+                hideSuggestions,
+                5000
+            );
+
+        }
+
+
+        function hideSuggestions(){
+
+            suggestionPanel.style.opacity =
+                "0";
+
+
+            suggestionPanel.style.pointerEvents =
+                "none";
+
+        }
+
+
+        /* =====================================
+           DRAW CANVAS VISUAL RESET
+        ====================================== */
+
+        function resetDrawing(){
+
+            points = [];
+
+            drawing = false;
+
+            clearDrawing();
+
+            drawGuide.style.opacity =
+                "0";
+
+        }
+
+
+        /* =====================================
+           VOICE INPUT
+        ====================================== */
+
+        let recognition =
+            null;
+
+
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
+
+
+        if(SpeechRecognition){
+
+            recognition =
+                new SpeechRecognition();
+
+
+            recognition.continuous =
+                false;
+
+
+            recognition.interimResults =
+                true;
+
+
+            recognition.lang =
+                "en-US";
+
+
+            recognition.onstart =
+                ()=>{
+
+                    state.voiceActive =
+                        true;
+
+
+                    micButton.classList.add(
+                        "text-purple-300"
+                    );
+
+
+                    micButton.classList.add(
+                        "animate-pulse"
+                    );
+
+                };
+
+
+            recognition.onresult =
+                event=>{
+
+                    let transcript =
+                        "";
+
+
+                    for(
+                        let i =
+                            event.resultIndex;
+
+                        i <
+                        event.results.length;
+
+                        i++
+                    ){
+
+                        transcript +=
+                            event.results[i][0]
+                                .transcript;
+
+                    }
+
+
+                    chatInput.value =
+                        transcript;
+
+                };
+
+
+            recognition.onerror =
+                ()=>{
+
+                    state.voiceActive =
+                        false;
+
+
+                    micButton.classList.remove(
+                        "text-purple-300"
+                    );
+
+
+                    micButton.classList.remove(
+                        "animate-pulse"
+                    );
+
+                };
+
+
+            recognition.onend =
+                ()=>{
+
+                    state.voiceActive =
+                        false;
+
+
+                    micButton.classList.remove(
+                        "text-purple-300"
+                    );
+
+
+                    micButton.classList.remove(
+                        "animate-pulse"
+                    );
+
+
+                    try{
+
+                        chatInput.focus();
+
+                    }catch(error){}
+
+                };
+
+        }
+
+
+        micButton.addEventListener(
+            "click",
+            ()=>{
+
+                if(!recognition){
+
+                    chatInput.focus();
+
+                    return;
+
+                }
+
+
+                if(state.voiceActive){
+
+                    recognition.stop();
+
+                    return;
+
+                }
+
+
+                try{
+
+                    recognition.start();
+
+                }catch(error){
+
+                    /*
+                     * Browser may reject a second
+                     * start while recognition is active.
+                     */
+
+                }
 
             }
-            catch(error){
+        );
+
+
+        /* =====================================
+           ORBIT RESPONSIVENESS
+        ====================================== */
+
+        let resizeTimer =
+            null;
+
+
+        window.addEventListener(
+            "resize",
+            ()=>{
+
+                clearTimeout(
+                    resizeTimer
+                );
+
+
+                resizeTimer =
+                    setTimeout(
+                        ()=>{
+
+                            renderOrbits();
+
+                        },
+                        180
+                    );
+
+            }
+        );
+
+
+        /* =====================================
+           KEEP ORBIT TEXT UPRIGHT
+        ====================================== */
+
+        function refreshOrbitOrientation(){
+
+            const orbits =
+                document.querySelectorAll(
+                    "#orbitLayer > div"
+                );
+
+
+            orbits.forEach(
+                orbit=>{
+
+                    const rotating =
+                        orbit.firstElementChild;
+
+
+                    if(!rotating){
+                        return;
+                    }
+
+
+                    const item =
+                        rotating.firstElementChild;
+
+
+                    if(!item){
+                        return;
+                    }
+
+
+                    const currentTransform =
+                        getComputedStyle(
+                            rotating
+                        ).transform;
+
+
+                    /*
+                     * The outer orbit rotates.
+                     * The inner text gets a reverse
+                     * rotation through CSS animation.
+                     */
+
+                    item.style.animation =
+                        "counterSpin 100s linear infinite";
+
+                }
+            );
+
+        }
+
+
+        /* =====================================
+           PERIODIC ORBIT REFRESH
+        ====================================== */
+
+        setInterval(
+            refreshOrbitOrientation,
+            1200
+        );
+
+
+        /* =====================================
+           GRAVITY DISTORTION
+        ====================================== */
+
+        function gravityPulse(){
+
+            const texts =
+                document.querySelectorAll(
+                    ".gravity-text"
+                );
+
+
+            texts.forEach(
+                (text,index)=>{
+
+                    /*
+                     * Slightly vary the distortion
+                     * so every orbit doesn't look identical.
+                     */
+
+                    const scale =
+                        2.2 +
+                        ((index % 3) * .6);
+
+
+                    text.style.filter =
+                        `url(#gravityWarp)`;
+
+
+                    text.style.willChange =
+                        "transform, filter";
+
+                }
+            );
+
+        }
+
+
+        gravityPulse();
+
+
+        /* =====================================
+           COSMIC MODE MANDALA ROTATION
+        ====================================== */
+
+        const mandalaSvg =
+            mandalaLayer.querySelector(
+                "svg"
+            );
+
+
+        if(mandalaSvg){
+
+            mandalaSvg.style.transformOrigin =
+                "center";
+
+
+            mandalaSvg.animate(
+                [
+
+                    {
+                        transform:
+                            "rotate(0deg)"
+
+                    },
+
+                    {
+
+                        transform:
+                            "rotate(360deg)"
+
+                    }
+
+                ],
+                {
+
+                    duration:
+                        90000,
+
+                    iterations:
+                        Infinity,
+
+                    easing:
+                        "linear"
+
+                }
+            );
+
+        }
+
+
+        /* =====================================
+           BLACK HOLE INTERACTION
+        ====================================== */
+
+        blackHole.addEventListener(
+            "click",
+            event=>{
+
+                event.stopPropagation();
+
 
                 /*
-                    Browser may throw an error
-                    if recognition is already running.
-                */
+                 * A short tap gives a subtle
+                 * gravitational pulse.
+                 *
+                 * Long press is reserved for
+                 * NORMAL ↔ COSMIC.
+                 */
 
-                console.log(
-                    "Voice recognition is already active."
+                if(longPressTriggered){
+
+                    longPressTriggered =
+                        false;
+
+                    return;
+
+                }
+
+
+                quasarCore.animate(
+                    [
+
+                        {
+                            transform:
+                                "scale(1)"
+                        },
+
+                        {
+                            transform:
+                                "scale(.92)"
+                        },
+
+                        {
+                            transform:
+                                "scale(1.04)"
+                        },
+
+                        {
+                            transform:
+                                "scale(1)"
+                        }
+
+                    ],
+                    {
+
+                        duration:520,
+
+                        easing:
+                            "cubic-bezier(.2,.8,.2,1)"
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================
+           VOID CLICK
+        ====================================== */
+
+        main.addEventListener(
+            "click",
+            event=>{
+
+                /*
+                 * Clicking empty space dismisses
+                 * temporary suggestion UI.
+                 */
+
+                if(
+                    event.target === main
+                ){
+
+                    hideSuggestions();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================
+           INITIAL ORBIT
+        ====================================== */
+
+        state.chats = [
+
+            {
+
+                id:"initial",
+
+                user:
+                    "What should we build?",
+
+                reply:
+                    "I'm ready."
+
+            }
+
+        ];
+
+
+        renderOrbits();
+
+
+        /* =====================================
+           INITIAL VISUAL STATE
+        ====================================== */
+
+        setTimeout(
+            ()=>{
+
+                gravityPulse();
+
+                refreshOrbitOrientation();
+
+            },
+            300
+        );
+
+
+        /* =====================================
+           MOBILE SAFE AREA
+        ====================================== */
+
+        const safeAreaStyle =
+            document.createElement(
+                "style"
+            );
+
+
+        safeAreaStyle.textContent = `
+
+            .input-area{
+
+                padding-bottom:
+                    max(
+                        0px,
+                        env(
+                            safe-area-inset-bottom
+                        )
+                    );
+
+            }
+
+
+            @media(max-width:600px){
+
+                .input-area{
+
+                    bottom:
+                        max(
+                            24px,
+                            env(
+                                safe-area-inset-bottom
+                            )
+                        );
+
+                    padding-left:16px;
+
+                    padding-right:16px;
+
+                }
+
+            }
+
+        `;
+
+
+        document.head.appendChild(
+            safeAreaStyle
+        );
+
+
+        /* =====================================
+           PERFORMANCE SAFETY
+        ====================================== */
+
+        document.addEventListener(
+            "visibilitychange",
+            ()=>{
+
+                if(
+                    document.hidden
+                ){
+
+                    /*
+                     * Stop expensive thinking
+                     * effects while the page isn't
+                     * visible.
+                     */
+
+                    if(
+                        state.thinking
+                    ){
+
+                        particleLayer.innerHTML =
+                            "";
+
+                    }
+
+                }else{
+
+                    if(
+                        state.thinking
+                    ){
+
+                        createThinkingParticles();
+
+                    }
+
+                }
+
+            }
+        );
+        /* =====================================
+           FINAL COSMIC VISUAL LAYER
+        ====================================== */
+
+        const finalVisualStyle =
+            document.createElement("style");
+
+
+        finalVisualStyle.textContent = `
+
+            /* ================================
+               COSMIC MODE
+            ================================= */
+
+            .cosmic-mode .constellation-star{
+
+                opacity:.58;
+
+            }
+
+
+            .cosmic-mode .constellation-star
+            span:first-child{
+
+                background:
+                    rgb(205,175,255);
+
+                box-shadow:
+                    0 0 10px
+                    rgba(175,125,255,.9);
+
+            }
+
+
+            /* ================================
+               ORBIT CONTAINER
+            ================================= */
+
+            #orbitLayer{
+
+                perspective:
+                    900px;
+
+            }
+
+
+            .gravity-text{
+
+                transform-origin:
+                    center;
+
+                backface-visibility:
+                    hidden;
+
+                -webkit-backface-visibility:
+                    hidden;
+
+            }
+
+
+            /* ================================
+               INPUT
+            ================================= */
+
+            #chatForm{
+
+                transition:
+                    border-color .3s ease,
+                    box-shadow .3s ease,
+                    transform .3s ease;
+
+            }
+
+
+            #chatForm:focus-within{
+
+                border-color:
+                    rgba(180,145,255,.16);
+
+                box-shadow:
+
+                    0 18px 60px
+                    rgba(0,0,0,.55),
+
+                    0 0 35px
+                    rgba(105,70,220,.07);
+
+            }
+
+
+            #chatInput::selection{
+
+                background:
+                    rgba(150,100,255,.25);
+
+            }
+
+
+            /* ================================
+               DRAW CANVAS
+            ================================= */
+
+            #drawCanvas{
+
+                cursor:
+                    crosshair;
+
+            }
+
+
+            /* ================================
+               SUGGESTIONS
+            ================================= */
+
+            #suggestionPanel{
+
+                transform:
+                    translate(-50%,-50%)
+                    scale(.96);
+
+            }
+
+
+            #suggestionPanel[style*="opacity: 1"]{
+
+                transform:
+                    translate(-50%,-50%)
+                    scale(1);
+
+            }
+
+
+            /* ================================
+               MANDALA
+            ================================= */
+
+            #mandalaLayer{
+
+                mix-blend-mode:
+                    screen;
+
+            }
+
+
+            /* ================================
+               MOBILE
+            ================================= */
+
+            @media(max-width:600px){
+
+                #orbitLayer{
+
+                    perspective:
+                        650px;
+
+                }
+
+
+                .gravity-text{
+
+                    font-size:
+                        10px;
+
+                    padding:
+                        8px 12px;
+
+                }
+
+
+                #suggestionPanel{
+
+                    top:
+                        45%;
+
+                }
+
+
+                #mandalaLayer{
+
+                    top:
+                        35px;
+
+                }
+
+
+                #mandalaLayer svg{
+
+                    width:
+                        330px;
+
+                    height:
+                        330px;
+
+                }
+
+            }
+
+
+            /* ================================
+               REDUCED MOTION
+            ================================= */
+
+            @media(prefers-reduced-motion:reduce){
+
+                #mandalaLayer svg{
+
+                    animation:
+                        none !important;
+
+                }
+
+                .constellation-star{
+
+                    transition:
+                        none !important;
+
+                }
+
+            }
+
+        `;
+
+
+        document.head.appendChild(
+            finalVisualStyle
+        );
+
+
+        /* =====================================
+           DRAWING GLOW
+        ====================================== */
+
+        function summonGlow(){
+
+            const glow =
+                document.createElement(
+                    "div"
+                );
+
+
+            glow.className = `
+                absolute
+                left-1/2
+                top-[180px]
+                -translate-x-1/2
+                w-[100px]
+                h-[100px]
+                rounded-full
+                pointer-events-none
+                z-[18]
+            `;
+
+
+            glow.style.background =
+                `
+                radial-gradient(
+                    circle,
+                    rgba(170,120,255,.22),
+                    transparent 70%
+                )
+                `;
+
+
+            glow.style.filter =
+                "blur(8px)";
+
+
+            main.appendChild(
+                glow
+            );
+
+
+            glow.animate(
+                [
+
+                    {
+                        opacity:0,
+
+                        transform:
+                            "translateX(-50%) scale(.4)"
+
+                    },
+
+                    {
+
+                        opacity:1,
+
+                        transform:
+                            "translateX(-50%) scale(1.15)"
+
+                    },
+
+                    {
+
+                        opacity:0,
+
+                        transform:
+                            "translateX(-50%) scale(1.8)"
+
+                    }
+
+                ],
+                {
+
+                    duration:850,
+
+                    easing:
+                        "cubic-bezier(.2,.8,.2,1)"
+
+                }
+            );
+
+
+            setTimeout(
+                ()=>{
+
+                    glow.remove();
+
+                },
+                900
+            );
+
+        }
+
+
+        /* =====================================
+           REPLACE SUMMON WITH GLOW
+        ====================================== */
+
+        const originalSummon =
+            summonInput;
+
+
+        summonInput = function(){
+
+            summonGlow();
+
+            originalSummon();
+
+        };
+
+
+        /* =====================================
+           TOUCH FEEDBACK
+        ====================================== */
+
+        function touchPulse(
+            x,
+            y
+        ){
+
+            const pulse =
+                document.createElement(
+                    "div"
+                );
+
+
+            pulse.className = `
+                absolute
+                z-[35]
+                w-[12px]
+                h-[12px]
+                rounded-full
+                pointer-events-none
+            `;
+
+
+            pulse.style.left =
+                x + "px";
+
+
+            pulse.style.top =
+                y + "px";
+
+
+            pulse.style.marginLeft =
+                "-6px";
+
+
+            pulse.style.marginTop =
+                "-6px";
+
+
+            pulse.style.background =
+                "rgba(185,145,255,.75)";
+
+
+            pulse.style.boxShadow =
+                "0 0 20px rgba(150,100,255,.8)";
+
+
+            main.appendChild(
+                pulse
+            );
+
+
+            pulse.animate(
+                [
+
+                    {
+                        transform:
+                            "scale(.4)",
+
+                        opacity:.8
+
+                    },
+
+                    {
+
+                        transform:
+                            "scale(4)",
+
+                        opacity:0
+
+                    }
+
+                ],
+                {
+
+                    duration:500,
+
+                    easing:
+                        "ease-out"
+
+                }
+            );
+
+
+            setTimeout(
+                ()=>{
+
+                    pulse.remove();
+
+                },
+                520
+            );
+
+        }
+
+
+        /* =====================================
+           DRAW COMPLETION FEEDBACK
+        ====================================== */
+
+        drawCanvas.addEventListener(
+            "pointerup",
+            event=>{
+
+                const point =
+                    getCanvasPoint(
+                        event
+                    );
+
+
+                if(
+                    points.length > 5
+                ){
+
+                    touchPulse(
+                        point.x,
+                        point.y
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================
+           CONSTELLATION CONNECTIONS
+        ====================================== */
+
+        const constellationLines =
+            document.createElement(
+                "canvas"
+            );
+
+
+        constellationLines.className = `
+            absolute
+            inset-0
+            w-full
+            h-full
+            pointer-events-none
+            z-[4]
+        `;
+
+
+        main.insertBefore(
+            constellationLines,
+            constellationLayer
+        );
+
+
+        const lineCtx =
+            constellationLines.getContext(
+                "2d"
+            );
+
+
+        function resizeConstellationCanvas(){
+
+            const rect =
+                main.getBoundingClientRect();
+
+
+            const dpr =
+                Math.min(
+                    window.devicePixelRatio || 1,
+                    2
+                );
+
+
+            constellationLines.width =
+                rect.width * dpr;
+
+
+            constellationLines.height =
+                rect.height * dpr;
+
+
+            constellationLines.style.width =
+                rect.width + "px";
+
+
+            constellationLines.style.height =
+                rect.height + "px";
+
+
+            lineCtx.setTransform(
+                dpr,
+                0,
+                0,
+                dpr,
+                0,
+                0
+            );
+
+
+            drawConstellationLines();
+
+        }
+
+
+        function drawConstellationLines(){
+
+            const width =
+                constellationLines.clientWidth;
+
+
+            const height =
+                constellationLines.clientHeight;
+
+
+            lineCtx.clearRect(
+                0,
+                0,
+                width,
+                height
+            );
+
+
+            /*
+             * Very subtle connections between
+             * nearby historical stars.
+             */
+
+            lineCtx.strokeStyle =
+                "rgba(150,120,220,.045)";
+
+
+            lineCtx.lineWidth =
+                .7;
+
+
+            for(
+                let i=0;
+                i<starPositions.length;
+                i++
+            ){
+
+                const a =
+                    starPositions[i];
+
+
+                const ax =
+                    width *
+                    a[0] /
+                    100;
+
+
+                const ay =
+                    height *
+                    a[1] /
+                    100;
+
+
+                for(
+                    let j=i+1;
+                    j<starPositions.length;
+                    j++
+                ){
+
+                    const b =
+                        starPositions[j];
+
+
+                    const bx =
+                        width *
+                        b[0] /
+                        100;
+
+
+                    const by =
+                        height *
+                        b[1] /
+                        100;
+
+
+                    const dx =
+                        ax - bx;
+
+
+                    const dy =
+                        ay - by;
+
+
+                    const distance =
+                        Math.sqrt(
+                            dx*dx +
+                            dy*dy
+                        );
+
+
+                    if(
+                        distance < 145
+                    ){
+
+                        lineCtx.beginPath();
+
+                        lineCtx.moveTo(
+                            ax,
+                            ay
+                        );
+
+                        lineCtx.lineTo(
+                            bx,
+                            by
+                        );
+
+                        lineCtx.stroke();
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        resizeConstellationCanvas();
+
+
+        window.addEventListener(
+            "resize",
+            resizeConstellationCanvas
+        );
+
+
+        /* =====================================
+           PERIODIC CONSTELLATION TWINKLE
+        ====================================== */
+
+        function twinkleStars(){
+
+            const stars =
+                constellationLayer.querySelectorAll(
+                    "button"
+                );
+
+
+            stars.forEach(
+                (star,index)=>{
+
+                    const delay =
+                        (index * 173) % 2600;
+
+
+                    star.animate(
+                        [
+
+                            {
+                                opacity:
+                                    .28
+                            },
+
+                            {
+                                opacity:
+                                    .65
+                            },
+
+                            {
+                                opacity:
+                                    .32
+                            }
+
+                        ],
+                        {
+
+                            duration:
+                                2400,
+
+                            delay,
+
+                            iterations:
+                                Infinity,
+
+                            easing:
+                                "ease-in-out"
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        twinkleStars();
+
+
+        /* =====================================
+           MODE INDICATOR
+        ====================================== */
+
+        const modeIndicator =
+            document.createElement(
+                "div"
+            );
+
+
+        modeIndicator.className = `
+            absolute
+            left-1/2
+            top-[268px]
+            -translate-x-1/2
+            z-[32]
+            pointer-events-none
+            text-[8px]
+            uppercase
+            tracking-[.45em]
+            text-white/0
+            transition-all
+            duration-500
+        `;
+
+
+        modeIndicator.textContent =
+            "COSMIC";
+
+
+        main.appendChild(
+            modeIndicator
+        );
+
+
+        function updateModeIndicator(){
+
+            if(state.cosmic){
+
+                modeIndicator.classList.remove(
+                    "text-white/0"
+                );
+
+
+                modeIndicator.classList.add(
+                    "text-purple-200/35"
+                );
+
+            }else{
+
+                modeIndicator.classList.add(
+                    "text-white/0"
+                );
+
+
+                modeIndicator.classList.remove(
+                    "text-purple-200/35"
                 );
 
             }
 
         }
-    );
 
 
-    /* ==============================
-       SPEECH RESULT
-    =============================== */
+        /* =====================================
+           WRAP COSMIC MODE
+        ====================================== */
 
-    recognition.addEventListener(
-        "result",
-        (event) => {
-
-            const transcript =
-                event
-                    .results[0][0]
-                    .transcript;
+        const previousSetCosmicMode =
+            setCosmicMode;
 
 
-            input.value =
-                transcript;
+        setCosmicMode = function(
+            enabled
+        ){
 
-            input.focus();
-
-        }
-    );
-
-
-    /* ==============================
-       RECOGNITION ENDED
-    =============================== */
-
-    recognition.addEventListener(
-        "end",
-        () => {
-
-            mic.classList.remove(
-                "mic-active"
+            previousSetCosmicMode(
+                enabled
             );
 
+
+            updateModeIndicator();
+
+        };
+
+
+        /* =====================================
+           INITIALIZE MODE
+        ====================================== */
+
+        updateModeIndicator();
+
+
+        /* =====================================
+           FOCUS INPUT ON "/" KEY
+        ====================================== */
+
+        document.addEventListener(
+            "keydown",
+            event=>{
+
+                if(
+                    event.key === "/" &&
+                    document.activeElement !==
+                        chatInput
+                ){
+
+                    event.preventDefault();
+
+                    chatInput.focus();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================
+           ESCAPE
+        ====================================== */
+
+        document.addEventListener(
+            "keydown",
+            event=>{
+
+                if(
+                    event.key === "Escape"
+                ){
+
+                    hideSuggestions();
+
+                    hideSummon();
+
+                    resetDrawing();
+
+                    chatInput.blur();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================
+           CLEAN ORBITS AFTER HISTORY LOAD
+        ====================================== */
+
+        function cleanOrbitOverflow(){
+
+            const orbits =
+                orbitLayer.children;
+
+
+            if(
+                orbits.length <= 12
+            ){
+
+                return;
+
+            }
+
+
+            while(
+                orbitLayer.children.length >
+                12
+            ){
+
+                orbitLayer.firstElementChild
+                    .remove();
+
+            }
+
         }
-    );
 
 
-    /* ==============================
-       RECOGNITION ERROR
-    =============================== */
+        /* =====================================
+           ORBIT RENDER WRAPPER
+        ====================================== */
 
-    recognition.addEventListener(
-        "error",
-        () => {
+        const originalRenderOrbits =
+            renderOrbits;
 
-            mic.classList.remove(
-                "mic-active"
+
+        renderOrbits = function(){
+
+            originalRenderOrbits();
+
+            cleanOrbitOverflow();
+
+            requestAnimationFrame(
+                ()=>{
+                    gravityPulse();
+                    refreshOrbitOrientation();
+                }
             );
 
+        };
+
+
+        /* =====================================
+           FINAL INITIAL RENDER
+        ====================================== */
+
+        renderOrbits();
+
+
+        /* =====================================
+           INPUT PLACEHOLDER BEHAVIOR
+        ====================================== */
+
+        chatInput.addEventListener(
+            "focus",
+            ()=>{
+
+                chatForm.style.transform =
+                    "translateY(-1px)";
+
+            }
+        );
+
+
+        chatInput.addEventListener(
+            "blur",
+            ()=>{
+
+                chatForm.style.transform =
+                    "translateY(0)";
+
+            }
+        );
+
+
+        /* =====================================
+           STARTUP
+        ====================================== */
+
+        requestAnimationFrame(
+            ()=>{
+
+                resizeCanvas();
+
+                resizeConstellationCanvas();
+
+                gravityPulse();
+
+                refreshOrbitOrientation();
+
+            }
+        );
+        /* =====================================
+           FINAL MOBILE ORBIT ADJUSTMENTS
+        ====================================== */
+
+        function adjustMobileLayout(){
+
+            const mobile =
+                window.innerWidth <= 600;
+
+
+            const quasar =
+                document.querySelector(
+                    ".quasar"
+                );
+
+
+            if(mobile){
+
+                quasar.style.top =
+                    "-4px";
+
+            }else{
+
+                quasar.style.top =
+                    "4px";
+
+            }
+
         }
-    );
 
-}
-else{
 
-    /*
-        Fallback for browsers
-        without Speech Recognition.
-    */
+        adjustMobileLayout();
 
-    mic.addEventListener(
-        "click",
-        () => {
 
-            input.focus();
+        window.addEventListener(
+            "resize",
+            adjustMobileLayout
+        );
+
+
+        /* =====================================
+           PREVENT ACCIDENTAL PAGE SCROLL
+        ====================================== */
+
+        document.addEventListener(
+            "touchmove",
+            event=>{
+
+                /*
+                 * Allow scrolling/interaction inside
+                 * normal form controls, but keep the
+                 * cosmic canvas stable.
+                 */
+
+                if(
+                    event.target === drawCanvas
+                ){
+
+                    event.preventDefault();
+
+                }
+
+            },
+            {
+                passive:false
+            }
+        );
+
+
+        /* =====================================
+           FINAL DRAW CLEANUP
+        ====================================== */
+
+        window.addEventListener(
+            "blur",
+            ()=>{
+
+                if(drawing){
+
+                    drawing =
+                        false;
+
+                    points = [];
+
+                    clearDrawing();
+
+                }
+
+
+                cancelLongPress();
+
+            }
+        );
+
+
+        /* =====================================
+           FINAL PERFORMANCE CLEANUP
+        ====================================== */
+
+        let animationFrame = null;
+
+
+        function lightweightRefresh(){
+
+            if(
+                animationFrame
+            ){
+
+                cancelAnimationFrame(
+                    animationFrame
+                );
+
+            }
+
+
+            animationFrame =
+                requestAnimationFrame(
+                    ()=>{
+
+                        resizeCanvas();
+
+                        resizeConstellationCanvas();
+
+                        gravityPulse();
+
+                    }
+                );
 
         }
-    );
-
-}
 
 
-/* =========================================
-   INITIAL FOCUS
-========================================= */
+        window.addEventListener(
+            "orientationchange",
+            ()=>{
 
-window.addEventListener(
-    "load",
-    () => {
+                setTimeout(
+                    lightweightRefresh,
+                    250
+                );
 
-        input.focus();
+            }
+        );
 
-    }
-);
 
-</script>
+        /* =====================================
+           FIRST LOAD
+        ====================================== */
 
+        setTimeout(
+            ()=>{
+
+                chatInput.focus();
+
+            },
+            500
+        );
+
+
+        /* =====================================
+           CONSOLE STATUS
+        ====================================== */
+
+        console.log(
+            "%cQUASAR",
+            `
+                color:#c4a5ff;
+                font-size:24px;
+                font-weight:700;
+                letter-spacing:8px;
+            `
+        );
+
+
+        console.log(
+            "%cPersonal intelligence interface online.",
+            `
+                color:#999;
+                font-size:12px;
+            `
+        );
+
+
+        /* =====================================
+           FINAL STATE CHECK
+        ====================================== */
+
+        if(
+            !window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches
+        ){
+
+            quasarCore.style.willChange =
+                "transform";
+
+            orbitLayer.style.willChange =
+                "transform";
+
+        }
+
+
+        /* =====================================
+           ACCESSIBILITY
+        ====================================== */
+
+        chatInput.setAttribute(
+            "aria-label",
+            "Message QUASAR"
+        );
+
+
+        sendButton.setAttribute(
+            "aria-label",
+            "Send message"
+        );
+
+
+        micButton.setAttribute(
+            "aria-label",
+            "Start voice input"
+        );
+
+
+        /* =====================================
+           FINAL READY STATE
+        ====================================== */
+
+        document.documentElement
+            .classList.add(
+                "quasar-ready"
+            );
+
+
+        /* =====================================
+           END OF APPLICATION
+        ====================================== */
+
+    </script>
 
 </div>
 
