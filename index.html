@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QUASAR — Personal AI</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#080a0f;
+  --panel:#0e1118;
+  --panel-2:#121620;
+  --line:rgba(255,255,255,.08);
+  --text:#f4f6f8;
+  --muted:#858c99;
+  --accent:#8b7cff;
+  --accent-2:#5c50d9;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(107,91,255,.18),transparent 35%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow:hidden;
+}
+
+/* APP */
+
+.app{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* HEADER */
+
+header{
+  height:72px;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  background:rgba(8,10,15,.72);
+  backdrop-filter:blur(20px);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 35%,#ffffff 0 4%,#bdb5ff 8%,#6d5fff 35%,#27205e 68%,#0c0b20 100%);
+  box-shadow:
+    0 0 18px rgba(112,96,255,.7),
+    inset 0 0 12px rgba(255,255,255,.2);
+  position:relative;
+}
+
+.logo::after{
+  content:"";
+  position:absolute;
+  width:52px;
+  height:12px;
+  border:1px solid rgba(139,124,255,.55);
+  border-radius:50%;
+  top:11px;
+  left:-8px;
+  transform:rotate(-18deg);
+}
+
+.brand-text h1{
+  font-size:15px;
+  letter-spacing:3px;
+  font-weight:700;
+}
+
+.brand-text span{
+  display:block;
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:1.5px;
+  margin-top:2px;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:11px;
+  color:#9da4b0;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#64d69b;
+  box-shadow:0 0 10px rgba(100,214,155,.7);
+}
+
+/* MAIN */
+
+main{
+  flex:1;
+  min-height:0;
+  display:flex;
+  justify-content:center;
+}
+
+.chat{
+  width:min(900px,100%);
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+
+/* WELCOME */
+
+.welcome{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:30px 20px;
+  text-align:center;
+}
+
+.welcome-orb{
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  margin-bottom:28px;
+  background:
+    radial-gradient(circle at 38% 32%,#fff 0 3%,#c5bfff 6%,#8b7cff 22%,#4035a4 50%,#15122f 76%,#080a0f 100%);
+  box-shadow:
+    0 0 35px rgba(119,105,255,.45),
+    0 0 100px rgba(119,105,255,.12);
+  animation:pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%,100%{
+    transform:scale(1);
+    box-shadow:
+      0 0 35px rgba(119,105,255,.45),
+      0 0 100px rgba(119,105,255,.12);
+  }
+
+  50%{
+    transform:scale(1.035);
+    box-shadow:
+      0 0 48px rgba(119,105,255,.6),
+      0 0 120px rgba(119,105,255,.18);
+  }
+}
+
+.welcome h2{
+  font-size:clamp(28px,6vw,44px);
+  font-weight:600;
+  letter-spacing:-1.5px;
+  margin-bottom:10px;
+}
+
+.welcome p{
+  color:var(--muted);
+  font-size:14px;
+  max-width:420px;
+  line-height:1.7;
+}
+
+/* SUGGESTIONS */
+
+.suggestions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:32px;
+  width:min(600px,100%);
+}
+
+.suggestion{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
+  border-radius:14px;
+  padding:15px;
+  color:#c7ccd5;
+  font-size:12px;
+  text-align:left;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.suggestion:hover{
+  background:rgba(139,124,255,.08);
+  border-color:rgba(139,124,255,.28);
+  transform:translateY(-2px);
+}
+
+/* MESSAGES */
+
+.messages{
+  display:none;
+  flex:1;
+  overflow-y:auto;
+  padding:35px 20px;
+}
+
+.message{
+  display:flex;
+  margin-bottom:24px;
+}
+
+.message.user{
+  justify-content:flex-end;
+}
+
+.bubble{
+  max-width:min(680px,85%);
+  padding:14px 17px;
+  border-radius:18px;
+  font-size:14px;
+  line-height:1.65;
+}
+
+.assistant .bubble{
+  background:rgba(255,255,255,.045);
+  border:1px solid var(--line);
+  border-bottom-left-radius:5px;
+}
+
+.user .bubble{
+  background:linear-gradient(135deg,var(--accent-2),var(--accent));
+  border-bottom-right-radius:5px;
+}
+
+/* INPUT */
+
+.input-area{
+  padding:15px 20px 22px;
+  background:linear-gradient(to top,var(--bg) 65%,transparent);
+}
+
+.input-box{
+  width:min(760px,100%);
+  margin:auto;
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+  padding:9px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(17,20,28,.92);
+  border-radius:20px;
+  box-shadow:0 12px 50px rgba(0,0,0,.35);
+}
+
+textarea{
+  flex:1;
+  resize:none;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  font:inherit;
+  font-size:14px;
+  padding:11px 9px;
+  min-height:42px;
+  max-height:120px;
+}
+
+textarea::placeholder{
+  color:#686f7b;
+}
+
+.icon-btn,
+.send-btn{
+  flex:none;
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:13px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s ease;
+}
+
+.icon-btn{
+  background:rgba(255,255,255,.055);
+  color:#aab0bb;
+}
+
+.icon-btn:hover{
+  background:rgba(255,255,255,.09);
+  color:white;
+}
+
+.send-btn{
+  background:var(--accent);
+  color:white;
+  box-shadow:0 5px 20px rgba(139,124,255,.25);
+}
+
+.send-btn:hover{
+  transform:scale(1.04);
+  background:#9a8dff;
+}
+
+.send-btn svg,
+.icon-btn svg{
+  width:18px;
+  height:18px;
+}
+
+.disclaimer{
+  text-align:center;
+  color:#555c68;
+  font-size:9px;
+  margin-top:9px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  header{
+    height:64px;
+    padding:0 17px;
+  }
+
+  .brand-text h1{
+    font-size:14px;
+  }
+
+  .status{
+    font-size:10px;
+  }
+
+  .welcome{
+    padding:20px;
+  }
+
+  .welcome-orb{
+    width:82px;
+    height:82px;
+    margin-bottom:23px;
+  }
+
+  .welcome h2{
+    font-size:30px;
+  }
+
+  .welcome p{
+    font-size:13px;
+  }
+
+  .suggestions{
+    grid-template-columns:1fr;
+    margin-top:25px;
+  }
+
+  .suggestion{
+    padding:13px;
+  }
+
+  .messages{
+    padding:24px 15px;
+  }
+
+  .input-area{
+    padding:10px 12px 15px;
+  }
+
+  .bubble{
+    max-width:88%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+  <div class="brand">
+
+    <div class="logo"></div>
+
+    <div class="brand-text">
+      <h1>QUASAR</h1>
+      <span>PERSONAL INTELLIGENCE</span>
+    </div>
+
+  </div>
+
+  <div class="status">
+    <span class="status-dot"></span>
+    ONLINE
+  </div>
+
+</header>
+
+
+<main>
+
+  <section class="chat">
+
+    <div class="welcome" id="welcome">
+
+      <div class="welcome-orb"></div>
+
+      <h2>How can I help?</h2>
+
+      <p>
+        Your personal intelligence system.
+        Ask anything, research anything, or give me something to do.
+      </p>
+
+      <div class="suggestions">
+
+        <button class="suggestion"
+          onclick="useSuggestion('Find 20 cafes near me')">
+          Find 20 cafes near me
+        </button>
+
+        <button class="suggestion"
+          onclick="useSuggestion('Research something for me')">
+          Research something for me
+        </button>
+
+        <button class="suggestion"
+          onclick="useSuggestion('Help me plan my day')">
+          Help me plan my day
+        </button>
+
+        <button class="suggestion"
+          onclick="useSuggestion('Explain something to me')">
+          Explain something to me
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="messages" id="messages"></div>
+
+
+    <div class="input-area">
+
+      <div class="input-box">
+
+        <button class="icon-btn" id="micBtn" aria-label="Voice input">
+
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor"
+               stroke-width="1.8"
+               stroke-linecap="round"
+               stroke-linejoin="round">
+
+            <rect x="9" y="3" width="6" height="11" rx="3"></rect>
+            <path d="M5 11a7 7 0 0 0 14 0"></path>
+            <path d="M12 18v3"></path>
+            <path d="M8 21h8"></path>
+
+          </svg>
+
+        </button>
+
+
+        <textarea
+          id="input"
+          rows="1"
+          placeholder="Ask QUASAR anything..."
+        ></textarea>
+
+
+        <button class="send-btn" id="sendBtn" aria-label="Send">
+
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor"
+               stroke-width="2"
+               stroke-linecap="round"
+               stroke-linejoin="round">
+
+            <path d="M22 2 11 13"></path>
+            <path d="m22 2-7 20-4-9-9-4Z"></path>
+
+          </svg>
+
+        </button>
+
+      </div>
+
+      <div class="disclaimer">
+        QUASAR can make mistakes. Verify important information.
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+</div>
+
+
+<script>
+
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("sendBtn");
+const messages = document.getElementById("messages");
+const welcome = document.getElementById("welcome");
+
+
+function useSuggestion(text){
+
+  input.value = text;
+  input.focus();
+
+}
+
+
+function addMessage(text,type){
+
+  const message = document.createElement("div");
+
+  message.className = "message " + type;
+
+  const bubble = document.createElement("div");
+
+  bubble.className = "bubble";
+
+  bubble.textContent = text;
+
+  message.appendChild(bubble);
+
+  messages.appendChild(message);
+
+  messages.scrollTop = messages.scrollHeight;
+
+}
+
+
+function sendMessage(){
+
+  const text = input.value.trim();
+
+  if(!text) return;
+
+  welcome.style.display = "none";
+  messages.style.display = "block";
+
+  addMessage(text,"user");
+
+  input.value = "";
+
+  /*
+    AI CONNECTION WILL BE ADDED NEXT.
+
+    For now this only demonstrates
+    the QUASAR interface.
+  */
+
+  setTimeout(()=>{
+
+    addMessage(
+      "I'm online. My intelligence system isn't connected yet — we'll give me my first ability next.",
+      "assistant"
+    );
+
+  },500);
+
+}
+
+
+sendBtn.addEventListener("click",sendMessage);
+
+
+input.addEventListener("keydown",(e)=>{
+
+  if(e.key === "Enter" && !e.shiftKey){
+
+    e.preventDefault();
+
+    sendMessage();
+
+  }
+
+});
+
+
+input.addEventListener("input",()=>{
+
+  input.style.height = "auto";
+
+  input.style.height =
+    Math.min(input.scrollHeight,120) + "px";
+
+});
+
+
+/* BASIC VOICE INPUT */
+
+const micBtn = document.getElementById("micBtn");
+
+if("webkitSpeechRecognition" in window){
+
+  const recognition = new webkitSpeechRecognition();
+
+  recognition.lang = "en-IN";
+  recognition.continuous = false;
+  recognition.interimResults = false;
+
+  micBtn.addEventListener("click",()=>{
+
+    recognition.start();
+
+  });
+
+  recognition.onresult = (event)=>{
+
+    input.value =
+      event.results[0][0].transcript;
+
+    input.focus();
+
+  };
+
+}else{
+
+  micBtn.addEventListener("click",()=>{
+
+    alert("Voice input isn't supported in this browser.");
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
