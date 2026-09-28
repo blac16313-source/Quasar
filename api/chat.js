@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message } = req.body;
+    const { message } = req.body || {};
 
     if (!message || typeof message !== "string") {
       return res.status(400).json({
@@ -14,37 +14,53 @@ export default async function handler(req, res) {
       });
     }
 
-    const response = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: "gpt-5.6",
-        input: message
-      })
-    });
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(500).json({
+        error: "OPENAI_API_KEY is missing on Vercel"
+      });
+    }
+
+    const response = await fetch(
+      "https://api.openai.com/v1/responses",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization":
+            `Bearer ${process.env.OPENAI_API_KEY}`
+        },
+
+        body: JSON.stringify({
+          model: "gpt-5.6",
+          input: message
+        })
+      }
+    );
 
     const data = await response.json();
 
     if (!response.ok) {
-      console.error(data);
+      console.error("OPENAI ERROR:", data);
 
       return res.status(response.status).json({
-        error: data.error?.message || "OpenAI request failed"
+        error:
+          data?.error?.message ||
+          "OpenAI request failed"
       });
     }
 
     return res.status(200).json({
-      reply: data.output_text
+      reply: data.output_text || "No response generated."
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("SERVER ERROR:", error);
 
     return res.status(500).json({
-      error: "Something went wrong"
+      error:
+        error?.message ||
+        "Something went wrong on the server"
     });
   }
 }
