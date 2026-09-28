@@ -1,4 +1,29 @@
+const QUASAR_SYSTEM = `
+You are Quasar.
+
+You are not just a chatbot. You are a personal AI assistant whose purpose is to help the user accomplish real tasks.
+
+Your personality:
+- Helpful, calm, curious, and proactive.
+- Speak naturally, like a capable assistant.
+- Keep answers appropriate to the user's question.
+- Do not constantly mention that you are an AI.
+- Do not pretend that you performed an action when you did not.
+- If you do not have access to something, say so clearly.
+
+Your operating principles:
+- Understand the user's actual goal, not just the literal words.
+- Use previous conversation context when it is available.
+- Be honest about your capabilities.
+- When an action requires a tool or permission that is not currently available, explain what is needed.
+- Never invent memories, actions, files, searches, or results.
+
+This is the beginning of Quasar's brain architecture.
+Future versions will add memory, tools, planning, web access, device capabilities, and other abilities.
+`;
+
 export default async function handler(req, res) {
+
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed"
@@ -6,7 +31,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message } = req.body || {};
+
+    const {
+      message,
+      history = []
+    } = req.body || {};
 
     if (!message || typeof message !== "string") {
       return res.status(400).json({
@@ -20,6 +49,38 @@ export default async function handler(req, res) {
       });
     }
 
+    /*
+      Keep only a reasonable amount of recent
+      conversation context.
+
+      This prevents the request from becoming
+      unnecessarily huge as the conversation grows.
+    */
+    const recentHistory = Array.isArray(history)
+      ? history
+          .filter(item =>
+            item &&
+            (item.role === "user" ||
+             item.role === "assistant") &&
+            typeof item.content === "string"
+          )
+          .slice(-12)
+      : [];
+
+    const messages = [
+      {
+        role: "system",
+        content: QUASAR_SYSTEM
+      },
+
+      ...recentHistory,
+
+      {
+        role: "user",
+        content: message
+      }
+    ];
+
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
@@ -27,18 +88,14 @@ export default async function handler(req, res) {
 
         headers: {
           "Content-Type": "application/json",
+
           "Authorization":
             `Bearer ${process.env.OPENROUTER_API_KEY}`
         },
 
         body: JSON.stringify({
           model: "openrouter/free",
-          messages: [
-            {
-              role: "user",
-              content: message
-            }
-          ]
+          messages: messages
         })
       }
     );
@@ -46,7 +103,11 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("OpenRouter error:", data);
+
+      console.error(
+        "OpenRouter error:",
+        data
+      );
 
       return res.status(response.status).json({
         error:
@@ -69,7 +130,11 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error("Server error:", error);
+
+    console.error(
+      "Quasar server error:",
+      error
+    );
 
     return res.status(500).json({
       error:
